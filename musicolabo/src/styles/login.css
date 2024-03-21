@@ -1,0 +1,77 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+
+.container-header-login {
+    padding: 5px;
+}
+
+.row-header-login {
+    display: flex;
+    width: 100%;
+    padding: 15px;
+}
+
+#btn-home-login {
+    background-color: white;
+    color: rgb(0,128,128);
+    border-radius: 3px;
+    margin-left: 10px;
+    margin-top: 20px;
+}
+#btn-home-login:hover {
+    background-color: rgb(1, 99, 99);
+    color: white;
+    border: 1px solid rgb(1, 99, 99);
+}
+
+
+.container-form-login {
+    border: 1px solid rgb(0,128,128);
+    border-radius: 8px;
+    width: min-content;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 50px;
+    font-family: "Anta"; /* de google fonts*/
+}
+
+.container-form-login h2 {
+    color: rgb(0,128,128);
+}
+
+.input-email-form-login {
+    background-color: white;
+    color: rgb(2, 82, 82);
+    border: 1px solid rgb(0,128,128);
+    border-radius: 3px;
+    margin-bottom: 5px;
+}
+.input-email-form-login:focus {
+    border: 1px;
+}
+
+.input-password-form-login {
+    background-color: white;
+    color: rgb(2, 82, 82);
+    border: 1px solid rgb(0,128,128);
+    border-radius: 3px;
+}
+
+#btn-form-login {
+    background-color: rgb(1, 99, 99);
+    color: white;
+    border: 1px solid rgb(1, 99, 99);
+    border-radius: 3px;
+    margin-top: 9px;
+}
+#btn-form-login:hover {
+    background-color: white;
+    color: rgb(1, 99, 99);
+    border: 1px solid rgb(1, 99, 99);
+}
+
+.error-message-email-login {
+    color: red;
+}
