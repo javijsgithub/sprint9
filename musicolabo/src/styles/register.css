@@ -1,0 +1,75 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+
+
+.container-header-register {
+    padding: 5px;
+}
+
+.row-header-register {
+    display: flex;
+    width: 100%;
+    padding: 15px;
+}
+
+#btn-home-register {
+    background-color: white;
+    color: rgb(0,128,128);
+    border-radius: 3px;
+    margin-left: 10px;
+    margin-top: 20px;
+}
+#btn-home-register:hover {
+    background-color: rgb(1, 99, 99);
+    color: white;
+    border: 1px solid rgb(1, 99, 99);
+}
+
+
+.container-form-register {
+    border: 1px solid rgb(0,128,128);
+    border-radius: 8px;
+    width: min-content;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.container-form-register h2 {
+    color: rgb(0,128,128);
+}
+
+.input-email-form-register {
+    background-color: white;
+    color: rgb(2, 82, 82);
+    border: 1px solid rgb(0,128,128);
+    border-radius: 3px;
+    margin-bottom: 5px;
+}
+
+.input-password-form-register {
+    background-color: white;
+    color: rgb(2, 82, 82);
+    border: 1px solid rgb(0,128,128);
+    border-radius: 3px;
+}
+
+#btn-form-register {
+    background-color: rgb(1, 99, 99);
+    color: white;
+    border: 1px solid rgb(1, 99, 99);
+
+    border-radius: 3px;
+    margin-top: 9px;
+}
+#btn-form-register:hover {
+    background-color: white;
+    color: rgb(1, 99, 99);
+    border: 1px solid rgb(1, 99, 99);
+}
+
+.error-message-email-register {
+    color: red;
+}
