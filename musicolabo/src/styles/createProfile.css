@@ -1,0 +1,151 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+
+.container-header-create-profile {
+    padding: 5px;
+}
+
+.row-header-create-profile {
+    display: flex;
+    width: 100%;
+    padding: 15px;
+}
+
+.container-form-create-profile {
+    border: 1px solid rgb(0,128,128);
+    border-radius: 8px;
+    width: 50%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.container-form-create-profile h2 {
+    color: rgb(0,128,128);
+    margin-bottom: 20px;
+}
+
+.container-form-create-profile p  {
+    color: rgb(0,128,128);
+    margin-bottom: 0px;
+}
+
+.container-form-create-profile input {
+    margin-top: 0px;
+    margin-bottom: 15px;
+}
+
+.input-picture-form-create-profile {
+    background-color: white;
+    color: rgb(2, 82, 82);
+    border: 1px solid rgb(0,128,128);
+    border-radius: 3px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.input-name-form-create-profile {
+    background-color: white;
+    color: rgb(2, 82, 82);
+    border: 1px solid rgb(0,128,128);
+    border-radius: 3px;
+    margin-bottom: 5px;
+}
+
+.input-username-form-create-profile {
+    background-color: white;
+    color: rgb(2, 82, 82);
+    border: 1px solid rgb(0,128,128);
+    border-radius: 3px;
+    margin-bottom: 5px;
+}
+
+.input-email-form-create-profile {
+    background-color: white;
+    color: rgb(2, 82, 82);
+    border: 1px solid rgb(0,128,128);
+    border-radius: 3px;
+    margin-bottom: 5px;
+}
+
+.checks-instruments-form-create-profile {
+    display: flex;
+    flex-direction: row;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: white;
+    color: rgb(2, 82, 82);
+    border: 1px solid rgb(0,128,128);
+    border-radius: 3px;
+    margin-bottom: 5px;
+}
+
+.checks-instruments-form-create-profile label {
+    margin-right: 15px;
+    color: rgb(0,128,128);
+}
+
+.input-ubication-form-create-profile {
+    background-color: white;
+    color: rgb(2, 82, 82);
+    border: 1px solid rgb(0,128,128);
+    border-radius: 3px;
+    margin-bottom: 5px;
+}
+
+.input-description-form-create-profile {
+    background-color: white;
+    color: rgb(2, 82, 82);
+    border: 1px solid rgb(0,128,128);
+    border-radius: 3px;
+}
+
+#btn-form-create-profile {
+    background-color: rgb(1, 99, 99);
+    color: white;
+    border: 1px solid rgb(1, 99, 99);
+
+    border-radius: 3px;
+    margin-top: 9px;
+}
+#btn-form-create-profile:hover {
+    background-color: white;
+    color: rgb(1, 99, 99);
+    border: 1px solid rgb(1, 99, 99);
+}
+
+fieldset {
+    border: none;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgb(1, 99, 99);
+  }
+  
+  fieldset:last-of-type {
+    border-bottom: none;
+  }
+
+  label {
+    display: block;
+    margin: 0.5rem 0;
+  }
+
+  textarea {
+    width: 100%;
+  }
+
+
+  @media (max-width: 767.98px) {
+
+    .checks-instruments-form-create-profile {
+        display: block;
+
+    }
+
+   }
+
+
+
+

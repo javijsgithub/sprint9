@@ -13,10 +13,7 @@ const CreateProfile = () => {
   const [city, setCity] = useState('');
   const [purpose, setPurpose] = useState('');
   const navigate = useNavigate();
-
- // useEffect(() => {
-    // Aquí podrías cargar los datos del perfil del usuario si ya existen
- // }, []);
+  
 
   const handleInstrumentChange = (e) => {
     const instrument = e.target.value;
