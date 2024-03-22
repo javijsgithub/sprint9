@@ -16,7 +16,7 @@ const Register = () => {
     e.preventDefault();
     try {
     await handleRegister({ email, password });
-    navigate('/login');  // Redireccionar a la página deseada después de registrarse para ya poder hacer login
+    navigate('/create-profile');  // Redireccionar a la página deseada después de registrarse para ya poder hacer login
 
     } catch (error) {
       setError('Email ya registrado.');
