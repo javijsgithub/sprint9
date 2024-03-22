@@ -5,6 +5,7 @@ import Register from './components/register.js';
 import Header from './components/header.js';
 import UsersList from './components/usersList.js';
 import WelcomeScreen from './components/welcomeScreen.js';
+import CreateProfile from './components/createProfile.js';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 
@@ -18,6 +19,7 @@ function App() {
             <Route path="/header" element={<Header />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/create-profile" element={<CreateProfile />} />
             <Route path="/list" element={<UsersList/>} />
             </Routes>
           </Router>
