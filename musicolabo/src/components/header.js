@@ -27,7 +27,7 @@ const Header = () => {
           {loggedIn ? (
             <div className='container-user-logged-header'>
               <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-header-logout'>Cerrar sesion</Link>
-              <p><Link to="/profile">{userEmail}</Link></p>
+              <p><Link to="/create-profile">{userEmail}</Link></p>
             </div>
           ) : (
           <>
