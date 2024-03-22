@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
+import { addDoc, collection } from 'firebase/firestore';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 export const MusiColaboContext = createContext();
@@ -44,11 +45,23 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   };
 
+  // Función para crear un nuevo documento de perfil de usuario en Firestore Database
+  const createNewDocument = async (userProfile) => {
+    try {
+      await addDoc(collection(db, 'userData'), userProfile);
+      console.log('Documento creado exitosamente con los datos del perfil del usuario:', userProfile);
+    } catch (error) {
+      console.error('Error al crear el documento:', error);
+      throw error;
+    }
+  };
+
   return (
     <MusiColaboContext.Provider value={{ 
       user,
       userEmail,
       loggedIn,
+      createNewDocument,
       handleRegister,
       handleLogin,
       handleLogout  
