@@ -160,8 +160,8 @@ const CreateProfile = () => {
                   <label for='drums'>
                     <input
                       type="checkbox"
-                      value="drums"
-                      checked={instruments.includes("drums")}
+                      value="bateria"
+                      checked={instruments.includes("bateria")}
                       onChange={handleInstrumentChange}
                     /> bateria
                   </label>
