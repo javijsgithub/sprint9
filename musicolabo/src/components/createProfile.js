@@ -4,7 +4,7 @@ import { MusiColaboContext } from '../context/context';
 import '../styles/createProfile.css';
 
 const CreateProfile = () => {
-  const { userEmail, createNewDocument } = useContext(MusiColaboContext);
+  const { userEmail, createNewDocument, uploadImage } = useContext(MusiColaboContext);
   const [picture, setPicture] = useState('');
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
@@ -26,9 +26,12 @@ const CreateProfile = () => {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     try {
+      console.log("Archivo seleccionado:", picture);
+      const pictureUrl = await uploadImage(picture);
       const userProfile = {
-        picture,
+        picture: pictureUrl,
         name,
         username,
         email,
@@ -38,7 +41,7 @@ const CreateProfile = () => {
       };
 
       await createNewDocument(userProfile);
-      navigate('/list'); // Redirecciona al usuario a otra página, por ejemplo, la página de inicio
+      navigate('/list'); // Redirecciona al usuario al listado
    
     } catch (error) {
       console.error('Error al guardar el perfil:', error);
@@ -60,21 +63,19 @@ const CreateProfile = () => {
         </div>
       </div>
       <div className="container-form-create-profile">
-       <h2>Crea tu perfil de Usuario</h2>
-         <form onSubmit={handleSubmit} className=''>
+       <h2>Crea tu perfil de usuario</h2>
+         <form onSubmit={handleSubmit}>
             <fieldset>
-             <p>Cargar imagen de perfil:</p> 
-             <label for="profile-picture"> 
+
+               <p>Cargar imagen de perfil:</p> 
+               <label> 
                  <input
-                className='input-picture-form-create-profile' 
-                id="profile-picture" 
-                type="file" 
-                value={picture}
-                onChange={(e) => setPicture(e.target.value)} 
-               />
+                 className='input-picture-form-create-profile' 
+                 type="file" 
+                 onChange={(e) => setPicture(e.target.files[0])}                />
                </label>
                <p>Nombre:</p>
-               <label for='name'>
+               <label>
                  <input
                  className='input-name-form-create-profile'
                  type="text"
@@ -83,7 +84,7 @@ const CreateProfile = () => {
                 />
               </label>
               <p>Nombre de usuario:</p> 
-              <label for='username'>
+              <label>
                  <input
                  className='input-username-form-create-profile'
                  type="text"
@@ -92,7 +93,7 @@ const CreateProfile = () => {
                 />
                </label>
                <p>Email:</p>
-               <label for='email'>
+               <label>
                  <input
                  className='input-email-form-create-profile'
                  type="email"
@@ -102,7 +103,7 @@ const CreateProfile = () => {
                 />
                </label>
                <p>Ubicación:</p>
-               <label for='ubication'> 
+               <label> 
                  <input
                  className='input-ubication-form-create-profile'
                  type="text"
@@ -110,22 +111,22 @@ const CreateProfile = () => {
                  onChange={(e) => setCity(e.target.value)}
                 />
                </label>
+
             </fieldset>
             <fieldset>
               
                 <p>Instrumentos:</p> 
-                <label for='instruments'>
-                  <div className='checks-instruments-form-create-profile'>
-                  <label for='guitar'>
+                <label>
+                 <div className='checks-instruments-form-create-profile'>
+                  <label>
                     <input
                       type="checkbox"
                       value="guitarra"
                       checked={instruments.includes("guitarra")}
                       onChange={handleInstrumentChange}
                     /> Guitarra 
-
                   </label>
-                  <label for='bass'>
+                  <label>
                     <input
                       type="checkbox"
                       value="bajo"
@@ -133,7 +134,7 @@ const CreateProfile = () => {
                       onChange={handleInstrumentChange}
                     /> bajo
                   </label>
-                  <label for='piano'>
+                  <label>
                     <input
                       type="checkbox"
                       value="piano"
@@ -141,7 +142,7 @@ const CreateProfile = () => {
                       onChange={handleInstrumentChange}
                     /> piano
                   </label>
-                  <label for='violin'>
+                  <label>
                     <input
                       type="checkbox"
                       value="violin"
@@ -149,7 +150,7 @@ const CreateProfile = () => {
                       onChange={handleInstrumentChange}
                     /> violin
                   </label>
-                  <label for='cello'>
+                  <label>
                     <input
                       type="checkbox"
                       value="cello"
@@ -157,7 +158,7 @@ const CreateProfile = () => {
                       onChange={handleInstrumentChange}
                     /> cello
                   </label>
-                  <label for='drums'>
+                  <label>
                     <input
                       type="checkbox"
                       value="bateria"
@@ -165,26 +166,27 @@ const CreateProfile = () => {
                       onChange={handleInstrumentChange}
                     /> bateria
                   </label>
-                  </div>
+                 </div>
                 </label>
                 <br/>
               <p>Descripcion:</p>
-              <label for='description'>
-                 <textarea
-                 className='input-description-form-create-profile'
-                 value={purpose}
-                 onChange={(e) => setPurpose(e.target.value)}
-                >
-                </textarea>
-              </label>
+                <label>
+                  <textarea
+                    className='input-description-form-create-profile'
+                    value={purpose}
+                    onChange={(e) => setPurpose(e.target.value)}
+                  >
+                  </textarea>
+                </label>
+
             </fieldset>
-           <button
-             //onSubmit={updateCreateProfileContext}
-             type="submit"
-             className="btn btn-secondary"
-             id='btn-form-create-profile'>
+            <button
+              //onSubmit={updateCreateProfileContext}
+              type="submit"
+              className="btn btn-secondary"
+              id='btn-form-create-profile'>
               Crear perfil
-           </button>
+            </button>
          </form>
       </div>
     </div>
