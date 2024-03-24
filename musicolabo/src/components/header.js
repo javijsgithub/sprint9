@@ -28,6 +28,7 @@ const Header = () => {
             <div className='container-user-logged-header'>
               <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-header-logout'>Cerrar sesion</Link>
               <p><Link to="/create-profile">{userEmail}</Link></p>
+              <p><Link to="/edit-profile" className='link-profile'>Ver perfil</Link></p>
             </div>
           ) : (
           <>

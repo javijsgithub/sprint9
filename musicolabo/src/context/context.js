@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
 import { auth, db, storage } from '../firebase';
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { addDoc, collection, getDocs, query, where, setDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 export const MusiColaboContext = createContext();
@@ -58,7 +58,7 @@ const MusiColaboContextProvider = ({ children }) => {
       throw error;
     }
   };
-
+//  Funcion para cargar imagenes en firestorage
   const uploadImage = async (file) => {
     try {
       const storageRef = ref(storage, `images/${file.name}`);
@@ -72,6 +72,7 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   };
 
+  // Funcion para ver los perfiles de usuarios en el listado
   const getProfilesFromFirestore = async () => {
     try {
       const profilesSnapshot = await getDocs(collection(db, 'userData'));
@@ -82,6 +83,24 @@ const MusiColaboContextProvider = ({ children }) => {
       throw error;
     }
   };
+
+  // Funcion para que el usuario pueda editar su perfil 
+  const updateProfileInFirestore = async (userEmail, updatedProfile) => {
+    try {
+      const querySnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', userEmail)));
+      if (!querySnapshot.empty) {
+        const docRef = querySnapshot.docs[0].ref;
+        await setDoc(docRef, updatedProfile, { merge: true });
+        console.log('Perfil del usuario actualizado exitosamente en Firestore:', updatedProfile);
+      } else {
+        console.error('No se encontró ningún perfil con el correo electrónico proporcionado:', userEmail);
+      }
+    } catch (error) {
+      console.error('Error al actualizar el perfil del usuario en Firestore:', error);
+      throw error;
+    }
+  };
+
 
   return (
     <MusiColaboContext.Provider value={{ 
@@ -94,7 +113,8 @@ const MusiColaboContextProvider = ({ children }) => {
       handleRegister,
       handleLogin,
       handleLogout, 
-      getProfilesFromFirestore 
+      getProfilesFromFirestore,
+      updateProfileInFirestore 
       }}>
       {children}
     </MusiColaboContext.Provider>
