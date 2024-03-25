@@ -2,7 +2,103 @@
 
 
 
-img {
-    width: 100px;
-    height: 100px;
+.container-users-list {
+    padding: 5px;
 }
+
+.row-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid rgb(95,158,160);
+}
+
+.cards {
+    background-color: rgb(192, 221, 221);
+    color: rgb(2, 82, 82);
+    max-width: 375px;
+    height: 520px;
+    border: 2px solid rgb(95,158,160);
+    border-radius: 5px;
+    margin: 10px 10px 0px 10px;
+    box-shadow: 2px;
+}
+
+img {
+    max-width: 400px;
+    height: 250px;
+    border-bottom: 1px solid rgb(95,158,160);
+}
+
+.card-body {
+    padding: 3px 7px 3px 7px ;
+   
+}
+
+.card-name-and-city {
+    border-bottom: 1px solid rgb(95,158,160);
+}
+
+.card-name {
+    margin-bottom: 0px;
+}
+
+.card-city {
+    margin-top: 0px;
+}
+
+
+
+.container-purpose {
+    height: 90px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.container-link {
+    text-align: end;
+    padding: 5px 5px 8px 5px;
+}
+
+
+
+@media (max-width: 991.98px) {
+
+    .container-purpose {
+        height: max-content;
+        margin-top: 5px;
+        margin-bottom: 2px;
+    }
+
+    .cards {
+        height: max-content;
+    }
+
+}
+
+
+@media (max-width: 768.98px) {
+    
+    .row-list {
+        display: block;
+        margin: auto;
+    }
+
+    .container-purpose {
+        height: max-content;
+        margin-top: 5px;
+        margin-bottom: 2px;
+    }
+
+    .cards {
+        width: 375px;
+        height: 500px;
+        margin: auto;
+    }
+
+    .container-link {
+        margin-bottom: 2px;
+    }
+
+ }

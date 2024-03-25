@@ -4,7 +4,6 @@
 
 .container-header {
     margin-bottom: 20px;
-    padding: 5px;
 }
 
 .row-header {
@@ -111,10 +110,9 @@
 
 
 
-
 @media (max-width: 767.98px) { 
 
-    .buttons-header {
+    .col-buttons-header {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
