@@ -22,31 +22,40 @@ const UsersList = () => {
 
     fetchProfiles();
   }, [getProfilesFromFirestore]);
-  
-  
-
 
     return (
      
-      <div className='container-users-list'>
+  <div className='container-users-list'>
         <Header />
-          
-          <Link to="/" className="btn btn-secondary" id='btn-users-list-go-to-header'>Ir a la pagina de Bienvenida</Link>
+        <Link to="/" className="btn btn-secondary" id='btn-users-list-go-to-header'>Ir a la pagina de Bienvenida</Link>
 
           <h2>LISTADO</h2>
-
-          <ul>
-            {profiles.map(profile => (
-              <li key={profile.email}>
-                <h3>{profile.name}</h3>
-                <p><img src={profile.picture} alt="Imagen de perfil" /> </p>
-               <p>Instrumentos: {profile.instruments.join(', ')}</p>
-               {/* Mostrar otros detalles del perfil según sea necesario */}
-              </li>
-            ))}
-          </ul>
+      <div className="row-list">
+        {profiles.map(profile => (
+          <div className="col-md-3 mb-4 sm-3 col-cards" key={profile.email}>
+            <div className="cards">
+              <img src={profile.picture} className="card-img-top" alt="Imagen de perfil" />
+              <div className="card-body">
+                <div className='card-name-and-city'>
+                  <h3 className="card-name">{profile.name}</h3>
+                  <p className='card-city'>{profile.city}</p>
+                  <p className='card-instruments'>{profile.instruments.join(', ')}</p>
+                </div>
+                <div className='container-purpose-link'>
+                  <div className='container-purpose'>
+                    <p className='card-purpose'>{profile.purpose}</p>
+                  </div>
+                  <div className='container-link'>
+                    <Link to='' className='link-card'>Enviar mensaje</Link>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
-            
+  </div>
           
          /* <div className='container-btn-view-more'>
          <button type="button" id='btn-view-more' onClick={loadMoreUsers} class="btn btn-secondary">Ver mas...</button>
