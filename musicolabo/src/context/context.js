@@ -72,6 +72,20 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   };
 
+  // Función para cargar videos en FireStorage
+  const uploadVideo = async (file) => {
+    try {
+      const storageRef = ref(storage, `videos/${file.name}`);
+      const snapshot = await uploadBytes(storageRef, file);
+      console.log('Video subido correctamente:', file.name);
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      return downloadURL; // Devuelve la URL de descarga del video
+    } catch (error) {
+      console.error("Error al subir el video:", error);
+      throw error;
+    }
+  };
+
   // Funcion para ver los perfiles de usuarios en el listado
   const getProfilesFromFirestore = async () => {
     try {
@@ -109,6 +123,7 @@ const MusiColaboContextProvider = ({ children }) => {
       userEmail,
       loggedIn,
       uploadImage,
+      uploadVideo,
       createNewDocument,
       handleRegister,
       handleLogin,
