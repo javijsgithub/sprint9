@@ -1,11 +1,12 @@
-import React, { useState, useContext/*, useEffect*/ } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate} from 'react-router-dom';
 import { MusiColaboContext } from '../context/context';
 import '../styles/createProfile.css';
 
 const CreateProfile = () => {
-  const { userEmail, createNewDocument, uploadImage } = useContext(MusiColaboContext);
+  const { userEmail, createNewDocument, uploadImage, uploadVideo } = useContext(MusiColaboContext);
   const [picture, setPicture] = useState('');
+  const [videos, setVideos] = useState([]);
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState(userEmail); // Email prellenado
@@ -23,6 +24,10 @@ const CreateProfile = () => {
       setInstruments(instruments.filter(item => item !== instrument));
     }
   };
+
+  const handleVideoChange = (e) => {
+    setVideos([...videos, ...e.target.files]);
+  };
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,8 +35,12 @@ const CreateProfile = () => {
     try {
       console.log("Archivo seleccionado:", picture);
       const pictureUrl = await uploadImage(picture);
+      const videoUrls = await Promise.all(videos.map(async (video) => {
+        return await uploadVideo(video);
+      }));
       const userProfile = {
         picture: pictureUrl,
+        videos: videoUrls,
         name,
         username,
         email,
@@ -74,6 +83,16 @@ const CreateProfile = () => {
                  type="file" 
                  onChange={(e) => setPicture(e.target.files[0])}                />
                </label>
+               <p>Cargar video(s):</p> 
+              <label> 
+                <input
+                className='input-video-form-create-profile' 
+                type="file"
+                accept="video/*"
+                multiple
+                onChange={handleVideoChange}
+                />
+            </label>
                <p>Nombre:</p>
                <label>
                  <input
