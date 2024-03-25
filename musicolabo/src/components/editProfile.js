@@ -5,9 +5,10 @@ import { MusiColaboContext } from '../context/context';
 //import '../styles/editProfile.css';
 
 const EditProfile = () => {
-  const { userEmail, getProfilesFromFirestore, updateProfileInFirestore, uploadImage } = useContext(MusiColaboContext);
+  const { userEmail, getProfilesFromFirestore, updateProfileInFirestore, uploadImage, uploadVideo } = useContext(MusiColaboContext);
   const [picture, setPicture] = useState(null);
   const [pictureUrl, setPictureUrl] = useState('');
+  const [videos, setVideos] = useState([]);
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -25,7 +26,7 @@ const EditProfile = () => {
         const currentUserProfile = profiles.find(profile => profile.email === userEmail);
         if (currentUserProfile) {
             setPictureUrl(currentUserProfile.picture);
-            setName(currentUserProfile.name);
+            setVideos(currentUserProfile.videos || []);            setName(currentUserProfile.name);
             setUsername(currentUserProfile.username);
             setEmail(currentUserProfile.email);
             setCity(currentUserProfile.city);
@@ -45,12 +46,21 @@ const EditProfile = () => {
 
     try {
         let newPictureUrl = pictureUrl;
+        let newVideoUrls = [];
+
         if (picture) {
           newPictureUrl = await uploadImage(picture);
           setPictureUrl(newPictureUrl)
         }
+
+        if (videos.length > 0) {
+          newVideoUrls = await Promise.all(videos.map(async (video) => {
+            return await uploadVideo(video);
+          }));
+        }
       const updatedProfile = {
         picture: newPictureUrl || null,
+        videos: newVideoUrls || [],
         name,
         username,
         email,
@@ -77,6 +87,10 @@ const EditProfile = () => {
 
   const toggleEditMode = () => {
     setIsEditMode(!isEditMode);
+  };
+
+  const handleVideoChange = (e) => {
+    setVideos([...videos, ...e.target.files]);
   };
 
   return (
@@ -110,6 +124,15 @@ const EditProfile = () => {
           <input
             type="file"
             onChange={(e) => setPicture(e.target.files[0])}
+          />
+        </label>
+      <p>Cargar video(s) de perfil:</p> 
+        <label> 
+          <input
+            type="file"
+            accept="video/*"
+            multiple
+            onChange={handleVideoChange}
           />
         </label>
       Nombre:
@@ -210,11 +233,25 @@ const EditProfile = () => {
           Guardar cambios
         </button>
       </form>
+       {/* Mostrar la información del perfil */}
       <div style={{ display: isEditMode ? 'none' : 'block' }}>
         {pictureUrl && (
-       <div className="preview">
+       <div className="preview-picture"> Foto de perfil:
         <img src={pictureUrl} alt="Imagen de perfil" />
        </div>
+       )}
+       {videos.length > 0 && (
+        <div className='preview-video'>
+           <h3>Videos:</h3>
+           {videos.map((video, index) => (
+          <div key={index}>
+            <video controls>
+              <source src={video} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        ))}
+        </div>
        )}
           <p>Nombre: {name}</p>
           <p>Nombre de usuario: {username}</p>
@@ -222,7 +259,7 @@ const EditProfile = () => {
           <p>Ubicación: {city}</p>
           <p>Instrumentos: {instruments.join(', ')}</p>
           <p>Descripción: {purpose}</p>
-        </div>
+      </div>
     </div>
 </div>
   );
