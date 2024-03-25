@@ -38,6 +38,7 @@ img {
 
 .card-name-and-city {
     border-bottom: 1px solid rgb(95,158,160);
+    
 }
 
 .card-name {
@@ -46,13 +47,20 @@ img {
 
 .card-city {
     margin-top: 0px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgb(95,158,160);
 }
+
+.card-instruments {
+    margin-bottom: 2px;
+}
+
 
 
 
 .container-purpose {
     height: 90px;
-    margin-top: 5px;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 
@@ -65,8 +73,13 @@ img {
 
 @media (max-width: 991.98px) {
 
+    .card-instruments {
+        height: 45px;
+        margin-bottom: 3px;
+    }
+
     .container-purpose {
-        height: max-content;
+        height: 200px;
         margin-top: 5px;
         margin-bottom: 2px;
     }
@@ -85,14 +98,19 @@ img {
         margin: auto;
     }
 
+    .card-instruments {
+        height: 45px;
+        margin-bottom: 2px;
+        height: 25px;
+    }
+
     .container-purpose {
-        height: max-content;
+        height: 90px;
         margin-top: 5px;
         margin-bottom: 2px;
     }
 
     .cards {
-        width: 375px;
         height: 500px;
         margin: auto;
     }
