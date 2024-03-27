@@ -100,9 +100,9 @@ const MusiColaboContextProvider = ({ children }) => {
   };
 
   //  Funcion para enviar mensajes utilizando firestore
-  const sendMessage = async (recipientEmail, message) => {
+  const sendMessage = async (recipientEmail, recipientName, message) => {
     try {
-      console.log("Enviando mensaje...");
+      console.log("Enviando mensaje a...", recipientName);
       console.log("Destinatario userId:", recipientEmail);
       console.log("Mensaje:", message);
       // Obtener la referencia al documento del destinatario usando el correo electrónico
@@ -112,10 +112,16 @@ const MusiColaboContextProvider = ({ children }) => {
       const messagesCollectionRef = collection(recipientDocRef, 'messages');
       await addDoc(messagesCollectionRef, {
         sender: userEmail,
+        recipient: recipientEmail, 
         message: message,
-        timestamp: new Date()
+        timestamp: new Date(),
+        read: false // Marcar el mensaje como no leído cuando se envía
       });
       console.log('Mensaje enviado exitosamente.');
+       // Solo actualizar unreadMessages si el usuario actual es el destinatario del mensaje
+       if (recipientEmail === userEmail) {
+        setUnreadMessages(prevUnreadMessages => prevUnreadMessages + 1);
+      }
     } else {
       console.error('No se encontró ningún usuario con el correo electrónico proporcionado:', recipientEmail);
     }
@@ -154,27 +160,34 @@ const MusiColaboContextProvider = ({ children }) => {
       }
     });
 
-    if (userEmail) {
-      const unsubscribeMessages = onSnapshot(
-        query(collection(db, 'userData', userEmail, 'messages'), where('read', '==', false)),
-        (snapshot) => {
-          console.log("Snapshot de mensajes no leídos:", snapshot);
-          console.log("Documentos no leídos:", snapshot.docs);
-          console.log("Cantidad de documentos no leídos:", snapshot.docs.length);
-          setUnreadMessages(snapshot.docs.length);
-        }
-      );
-  
-      return () => {
-        unsubscribeMessages();
-      };
-    }
-  
     return () => {
       unsubscribeAuth();
     };
-  }, [userEmail]);
+  }, []);
 
+    useEffect(() => {
+      if (userEmail && loggedIn) {
+        const unsubscribeMessages = onSnapshot(collection(db, 'userData'), async (snapshot) => {
+          let unreadCount = 0;
+          for (const doc of snapshot.docs) {
+            const messagesCollectionRef = collection(doc.ref, 'messages');
+            const messagesSnapshot = await getDocs(messagesCollectionRef);
+            for (const messageDoc of messagesSnapshot.docs) {
+              const messageData = messageDoc.data();
+              if (!messageData.read && messageData.recipient === userEmail) {
+                unreadCount++;
+              }
+            }
+          }
+          setUnreadMessages(unreadCount);
+        });
+    
+        return () => {
+          unsubscribeMessages();
+        };
+      }
+    }, [userEmail, loggedIn]);
+  
   return (
     <MusiColaboContext.Provider value={{ 
       user,
@@ -199,3 +212,10 @@ const MusiColaboContextProvider = ({ children }) => {
 };
 
 export default MusiColaboContextProvider;
+
+
+
+
+//cuando el usuario envia un mensaje a otro usuario debe mostrarse el aviso de mensaje nuevo de mensajes al usuario destinatario, esto no esta pasando, cuando el usuario destinatario del mensaje inicia sesion no sale ningun aviso
+//te he facilitado mis componentes para que mires donde puede estar el error
+
