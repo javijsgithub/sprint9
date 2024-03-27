@@ -6,8 +6,31 @@ import '../styles/userList.css';
 
 
 const UsersList = () => {
-  const { getProfilesFromFirestore } = useContext(MusiColaboContext);
+  const { getProfilesFromFirestore, sendMessage, unreadMessages } = useContext(MusiColaboContext);
   const [profiles, setProfiles] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [recipientEmail, setRecipientEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+
+
+  const handleSendMessage = (recipientEmail) => {
+    console.log("Se hizo clic en el enlace 'Enviar mensaje'");
+    console.log("ID del usuario destinatario:", recipientEmail);
+    setRecipientEmail(recipientEmail);
+    setShowModal(true);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await sendMessage(recipientEmail, message);
+      setShowModal(false);
+      setMessage('');
+    } catch (error) {
+      console.error('Error al enviar el mensaje:', error);
+    }
+  };
 
   useEffect(() => {
     const fetchProfiles = async () => {
@@ -23,6 +46,8 @@ const UsersList = () => {
     fetchProfiles();
   }, [getProfilesFromFirestore]);
 
+ 
+  console.log("Mensajes no leídos:", unreadMessages);
     return (
      
   <div className='container-users-list'>
@@ -30,6 +55,10 @@ const UsersList = () => {
         <Link to="/" className="btn btn-secondary" id='btn-users-list-go-to-header'>Ir a la pagina de Bienvenida</Link>
 
           <h2>LISTADO</h2>
+      {unreadMessages > 0 && 
+      <div
+       className="unread-messages">Tienes {unreadMessages} mensaje(s) nuevo(s).
+      </div>}
       <div className="row-list">
         {profiles.map(profile => (
           <div className="col-md-3 mb-4 sm-3 col-cards" key={profile.email}>
@@ -46,7 +75,7 @@ const UsersList = () => {
                     <p className='card-purpose'>{profile.purpose}</p>
                   </div>
                   <div className='container-link'>
-                    <Link to='' className='link-card'>Enviar mensaje</Link>
+                  <Link to='' className='link-card' onClick={() => handleSendMessage(profile.email)}>Enviar mensaje</Link>  
                   </div>
                 </div>
                 
@@ -55,16 +84,25 @@ const UsersList = () => {
           </div>
         ))}
       </div>
-  </div>
-          
-         /* <div className='container-btn-view-more'>
-         <button type="button" id='btn-view-more' onClick={loadMoreUsers} class="btn btn-secondary">Ver mas...</button>
-         
-          </div>*/
-         
-  
       
+      {showModal && (
+        <div className="message-popup">
+            <span className="close" onClick={() => setShowModal(false)}>&times;</span>
+            <h2>Enviar mensaje a {recipientEmail}</h2>
+            <form onSubmit={handleSubmit}>
+              <textarea value={message} onChange={(e) => setMessage(e.target.value)} />
+              <button type="submit">Enviar</button>
+            </form>
+        </div>
+      )}
+      
+  </div>
     );
   };
   
   export default UsersList;
+
+  /* <div className='container-btn-view-more'>
+         <button type="button" id='btn-view-more' onClick={loadMoreUsers} class="btn btn-secondary">Ver mas...</button>
+         
+          </div>*/
