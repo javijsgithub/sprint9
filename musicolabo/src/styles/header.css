@@ -7,7 +7,7 @@
 }
 
 .row-header {
-    background-color:rgb(95,158,160);
+    background-color:rgb(63, 125, 128);
     border-radius: 5px;
     display: flex;
     width: 100%;
@@ -15,7 +15,7 @@
 }
 
 .col-redes {
-    color: rgb(2, 82, 82);
+    color: rgb(46, 44, 44);
 }
 
 .col-logo {
@@ -24,7 +24,7 @@
 
 .col-logo h1 {
     font-family: "Monoton";
-    color: rgb(2, 82, 82);
+    color: rgb(29, 28, 28);
 }
 
 .musicolabo-logo {
@@ -32,7 +32,7 @@
     border-radius: 50px;
     width: 100px;
     height: 100px;
-    border: 1px solid rgb(2, 82, 82);
+    border: 1px solid rgb(29, 28, 28);
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -41,7 +41,7 @@
 .musicolabo-logo h1 {
     font-family: "Monoton";
     margin-top: 25px;
-    color: rgb(2, 82, 82);
+    color: rgb(29, 28, 28);
     
 }
 
@@ -52,7 +52,7 @@
 }
 
 .container-user-logged-header p{
-    color: rgb(2, 82, 82);
+    color: rgb(46, 44, 44);
     text-decoration: none; /* Esto quita el subrayado del texto */
     color: inherit; /* Esto mantiene el color predeterminado del texto */
     
@@ -65,32 +65,31 @@
 }
 
 #btn-header-login {
-    background-color: rgb(1, 99, 99);
-    color: white;
-    border: 1px solid rgb(1, 99, 99);
+    background-color: rgb(46, 44, 44);
+    color: rgb(95,158,160);
+    border: 1px solid rgb(46, 44, 44);
     border-radius: 3px;
     width: max-content;
     height: max-content;
 }
 #btn-header-login:hover {
-    background-color: rgb(219, 217, 217);
-    color: rgb(1, 99, 99);
-    border: 1px solid rgb(1, 99, 99);
+    background-color: white;
+    color: rgb(63, 125, 128);
+    border: 1px solid white;
 }
 
 #btn-header-register {
     background-color: white;
-    color: rgb(1, 99, 99);
-    border: 1px solid rgb(1, 99, 99);
+    color: rgb(63, 125, 128);
     border-radius: 3px;
     margin-left: 5px;
     width: max-content;
     height: max-content;
 }
 #btn-header-register:hover {
-    background-color: rgb(1, 99, 99);
-    color: white;
-    border: 1px solid white;
+    background-color: rgb(46, 44, 44);
+    color: rgb(63, 125, 128);
+
 }
 
 #btn-header-logout {
@@ -121,13 +120,7 @@
     }
 
     #btn-header-register {
-        background-color: white;
-        color: rgb(1, 99, 99);
-        border: 1px solid rgb(1, 99, 99);
-        border-radius: 3px;
-        margin-left: 5px;
         width: 117px;
-        height: max-content;
     }
 }
 

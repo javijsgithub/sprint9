@@ -6,20 +6,23 @@
     padding: 5px;
 }
 
+.unread-messages {
+    background-color: black;
+}
+
 .row-list {
     display: flex;
     flex-wrap: wrap;
     padding: 20px;
     border-radius: 5px;
-    border: 2px solid rgb(95,158,160);
+    border: 2px solid rgb(63, 125, 128);
 }
 
 .cards {
-    background-color: rgb(192, 221, 221);
-    color: rgb(2, 82, 82);
+    color: rgb(63, 125, 128);
     max-width: 375px;
     height: 520px;
-    border: 2px solid rgb(95,158,160);
+    border: 1px solid rgb(63, 125, 128);
     border-radius: 5px;
     margin: 10px 10px 0px 10px;
     box-shadow: 2px;
@@ -28,7 +31,7 @@
 img {
     max-width: 400px;
     height: 250px;
-    border-bottom: 1px solid rgb(95,158,160);
+    border-bottom: 1px solid rgb(63, 125, 128);
 }
 
 .card-body {
@@ -37,7 +40,7 @@ img {
 }
 
 .card-name-and-city {
-    border-bottom: 1px solid rgb(95,158,160);
+    border-bottom: 1px solid rgb(63, 125, 128);
     
 }
 
@@ -48,7 +51,7 @@ img {
 .card-city {
     margin-top: 0px;
     margin-bottom: 25px;
-    border-bottom: 1px solid rgb(95,158,160);
+    border-bottom: 1px solid rgb(63, 125, 128);
 }
 
 .card-instruments {
@@ -68,6 +71,26 @@ img {
     text-align: end;
     padding: 5px 5px 8px 5px;
 }
+
+.message-popup {
+    position: absolute;
+    top: 20px; /* Ajusta la distancia desde la parte superior según sea necesario */
+    right: 20px; /* Ajusta la distancia desde la derecha según sea necesario */
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    z-index: 1000; /* Asegúrate de que el mensaje emergente esté por encima de otros elementos */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Añade sombra */
+  }
+  
+    
+  .message-popup .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+  
 
 
 
