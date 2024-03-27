@@ -1,6 +1,6 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { auth, db, storage } from '../firebase';
-import { addDoc, collection, getDocs, query, where, setDoc } from 'firebase/firestore';
+import { addDoc, collection, getDocs, query, where, setDoc, onSnapshot } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 export const MusiColaboContext = createContext();
@@ -9,6 +9,7 @@ const MusiColaboContextProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [userEmail, setUserEmail] = useState('');
+  const [unreadMessages, setUnreadMessages] = useState(0);
 
   
   // Función para registrar un nuevo usuario
@@ -98,6 +99,33 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   };
 
+  //  Funcion para enviar mensajes utilizando firestore
+  const sendMessage = async (recipientEmail, message) => {
+    try {
+      console.log("Enviando mensaje...");
+      console.log("Destinatario userId:", recipientEmail);
+      console.log("Mensaje:", message);
+      // Obtener la referencia al documento del destinatario usando el correo electrónico
+    const querySnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', recipientEmail)));
+    if (!querySnapshot.empty) {
+      const recipientDocRef = querySnapshot.docs[0].ref;
+      const messagesCollectionRef = collection(recipientDocRef, 'messages');
+      await addDoc(messagesCollectionRef, {
+        sender: userEmail,
+        message: message,
+        timestamp: new Date()
+      });
+      console.log('Mensaje enviado exitosamente.');
+    } else {
+      console.error('No se encontró ningún usuario con el correo electrónico proporcionado:', recipientEmail);
+    }
+    } catch (error) {
+      console.error('Error al enviar el mensaje:', error);
+    }
+  };
+
+  
+
   // Funcion para que el usuario pueda editar su perfil 
   const updateProfileInFirestore = async (userEmail, updatedProfile) => {
     try {
@@ -115,6 +143,37 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    const unsubscribeAuth = auth.onAuthStateChanged(user => {
+      if (user) {
+        setLoggedIn(true);
+        setUserEmail(user.email);
+      } else {
+        setLoggedIn(false);
+        setUserEmail('');
+      }
+    });
+
+    if (userEmail) {
+      const unsubscribeMessages = onSnapshot(
+        query(collection(db, 'userData', userEmail, 'messages'), where('read', '==', false)),
+        (snapshot) => {
+          console.log("Snapshot de mensajes no leídos:", snapshot);
+          console.log("Documentos no leídos:", snapshot.docs);
+          console.log("Cantidad de documentos no leídos:", snapshot.docs.length);
+          setUnreadMessages(snapshot.docs.length);
+        }
+      );
+  
+      return () => {
+        unsubscribeMessages();
+      };
+    }
+  
+    return () => {
+      unsubscribeAuth();
+    };
+  }, [userEmail]);
 
   return (
     <MusiColaboContext.Provider value={{ 
@@ -122,6 +181,7 @@ const MusiColaboContextProvider = ({ children }) => {
       storage,
       userEmail,
       loggedIn,
+      sendMessage,
       uploadImage,
       uploadVideo,
       createNewDocument,
@@ -129,7 +189,9 @@ const MusiColaboContextProvider = ({ children }) => {
       handleLogin,
       handleLogout, 
       getProfilesFromFirestore,
-      updateProfileInFirestore 
+      updateProfileInFirestore,
+      unreadMessages
+       
       }}>
       {children}
     </MusiColaboContext.Provider>
