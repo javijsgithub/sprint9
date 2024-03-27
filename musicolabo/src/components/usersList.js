@@ -10,27 +10,30 @@ const UsersList = () => {
   const [profiles, setProfiles] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [recipientEmail, setRecipientEmail] = useState('');
+  const [recipientName, setRecipientName] = useState('');
   const [message, setMessage] = useState('');
 
 
 
-  const handleSendMessage = (recipientEmail) => {
+  const handleSendMessage = (recipientEmail, recipientName) => {
     console.log("Se hizo clic en el enlace 'Enviar mensaje'");
     console.log("ID del usuario destinatario:", recipientEmail);
     setRecipientEmail(recipientEmail);
+    setRecipientName(recipientName);
     setShowModal(true);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await sendMessage(recipientEmail, message);
+      await sendMessage(recipientEmail, recipientName, message);
       setShowModal(false);
       setMessage('');
     } catch (error) {
       console.error('Error al enviar el mensaje:', error);
     }
   };
+    
 
   useEffect(() => {
     const fetchProfiles = async () => {
@@ -75,7 +78,7 @@ const UsersList = () => {
                     <p className='card-purpose'>{profile.purpose}</p>
                   </div>
                   <div className='container-link'>
-                  <Link to='' className='link-card' onClick={() => handleSendMessage(profile.email)}>Enviar mensaje</Link>  
+                  <Link to='' className='link-card' onClick={() => handleSendMessage(profile.email, profile.name)}>Enviar mensaje</Link>  
                   </div>
                 </div>
                 
@@ -88,7 +91,7 @@ const UsersList = () => {
       {showModal && (
         <div className="message-popup">
             <span className="close" onClick={() => setShowModal(false)}>&times;</span>
-            <h2>Enviar mensaje a {recipientEmail}</h2>
+            <h2>Enviar mensaje a {recipientName}</h2>
             <form onSubmit={handleSubmit}>
               <textarea value={message} onChange={(e) => setMessage(e.target.value)} />
               <button type="submit">Enviar</button>
