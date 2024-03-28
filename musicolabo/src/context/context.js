@@ -213,8 +213,25 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   }, [user]);
 
+  // Funcion para diferenciar mensajes entre leidos y no leidos
+  const updateMessageReadStatus = async (recipientEmail) => {
+    try {
+      const userDocSnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', recipientEmail)));
+      if (!userDocSnapshot.empty) {
+        const userDocRef = userDocSnapshot.docs[0].ref;
+        const messagesCollectionRef = collection(userDocRef, 'messages');
+        const unreadMessagesQuerySnapshot = await getDocs(query(messagesCollectionRef, where('read', '==', false)));
+        unreadMessagesQuerySnapshot.forEach(async (doc) => {
+          await setDoc(doc.ref, { read: true }, { merge: true });
+        });
+      }
+    } catch (error) {
+      console.error('Error al actualizar el estado de leído del mensaje:', error);
+    }
+  };
 
-  useEffect(() => {
+
+  /*useEffect(() => {
     const unsubscribeAuth = auth.onAuthStateChanged(user => {
       if (user) {
         setLoggedIn(true);
@@ -228,7 +245,7 @@ const MusiColaboContextProvider = ({ children }) => {
     return () => {
       unsubscribeAuth();
     };
-  }, []);
+  }, []);*/
      
     
   
@@ -238,6 +255,7 @@ const MusiColaboContextProvider = ({ children }) => {
       storage,
       userEmail,
       loggedIn,
+      unreadMessages,
       sendMessage,
       uploadImage,
       uploadVideo,
@@ -248,8 +266,8 @@ const MusiColaboContextProvider = ({ children }) => {
       getProfilesFromFirestore,
       getMessagesFromFirestore,
       updateProfileInFirestore,
-      unreadMessages
-       
+      updateMessageReadStatus,
+      setUnreadMessages
       }}>
       {children}
     </MusiColaboContext.Provider>
