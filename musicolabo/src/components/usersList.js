@@ -6,9 +6,9 @@ import '../styles/userList.css';
 
 
 const UsersList = () => {
-  const { getProfilesFromFirestore, sendMessage, unreadMessages } = useContext(MusiColaboContext);
+  const { getProfilesFromFirestore, sendMessage, unreadMessages, updateMessageReadStatus, setUnreadMessages } = useContext(MusiColaboContext);
   const [profiles, setProfiles] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const [recipientEmail, setRecipientEmail] = useState('');
   const [recipientName, setRecipientName] = useState('');
   const [message, setMessage] = useState('');
@@ -20,14 +20,17 @@ const UsersList = () => {
     console.log("ID del usuario destinatario:", recipientEmail);
     setRecipientEmail(recipientEmail);
     setRecipientName(recipientName);
-    setShowModal(true);
+    setShowForm(true);
+    updateMessageReadStatus(recipientEmail);
+    // Actualizar el estado de mensajes no leídos en el contexto
+  setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await sendMessage(recipientEmail, recipientName, message);
-      setShowModal(false);
+      setShowForm(false);
       setMessage('');
     } catch (error) {
       console.error('Error al enviar el mensaje:', error);
@@ -91,9 +94,9 @@ const UsersList = () => {
         ))}
       </div>
       
-      {showModal && (
+      {showForm && (
         <div className="message-popup">
-            <span className="close" onClick={() => setShowModal(false)}>&times;</span>
+            <button className="close" onClick={() => setShowForm(false)}>&times;</button>
             <h2>Enviar mensaje a {recipientName}</h2>
             <form onSubmit={handleSubmit}>
               <textarea value={message} onChange={(e) => setMessage(e.target.value)} />
