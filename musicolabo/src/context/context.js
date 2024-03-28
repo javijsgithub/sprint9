@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { auth, db, storage } from '../firebase';
-import { addDoc, collection, getDocs, query, where, setDoc, onSnapshot } from 'firebase/firestore';
+import { addDoc, collection, getDocs, query, where, orderBy, setDoc, onSnapshot } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 export const MusiColaboContext = createContext();
@@ -99,6 +99,24 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   };
 
+  // Funcion para que el usuario pueda editar su perfil 
+  const updateProfileInFirestore = async (userEmail, updatedProfile) => {
+    try {
+      const querySnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', userEmail)));
+      if (!querySnapshot.empty) {
+        const docRef = querySnapshot.docs[0].ref;
+        await setDoc(docRef, updatedProfile, { merge: true });
+        console.log('Perfil del usuario actualizado exitosamente en Firestore:', updatedProfile);
+      } else {
+        console.error('No se encontró ningún perfil con el correo electrónico proporcionado:', userEmail);
+      }
+    } catch (error) {
+      console.error('Error al actualizar el perfil del usuario en Firestore:', error);
+      throw error;
+    }
+  };
+
+
   //  Funcion para enviar mensajes utilizando firestore
   const sendMessage = async (recipientEmail, recipientName, message) => {
     try {
@@ -130,24 +148,71 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   };
 
+  // mostrar los avisos de mensajes
+  useEffect(() => {
+    if (userEmail && loggedIn) {
+      const unsubscribeMessages = onSnapshot(collection(db, 'userData'), async (snapshot) => {
+        let unreadCount = 0;
+        for (const doc of snapshot.docs) {
+          const messagesCollectionRef = collection(doc.ref, 'messages');
+          const messagesSnapshot = await getDocs(messagesCollectionRef);
+          for (const messageDoc of messagesSnapshot.docs) {
+            const messageData = messageDoc.data();
+            if (!messageData.read && messageData.recipient === userEmail) {
+              unreadCount++;
+            }
+          }
+        }
+        setUnreadMessages(unreadCount);
+      });
   
+      return () => {
+        unsubscribeMessages();
+      };
+    }
+  }, [userEmail, loggedIn]);
 
-  // Funcion para que el usuario pueda editar su perfil 
-  const updateProfileInFirestore = async (userEmail, updatedProfile) => {
+  // Función para obtener los mensajes del usuario
+  const getMessagesFromFirestore = async (userEmail) => {
     try {
       const querySnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', userEmail)));
       if (!querySnapshot.empty) {
-        const docRef = querySnapshot.docs[0].ref;
-        await setDoc(docRef, updatedProfile, { merge: true });
-        console.log('Perfil del usuario actualizado exitosamente en Firestore:', updatedProfile);
+        const userDocRef = querySnapshot.docs[0].ref;
+        const messagesQuerySnapshot = await getDocs(query(collection(userDocRef, 'messages'), orderBy('timestamp', 'asc')));        const messages = messagesQuerySnapshot.docs.map(doc => {
+          const messageData = doc.data();
+          console.log('Mensaje obtenido:', messageData);
+          if (!messageData.hasOwnProperty('read')) {
+            messageData.read = false;
+          }
+          return messageData;
+        });
+        return messages;
       } else {
-        console.error('No se encontró ningún perfil con el correo electrónico proporcionado:', userEmail);
+        console.error('No se encontró ningún usuario con el correo electrónico proporcionado:', userEmail);
+        return []; // Devolver un array vacío si no se encuentra ningún usuario
       }
     } catch (error) {
-      console.error('Error al actualizar el perfil del usuario en Firestore:', error);
+      console.error('Error al obtener mensajes del usuario:', error);
       throw error;
     }
   };
+  
+  useEffect(() => {
+    if (user) {
+      // Llamar a la función getMessagesFromFirestore para obtener los mensajes del usuario
+    getMessagesFromFirestore(user.email)
+    .then(messages => {
+      // Calcular el número de mensajes no leídos
+      const unreadCount = messages.filter(message => !message.read).length;
+      setUnreadMessages(unreadCount);
+      console.log('unreadMessages actualizado:', unreadCount);
+    })
+    .catch(error => {
+      console.error('Error al obtener mensajes del usuario:', error);
+    });
+    }
+  }, [user]);
+
 
   useEffect(() => {
     const unsubscribeAuth = auth.onAuthStateChanged(user => {
@@ -164,29 +229,8 @@ const MusiColaboContextProvider = ({ children }) => {
       unsubscribeAuth();
     };
   }, []);
-
-    useEffect(() => {
-      if (userEmail && loggedIn) {
-        const unsubscribeMessages = onSnapshot(collection(db, 'userData'), async (snapshot) => {
-          let unreadCount = 0;
-          for (const doc of snapshot.docs) {
-            const messagesCollectionRef = collection(doc.ref, 'messages');
-            const messagesSnapshot = await getDocs(messagesCollectionRef);
-            for (const messageDoc of messagesSnapshot.docs) {
-              const messageData = messageDoc.data();
-              if (!messageData.read && messageData.recipient === userEmail) {
-                unreadCount++;
-              }
-            }
-          }
-          setUnreadMessages(unreadCount);
-        });
+     
     
-        return () => {
-          unsubscribeMessages();
-        };
-      }
-    }, [userEmail, loggedIn]);
   
   return (
     <MusiColaboContext.Provider value={{ 
@@ -202,6 +246,7 @@ const MusiColaboContextProvider = ({ children }) => {
       handleLogin,
       handleLogout, 
       getProfilesFromFirestore,
+      getMessagesFromFirestore,
       updateProfileInFirestore,
       unreadMessages
        
@@ -216,6 +261,6 @@ export default MusiColaboContextProvider;
 
 
 
-//cuando el usuario envia un mensaje a otro usuario debe mostrarse el aviso de mensaje nuevo de mensajes al usuario destinatario, esto no esta pasando, cuando el usuario destinatario del mensaje inicia sesion no sale ningun aviso
-//te he facilitado mis componentes para que mires donde puede estar el error
+
+
 
