@@ -27,9 +27,12 @@ const Header = () => {
           {loggedIn ? (
             <div className='container-user-logged-header'>
               <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-header-logout'>Cerrar sesion</Link>
-              <p><Link to="/create-profile">{userEmail}</Link></p>
+              <p>{userEmail}</p>
               <p><Link to="/edit-profile" className='link-profile'>Ver perfil</Link></p>
-              <p><Link to="/messages" className="unread-messages"> Ver mensajes </Link></p> {unreadMessages > 0 && <p>{unreadMessages} no leidos</p>}
+              <div className='container-ver-mensajes'> 
+                <p><Link to="/messages" className="unread-messages"> Ver mensajes </Link></p> 
+                {unreadMessages > 0 && <p>{unreadMessages} no leidos</p>}
+              </div>
             </div>
           ) : (
           <>
