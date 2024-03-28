@@ -3,9 +3,16 @@ import { Link } from 'react-router-dom';
 import { MusiColaboContext } from '../context/context';
 
 const Messages = () => {
-  const { user, getMessagesFromFirestore, unreadMessages } = useContext(MusiColaboContext);
+  const { user, getMessagesFromFirestore, unreadMessages, sendMessage, updateMessageReadStatus, setUnreadMessages  } = useContext(MusiColaboContext);
   const [messages, setMessages] = useState([]);
+  const [unreadMessagesList, setUnreadMessagesList] = useState([]);
+  const [readMessagesList, setReadMessagesList] = useState([]);
   const [expandedMessageIndexes, setExpandedMessageIndexes] = useState([]);
+  const [recipientEmail, setRecipientEmail] = useState('');
+  const [recipientName, setRecipientName] = useState('');
+  const [replyMessage, setReplyMessage] = useState('');
+  const [showReplyForm, setShowReplyForm] = useState(false);
+  //const [recipientName, setRecipientName] = useState('');
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -13,27 +20,70 @@ const Messages = () => {
         if (user) {
           const userMessages = await getMessagesFromFirestore(user.email);
           console.log('Mensajes obtenidos en el componente:', userMessages);
-          setMessages(userMessages.reverse());        }
+          const unread = [];
+          const read = [];
+          userMessages.forEach(message => {
+            if (!message.read) {
+              unread.push(message);
+            } else {
+              read.push(message);
+            }
+          });
+          setUnreadMessagesList(unread.reverse());
+          setReadMessagesList(read.reverse());
+          setMessages(userMessages.reverse());
+        }       
       } catch (error) {
         console.error('Error al obtener mensajes del usuario:', error);
       }
     };
-
     fetchMessages();
   }, [getMessagesFromFirestore, user]);
 
-  useEffect(() => {
-    console.log('Messages:', messages);
-  }, [messages]);
+  
+  const openMessage = async (index) => {
+    try {
+      if (!expandedMessageIndexes.includes(index)) {
+        const updatedMessages = [...messages];
+        updatedMessages[index].read = true; // Marcar el mensaje como leído
+        setMessages(updatedMessages);
+        await updateMessageReadStatus(messages[index].recipient); // Actualizar el estado de leído en Firestore
+        setExpandedMessageIndexes([...expandedMessageIndexes, index]);
+       // setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1)); // Actualizar el estado de mensajes no leídos en el contexto
 
-  const openMessage = (index) => {
-    if (!expandedMessageIndexes.includes(index)) {
-      setExpandedMessageIndexes([...expandedMessageIndexes, index]);
+      }
+    } catch (error) {
+      console.error('Error al abrir el mensaje:', error);
     }
   };
 
   const closeMessage = (index) => {
-    setExpandedMessageIndexes(expandedMessageIndexes.filter((i) => i !== index));
+    try {
+      const updatedMessages = [...messages];
+      updatedMessages[index].read = true;
+      setMessages(updatedMessages);
+      updateMessageReadStatus(messages[index].recipient);
+      setExpandedMessageIndexes(expandedMessageIndexes.filter((i) => i !== index));
+      setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1));
+    } catch (error) {
+      console.error('Error al cerrar el mensaje:', error);
+    }
+  };
+
+  const handleReply = (recipientEmail, recipientName) => {
+    setRecipientEmail(recipientEmail);
+    setRecipientName(recipientName);
+    setShowReplyForm(true);
+  };
+
+  const handleSendReply = async () => {
+    try {
+      await sendMessage(recipientEmail, recipientName, replyMessage);
+      setShowReplyForm(false);
+      setReplyMessage('');
+    } catch (error) {
+      console.error('Error al enviar la respuesta:', error);
+    }
   };
 
   return (
@@ -41,8 +91,9 @@ const Messages = () => {
       <Link to="/list" className="btn btn-secondary" id='btn-users-list-go-to-header'>Volver</Link>
       <h2>Mensajes</h2>
       {unreadMessages > 0 && <p>Tienes {unreadMessages} mensaje/s no leídos.</p>}
+      <h3>Mensajes no leídos</h3>
       <ul>
-        {messages.map((message, index) => (
+      {unreadMessagesList.map((message, index) => (
           <li key={index}>
             <strong>De:</strong> {message.sender}<br />
             <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
@@ -51,6 +102,7 @@ const Messages = () => {
               <>
                 <strong>Mensaje:</strong> {message.message}<br />
                 <button onClick={() => closeMessage(index)}>Cerrar mensaje</button>
+                <button onClick={() => handleReply(message.sender, message.sender)}>Responder</button>
               </>
             ) : (
               <button onClick={() => openMessage(index)}>Ver mensaje</button>
@@ -58,6 +110,36 @@ const Messages = () => {
           </li>
         ))}
       </ul>
+      <h3>Mensajes leídos</h3>
+      <ul>
+        {readMessagesList.map((message, index) => (
+          <li key={index}>
+          <strong>De:</strong> {message.sender}<br />
+            <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
+
+            {expandedMessageIndexes.includes(index) ? (
+              <>
+                <strong>Mensaje:</strong> {message.message}<br />
+                <button onClick={() => closeMessage(index)}>Cerrar mensaje</button>
+                <button onClick={() => handleReply(message.sender, message.sender)}>Responder</button>
+              </>
+            ) : (
+              <button onClick={() => openMessage(index)}>Ver mensaje</button>
+            )}
+          </li>
+        ))}
+      </ul>
+
+      {showReplyForm && (
+        <div className="reply-message-popup">
+            <button className="close" onClick={() => setShowReplyForm(false)}>&times;</button>
+          <h3>Responder a {recipientName}</h3>
+          <form>
+            <textarea value={replyMessage} onChange={(e) => setReplyMessage(e.target.value)} />
+            <button onClick={handleSendReply}>Enviar</button>
+          </form>
+        </div>
+      )}
     </div>
   );
 };
