@@ -9,7 +9,7 @@ import { FaYoutube } from "react-icons/fa";
 import '../styles/header.css';
 
 const Header = () => {
-  const { handleLogout, loggedIn, userEmail } = useContext(MusiColaboContext);
+  const { handleLogout, loggedIn, userEmail, unreadMessages } = useContext(MusiColaboContext);
  
   return (
     <div className='container-header'>
@@ -29,6 +29,7 @@ const Header = () => {
               <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-header-logout'>Cerrar sesion</Link>
               <p><Link to="/create-profile">{userEmail}</Link></p>
               <p><Link to="/edit-profile" className='link-profile'>Ver perfil</Link></p>
+              <p><Link to="/messages" className="unread-messages"> Ver mensajes </Link></p> {unreadMessages > 0 && <p>{unreadMessages} no leidos</p>}
             </div>
           ) : (
           <>
