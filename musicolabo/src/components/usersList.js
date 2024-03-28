@@ -51,17 +51,20 @@ const UsersList = () => {
 
  
   console.log("Mensajes no leídos:", unreadMessages);
+
     return (
      
   <div className='container-users-list'>
         <Header />
-        <Link to="/" className="btn btn-secondary" id='btn-users-list-go-to-header'>Ir a la pagina de Bienvenida</Link>
+        <Link to="/" 
+         className="btn btn-secondary" id='btn-users-list-go-to-header'>Ir a la pagina de Bienvenida
+        </Link>
 
           <h2>LISTADO</h2>
       {unreadMessages > 0 && 
-      <div
+      <Link to="/messages"
        className="unread-messages">Tienes {unreadMessages} mensaje(s) nuevo(s).
-      </div>}
+      </Link>}
       <div className="row-list">
         {profiles.map(profile => (
           <div className="col-md-3 mb-4 sm-3 col-cards" key={profile.email}>
