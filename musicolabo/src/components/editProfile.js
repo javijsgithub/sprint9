@@ -111,8 +111,8 @@ const EditProfile = () => {
         </div>
       </div>
       <div className='container-edit-profile'>
-      <h2>Editar perfil</h2>
-      <button onClick={toggleEditMode}>{isEditMode ? 'Cancelar' : 'Editar'}</button>
+      <h2>Perfil</h2>
+      <button onClick={toggleEditMode}>{isEditMode ? 'Cancelar' : 'Editar Perfil'}</button>
         <form onSubmit={handleSubmit} style={{ display: isEditMode ? 'block' : 'none' }}>      
         {pictureUrl && (
           <div className="preview">
