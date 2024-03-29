@@ -28,10 +28,11 @@ const Header = () => {
             <div className='container-user-logged-header'>
               <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-header-logout'>Cerrar sesion</Link>
               <p>{userEmail}</p>
-              <p><Link to="/edit-profile" className='link-profile'>Ver perfil</Link></p>
-              <div className='container-ver-mensajes'> 
-                <p><Link to="/messages" className="unread-messages"> Ver mensajes </Link></p> 
-                {unreadMessages > 0 && <p>{unreadMessages} no leidos</p>}
+              <div className='container--mensajes-no-leidos'> 
+                {unreadMessages > 0 && 
+                 <Link to="/messages"
+                   className="unread-messages">{unreadMessages} mensaje(s) nuevo(s).
+                 </Link>}              
               </div>
             </div>
           ) : (
