@@ -1,0 +1,7 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+
+.navbar {
+    background-color: rgb(63, 125, 128);
+    border-radius: 5px;
+}
