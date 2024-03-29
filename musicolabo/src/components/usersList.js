@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import { MusiColaboContext } from '../context/context';
 import { Link } from 'react-router-dom';
 import Header from './header';
+import Navbar from './navbar';
 import '../styles/userList.css';
 
 
 const UsersList = () => {
-  const { getProfilesFromFirestore, sendMessage, unreadMessages, updateMessageReadStatus, setUnreadMessages } = useContext(MusiColaboContext);
+  const { getProfilesFromFirestore, sendMessage, unreadMessages, updateMessageReadStatus, setUnreadMessages, filteredProfiles } = useContext(MusiColaboContext);
   const [profiles, setProfiles] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [recipientEmail, setRecipientEmail] = useState('');
@@ -44,6 +45,7 @@ const UsersList = () => {
         const fetchedProfiles = await getProfilesFromFirestore();
         console.log("Perfiles obtenidos:", fetchedProfiles);
         setProfiles(fetchedProfiles);
+        // Establecemos los perfiles filtrados
       } catch (error) {
         console.error('Error al obtener perfiles:', error);
       }
@@ -52,24 +54,40 @@ const UsersList = () => {
     fetchProfiles();
   }, [getProfilesFromFirestore]);
 
- 
   console.log("Mensajes no leídos:", unreadMessages);
 
     return (
      
   <div className='container-users-list'>
         <Header />
-        <Link to="/" 
-         className="btn btn-secondary" id='btn-users-list-go-to-header'>Ir a la pagina de Bienvenida
-        </Link>
+        <Navbar />
 
           <h2>LISTADO</h2>
-      {unreadMessages > 0 && 
-      <Link to="/messages"
-       className="unread-messages">Tienes {unreadMessages} mensaje(s) nuevo(s).
-      </Link>}
+     
       <div className="row-list">
-        {profiles.map(profile => (
+      {filteredProfiles.length > 0 ? filteredProfiles.map(profile => (
+          <div className="col-md-3 mb-4 sm-3 col-cards" key={profile.email}>
+            <div className="cards">
+              <img src={profile.picture} className="card-img-top" alt="Imagen de perfil" />
+              <div className="card-body">
+                <div className='card-name-and-city'>
+                  <h3 className="card-name">{profile.name}</h3>
+                  <p className='card-city'>{profile.city}</p>
+                  <p className='card-instruments'>{profile.instruments.join(', ')}</p>
+                </div>
+                <div className='container-purpose-link'>
+                  <div className='container-purpose'>
+                    <p className='card-purpose'>{profile.purpose}</p>
+                  </div>
+                  <div className='container-link'>
+                    <Link to='' className='link-card' onClick={() => handleSendMessage(profile.email, profile.name)}>Enviar mensaje</Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )) :
+        profiles.map(profile => (
           <div className="col-md-3 mb-4 sm-3 col-cards" key={profile.email}>
             <div className="cards">
               <img src={profile.picture} className="card-img-top" alt="Imagen de perfil" />
