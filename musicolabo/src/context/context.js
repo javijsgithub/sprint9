@@ -10,6 +10,7 @@ const MusiColaboContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userEmail, setUserEmail] = useState('');
   const [unreadMessages, setUnreadMessages] = useState(0);
+  const [filteredProfiles, setFilteredProfiles] = useState([]);
 
   
   // Función para registrar un nuevo usuario
@@ -256,6 +257,7 @@ const MusiColaboContextProvider = ({ children }) => {
       userEmail,
       loggedIn,
       unreadMessages,
+      filteredProfiles,
       sendMessage,
       uploadImage,
       uploadVideo,
@@ -267,7 +269,8 @@ const MusiColaboContextProvider = ({ children }) => {
       getMessagesFromFirestore,
       updateProfileInFirestore,
       updateMessageReadStatus,
-      setUnreadMessages
+      setUnreadMessages,
+      setFilteredProfiles
       }}>
       {children}
     </MusiColaboContext.Provider>
