@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MusiColaboContext } from '../context/context';
+import '../styles/messages.css';
 
 const Messages = () => {
   const { user, getMessagesFromFirestore, unreadMessages, sendMessage, updateMessageReadStatus, setUnreadMessages  } = useContext(MusiColaboContext);
@@ -12,7 +13,6 @@ const Messages = () => {
   const [recipientName, setRecipientName] = useState('');
   const [replyMessage, setReplyMessage] = useState('');
   const [showReplyForm, setShowReplyForm] = useState(false);
-  //const [recipientName, setRecipientName] = useState('');
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -40,6 +40,7 @@ const Messages = () => {
     fetchMessages();
   }, [getMessagesFromFirestore, user]);
 
+ 
   
   const openMessage = async (index) => {
     try {
@@ -49,8 +50,6 @@ const Messages = () => {
         setMessages(updatedMessages);
         await updateMessageReadStatus(messages[index].recipient); // Actualizar el estado de leído en Firestore
         setExpandedMessageIndexes([...expandedMessageIndexes, index]);
-       // setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1)); // Actualizar el estado de mensajes no leídos en el contexto
-
       }
     } catch (error) {
       console.error('Error al abrir el mensaje:', error);
@@ -95,7 +94,7 @@ const Messages = () => {
       <ul>
       {unreadMessagesList.map((message, index) => (
           <li key={index}>
-            <strong>De:</strong> {message.sender}<br />
+            <strong>De:</strong> {message.sender}, <Link to={`/user-profile/${message.sender}`}> Ver perfil</Link><br />
             <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
 
             {expandedMessageIndexes.includes(index) ? (
@@ -114,7 +113,7 @@ const Messages = () => {
       <ul>
         {readMessagesList.map((message, index) => (
           <li key={index}>
-          <strong>De:</strong> {message.sender}<br />
+            <strong>De:</strong> {message.sender}, <Link to={`/user-profile/${message.sender}`}> Ver perfil</Link><br />
             <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
 
             {expandedMessageIndexes.includes(index) ? (
