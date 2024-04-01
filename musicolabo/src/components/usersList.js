@@ -11,16 +11,16 @@ const UsersList = () => {
   const [profiles, setProfiles] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [recipientEmail, setRecipientEmail] = useState('');
-  const [recipientName, setRecipientName] = useState('');
+  const [recipientUserName, setRecipientUserName] = useState('');
   const [message, setMessage] = useState('');
 
 
 
-  const handleSendMessage = (recipientEmail, recipientName) => {
+  const handleSendMessage = (recipientEmail, recipientUserName) => {
     console.log("Se hizo clic en el enlace 'Enviar mensaje'");
     console.log("ID del usuario destinatario:", recipientEmail);
     setRecipientEmail(recipientEmail);
-    setRecipientName(recipientName);
+    setRecipientUserName(recipientUserName);
     setShowForm(true);
     updateMessageReadStatus(recipientEmail);
     // Actualizar el estado de mensajes no leídos en el contexto
@@ -30,7 +30,7 @@ const UsersList = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await sendMessage(recipientEmail, recipientName, message);
+      await sendMessage(recipientEmail, recipientUserName, message);
       setShowForm(false);
       setMessage('');
     } catch (error) {
@@ -61,8 +61,6 @@ const UsersList = () => {
   <div className='container-users-list'>
         <Header />
         <Navbar />
-
-          <h2>LISTADO</h2>
      
       <div className="row-list">
       {filteredProfiles.length > 0 ? filteredProfiles.map(profile => (
@@ -71,7 +69,7 @@ const UsersList = () => {
               <img src={profile.picture} className="card-img-top" alt="Imagen de perfil" />
               <div className="card-body">
                 <div className='card-name-and-city'>
-                  <h3 className="card-name">{profile.name}</h3>
+                  <h3 className="card-user-name">{profile.username}</h3>
                   <p className='card-city'>{profile.city}</p>
                   <p className='card-instruments'>{profile.instruments.join(', ')}</p>
                 </div>
@@ -80,6 +78,7 @@ const UsersList = () => {
                     <p className='card-purpose'>{profile.purpose}</p>
                   </div>
                   <div className='container-link'>
+                    <Link to={`/user-videos/${profile.email}`} className='link-card'>Ver videos</Link>
                     <Link to='' className='link-card' onClick={() => handleSendMessage(profile.email, profile.name)}>Enviar mensaje</Link>
                   </div>
                 </div>
@@ -93,7 +92,7 @@ const UsersList = () => {
               <img src={profile.picture} className="card-img-top" alt="Imagen de perfil" />
               <div className="card-body">
                 <div className='card-name-and-city'>
-                  <h3 className="card-name">{profile.name}</h3>
+                  <h3 className="card-user-name">{profile.username}</h3>
                   <p className='card-city'>{profile.city}</p>
                   <p className='card-instruments'>{profile.instruments.join(', ')}</p>
                 </div>
@@ -102,7 +101,8 @@ const UsersList = () => {
                     <p className='card-purpose'>{profile.purpose}</p>
                   </div>
                   <div className='container-link'>
-                  <Link to='' className='link-card' onClick={() => handleSendMessage(profile.email, profile.name)}>Enviar mensaje</Link>  
+                  <Link to={`/user-videos/${profile.email}`} className='link-card1'>Ver videos</Link>
+                  <Link to='' className='link-card2' onClick={() => handleSendMessage(profile.email, profile.name)}>Enviar mensaje</Link>  
                   </div>
                 </div>
                 
@@ -115,7 +115,7 @@ const UsersList = () => {
       {showForm && (
         <div className="message-popup">
             <button className="close" onClick={() => setShowForm(false)}>&times;</button>
-            <h2>Enviar mensaje a {recipientName}</h2>
+            <h2>Enviar mensaje a {recipientUserName}</h2>
             <form onSubmit={handleSubmit}>
               <textarea value={message} onChange={(e) => setMessage(e.target.value)} />
               <button type="submit">Enviar</button>
@@ -131,5 +131,4 @@ const UsersList = () => {
 
   /* <div className='container-btn-view-more'>
          <button type="button" id='btn-view-more' onClick={loadMoreUsers} class="btn btn-secondary">Ver mas...</button>
-         
-          </div>*/
+     </div>*/
