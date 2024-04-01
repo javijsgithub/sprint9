@@ -13,7 +13,7 @@ const MusiColaboContextProvider = ({ children }) => {
   const [filteredProfiles, setFilteredProfiles] = useState([]);
 
   
-  // Función para registrar un nuevo usuario
+  // Función para registrar un nuevo usuario.
   const handleRegister = async ({ email, password }) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -25,7 +25,8 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   };
 
-  // Función para iniciar sesión
+
+  // Función para iniciar sesión.
   const handleLogin = async ({ email, password }) => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -37,7 +38,8 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   };
 
-  // Función para cerrar sesión
+
+  // Función para cerrar sesión.
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -48,7 +50,8 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   };
 
-  // Función para crear un nuevo documento de perfil de usuario en Firestore Database.
+
+  // Función para crear un nuevo documento de perfil de usuario en Firestore.
   const createNewDocument = async (userProfile) => {
     try {
       
@@ -60,35 +63,60 @@ const MusiColaboContextProvider = ({ children }) => {
       throw error;
     }
   };
-//  Funcion para cargar imagenes en firestorage
+
+
+//  Funcion para cargar imagenes en firestorage.
   const uploadImage = async (file) => {
     try {
       const storageRef = ref(storage, `images/${file.name}`);
       const snapshot = await uploadBytes(storageRef, file);
       console.log('Imagen subida correctamente:', file.name);
       const downloadURL = await getDownloadURL(snapshot.ref);
-      return downloadURL; // Devuelve la URL de descarga de la imagen
+      return downloadURL; // Devuelve la URL de descarga de la imagen.
     } catch (error) {
       console.error("Error al subir la imagen:", error);
       throw error;
     }
   };
 
-  // Función para cargar videos en FireStorage
+
+  // Función para cargar videos en FireStorage.
   const uploadVideo = async (file) => {
     try {
       const storageRef = ref(storage, `videos/${file.name}`);
       const snapshot = await uploadBytes(storageRef, file);
       console.log('Video subido correctamente:', file.name);
       const downloadURL = await getDownloadURL(snapshot.ref);
-      return downloadURL; // Devuelve la URL de descarga del video
+      return downloadURL; // Devuelve la URL de descarga del video.
     } catch (error) {
       console.error("Error al subir el video:", error);
       throw error;
     }
   };
 
-  // Funcion para ver los perfiles de usuarios en el listado
+  //  Funcion para obtener los videos del usuario. 
+  const getVideosByUserEmail = async (email) => {
+    try {
+      const querySnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', email)));
+      if (!querySnapshot.empty) {
+        const userData = querySnapshot.docs[0].data();
+        if (userData.videos) {
+          return userData.videos;
+        } else {
+          return [];
+        }
+      } else {
+        console.error('No se encontró ningún usuario con el correo electrónico proporcionado:', email);
+        return [];
+      }
+    } catch (error) {
+      console.error('Error al obtener los videos del usuario:', error);
+      throw error;
+    }
+  };
+
+
+  // Funcion para ver los perfiles de usuarios en el listado.
   const getProfilesFromFirestore = async () => {
     try {
       const profilesSnapshot = await getDocs(collection(db, 'userData'));
@@ -100,7 +128,8 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   };
 
-  // Funcion para que el usuario pueda editar su perfil 
+
+  // Funcion para que el usuario pueda editar su perfil.
   const updateProfileInFirestore = async (userEmail, updatedProfile) => {
     try {
       const querySnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', userEmail)));
@@ -119,9 +148,9 @@ const MusiColaboContextProvider = ({ children }) => {
 
 
   //  Funcion para enviar mensajes utilizando firestore
-  const sendMessage = async (recipientEmail, recipientName, message) => {
+  const sendMessage = async (recipientEmail, recipientUserName, message) => {
     try {
-      console.log("Enviando mensaje a...", recipientName);
+      console.log("Enviando mensaje a...", recipientUserName);
       console.log("Destinatario userId:", recipientEmail);
       console.log("Mensaje:", message);
       // Obtener la referencia al documento del destinatario usando el correo electrónico
@@ -137,7 +166,6 @@ const MusiColaboContextProvider = ({ children }) => {
         read: false // Marcar el mensaje como no leído cuando se envía
       });
       console.log('Mensaje enviado exitosamente.');
-       // Solo actualizar unreadMessages si el usuario actual es el destinatario del mensaje
        if (recipientEmail === userEmail) {
         setUnreadMessages(prevUnreadMessages => prevUnreadMessages + 1);
       }
@@ -148,8 +176,7 @@ const MusiColaboContextProvider = ({ children }) => {
       console.error('Error al enviar el mensaje:', error);
     }
   };
-
-  // mostrar los avisos de mensajes
+    // mostrar los avisos de mensajes
   useEffect(() => {
     if (userEmail && loggedIn) {
       const unsubscribeMessages = onSnapshot(collection(db, 'userData'), async (snapshot) => {
@@ -173,7 +200,8 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   }, [userEmail, loggedIn]);
 
-  // Función para obtener los mensajes del usuario
+
+  // Función para obtener los mensajes del usuario.
   const getMessagesFromFirestore = async (userEmail) => {
     try {
       const querySnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', userEmail)));
@@ -200,10 +228,10 @@ const MusiColaboContextProvider = ({ children }) => {
   
   useEffect(() => {
     if (user) {
-      // Llamar a la función getMessagesFromFirestore para obtener los mensajes del usuario
+      // Llamar a la función getMessagesFromFirestore para obtener los mensajes del usuario.
     getMessagesFromFirestore(user.email)
     .then(messages => {
-      // Calcular el número de mensajes no leídos
+      // Calcular el número de mensajes no leídos.
       const unreadCount = messages.filter(message => !message.read).length;
       setUnreadMessages(unreadCount);
       console.log('unreadMessages actualizado:', unreadCount);
@@ -214,7 +242,8 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   }, [user]);
 
-  // Funcion para diferenciar mensajes entre leidos y no leidos
+
+  // Funcion para diferenciar mensajes entre leidos y no leidos.
   const updateMessageReadStatus = async (recipientEmail) => {
     try {
       const userDocSnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', recipientEmail)));
@@ -231,24 +260,6 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   };
 
-
-  /*useEffect(() => {
-    const unsubscribeAuth = auth.onAuthStateChanged(user => {
-      if (user) {
-        setLoggedIn(true);
-        setUserEmail(user.email);
-      } else {
-        setLoggedIn(false);
-        setUserEmail('');
-      }
-    });
-
-    return () => {
-      unsubscribeAuth();
-    };
-  }, []);*/
-     
-    
   
   return (
     <MusiColaboContext.Provider value={{ 
@@ -270,7 +281,8 @@ const MusiColaboContextProvider = ({ children }) => {
       updateProfileInFirestore,
       updateMessageReadStatus,
       setUnreadMessages,
-      setFilteredProfiles
+      setFilteredProfiles,
+      getVideosByUserEmail
       }}>
       {children}
     </MusiColaboContext.Provider>
@@ -278,7 +290,6 @@ const MusiColaboContextProvider = ({ children }) => {
 };
 
 export default MusiColaboContextProvider;
-
 
 
 
