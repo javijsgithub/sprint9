@@ -56,7 +56,7 @@ const Navbar = () => {
               <Link className="nav-link" to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/profile">Perfil</Link>
+              <Link className="nav-link" to="/edit-profile">Perfil</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/messages">Mensajes</Link>
