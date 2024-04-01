@@ -93,18 +93,18 @@
 }
 
 #btn-header-logout {
-    background-color: rgb(0,128,128);
-    color: white;
-    border: 1px solid rgb(0,128,128);
+    background-color:  rgb(46, 44, 44);
+    color: rgb(95,158,160);
+    border: 1px solid rgb(46, 44, 44);
     border-radius: 3px;
     height: max-content;
     align-items: flex-end;
     margin-bottom: 10px;
 }
 #btn-header-logout:hover {
-    background-color: rgb(219, 217, 217);
-    color: rgb(1, 99, 99);
-    border: 1px solid rgb(1, 99, 99);
+    background-color: white;
+    color: rgb(63, 125, 128);
+    border: 1px solid white;
 }
 
 

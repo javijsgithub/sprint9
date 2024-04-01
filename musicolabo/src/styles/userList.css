@@ -11,6 +11,7 @@
 }
 
 .row-list {
+    margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
     padding: 20px;
@@ -68,7 +69,9 @@ img {
 }
 
 .container-link {
+    display: flex;
     text-align: end;
+    justify-content: space-between;
     padding: 5px 5px 8px 5px;
 }
 
