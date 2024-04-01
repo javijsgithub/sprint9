@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { MusiColaboContext } from '../context/context';
-//import '../styles/editProfile.css';
+import '../styles/editProfile.css';
 
 const EditProfile = () => {
   const { userEmail, getProfilesFromFirestore, updateProfileInFirestore, uploadImage, uploadVideo } = useContext(MusiColaboContext);
@@ -26,7 +26,8 @@ const EditProfile = () => {
         const currentUserProfile = profiles.find(profile => profile.email === userEmail);
         if (currentUserProfile) {
             setPictureUrl(currentUserProfile.picture);
-            setVideos(currentUserProfile.videos || []);            setName(currentUserProfile.name);
+            setVideos(currentUserProfile.videos || []);            
+            setName(currentUserProfile.name);
             setUsername(currentUserProfile.username);
             setEmail(currentUserProfile.email);
             setCity(currentUserProfile.city);
@@ -93,10 +94,16 @@ const EditProfile = () => {
     setVideos([...videos, ...e.target.files]);
   };
 
+  const handleRemoveVideo = (index) => {
+    const updatedVideos = [...videos];
+    updatedVideos.splice(index, 1);
+    setVideos(updatedVideos);
+  };
+
   return (
-<div className='container-fluid' id='container-edite-profile'>
-      <div className='container-header-edite-profile'>
-        <div className='row-header-edite-profile'>
+<div className='container-fluid' id='container-edit-profile'>
+      <div className='container-header-edit-profile'>
+        <div className='row-header-edit-profile'>
           <div className='col col-volver'>
           <Link to="/list" className='btn btn-sm btn-outline-secondary' type="button" id='btn-home-login'>Volver</Link>
 
@@ -135,6 +142,21 @@ const EditProfile = () => {
             onChange={handleVideoChange}
           />
         </label>
+        {videos.map((video, index) => (
+       <div key={index} className="video-item">
+        <video controls>
+          <source src={video} type="video/mp4" />
+          Tu navegador no admite la etiqueta de video.
+        </video>
+        <button
+          type="button"
+          onClick={() => handleRemoveVideo(index)}
+          className="btn btn-danger btn-sm"
+        >
+        Eliminar
+       </button>
+    </div>
+    ))}
       Nombre:
       <label>
           <input
@@ -219,7 +241,6 @@ const EditProfile = () => {
                 onChange={handleInstrumentChange}
               /> Batería
             </label>
-            {/* Agrega más checkboxes según sea necesario */}
           </div>
         </label>
         Descripción:
