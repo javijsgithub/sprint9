@@ -31,8 +31,8 @@ const Register = () => {
           <div className='col col-btn-home-register'>
           <Link to="/" className='btn btn-sm btn-outline-secondary' type="button" id='btn-home-register'>HOME</Link>
           </div>
-          <div className=' col col-logo'>
-            <div className='musicolabo-logo'> 
+          <div className=' col col-logo-register'>
+            <div className='musicolabo-logo-register'> 
               <h1>MC</h1>
             </div>
               <h1>MusiColabo</h1>
