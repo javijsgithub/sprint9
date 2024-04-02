@@ -45,27 +45,27 @@ const Navbar = () => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark ">
-      <div className="container">
-        <Link className="navbar-brand" to="/">MusiColabo</Link>
+      <div className="container-navbar">
+        <Link className="navbar-brand" id='navbar-logo' to="/"><h4>MusiColabo</h4></Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link" to="/">Home</Link>
+              <Link className="nav-link" id='nav-link-1' to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/edit-profile">Perfil</Link>
+              <Link className="nav-link" id='nav-link-2' to="/edit-profile">Perfil</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/messages">Mensajes</Link>
+              <Link className="nav-link" id='nav-link-3' to="/messages">Mensajes</Link>
             </li>
           </ul>
-          <form className="d-flex">
-            <input className="form-control me-2" type="search" placeholder="Filtrar por instrumento" aria-label="Search" value={instrumentFilter} onChange={(e) => setInstrumentFilter(e.target.value)} />
-            <input className="form-control me-2" type="search" placeholder="Filtrar por ciudad" aria-label="Search" value={cityFilter} onChange={(e) => setCityFilter(e.target.value)} />
-            <button className="btn btn-outline-light" type="button" onClick={handleFilter}>Filtrar</button>
+          <form className="d-flex" id='navbar-filter'>
+            <input className="form-control me-2" id='input-instrument-navbar' type="search" placeholder="Filtrar por instrumento" aria-label="Search" value={instrumentFilter} onChange={(e) => setInstrumentFilter(e.target.value)} />
+            <input className="form-control me-2" id='input-city-navbar' type="search" placeholder="Filtrar por ciudad" aria-label="Search" value={cityFilter} onChange={(e) => setCityFilter(e.target.value)} />
+            <button className="btn btn-outline-light" id='btn-filter' type="button" onClick={handleFilter}>Filtrar</button>
           </form>
           {noProfilesFound && (
             <div className="alert alert-warning" role="alert">
