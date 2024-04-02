@@ -78,8 +78,8 @@ const UsersList = () => {
                     <p className='card-purpose'>{profile.purpose}</p>
                   </div>
                   <div className='container-link'>
-                    <Link to={`/user-videos/${profile.email}`} className='link-card'>Ver videos</Link>
-                    <Link to='' className='link-card' onClick={() => handleSendMessage(profile.email, profile.name)}>Enviar mensaje</Link>
+                    <Link to={`/user-videos/${profile.email}`} className='link-card' id='link-videos'>Ver videos</Link>
+                    <Link to='' className='link-card' id='link-message' onClick={() => handleSendMessage(profile.email, profile.name)}>Enviar mensaje</Link>
                   </div>
                 </div>
               </div>
@@ -101,8 +101,8 @@ const UsersList = () => {
                     <p className='card-purpose'>{profile.purpose}</p>
                   </div>
                   <div className='container-link'>
-                  <Link to={`/user-videos/${profile.email}`} className='link-card1'>Ver videos</Link>
-                  <Link to='' className='link-card2' onClick={() => handleSendMessage(profile.email, profile.name)}>Enviar mensaje</Link>  
+                  <Link to={`/user-videos/${profile.email}`} className='link-card1' id='link-videos'>Ver videos</Link>
+                  <Link to='' className='link-card2' id='link-message' onClick={() => handleSendMessage(profile.email, profile.name)}>Enviar mensaje</Link>  
                   </div>
                 </div>
                 
