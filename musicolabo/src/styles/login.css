@@ -101,3 +101,16 @@
 .error-message-email-login {
     color: red;
 }
+
+.container-link-register {
+    color: rgb(63, 125, 128);
+    margin-top: 15px;
+}
+
+#link-register {
+    text-decoration: none;
+    color: rgb(210,180,140);
+}
+#link-register:hover {
+    color: rgb(63, 125, 128);
+}
