@@ -70,6 +70,9 @@ const Login = () => {
               Iniciar sesión
           </button>
         </form>
+        <div className='container-link-register'>
+         <p>Nuevo en MusiColabo? <Link to="/register" type="submit" id='link-register'>Registrate</Link></p> 
+        </div>
       </div>
     </div>
   );
