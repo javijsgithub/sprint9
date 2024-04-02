@@ -31,8 +31,8 @@ const Login = () => {
           <div className='col col-btn-home-login'>
           <Link to="/" className='btn btn-sm btn-outline-secondary' type="button" id='btn-home-login'>HOME</Link>
           </div>
-          <div className=' col col-logo'>
-            <div className='musicolabo-logo'> 
+          <div className='col col-logo-login'>
+            <div className='musicolabo-logo-login'> 
               <h1>MC</h1>
             </div>
               <h1>MusiColabo</h1>
