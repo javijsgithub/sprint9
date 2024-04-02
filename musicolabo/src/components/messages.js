@@ -14,6 +14,7 @@ const Messages = () => {
   const [replyMessage, setReplyMessage] = useState('');
   const [showReplyForm, setShowReplyForm] = useState(false);
 
+
   useEffect(() => {
     const fetchMessages = async () => {
       try {
@@ -75,13 +76,15 @@ const Messages = () => {
     setShowReplyForm(true);
   };
 
-  const handleSendReply = async () => {
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       await sendMessage(recipientEmail, recipientName, replyMessage);
       setShowReplyForm(false);
       setReplyMessage('');
     } catch (error) {
-      console.error('Error al enviar la respuesta:', error);
+      console.error('Error al enviar el mensaje:', error);
     }
   };
 
@@ -133,9 +136,9 @@ const Messages = () => {
         <div className="reply-message-popup">
             <button className="close" onClick={() => setShowReplyForm(false)}>&times;</button>
           <h3>Responder a {recipientName}</h3>
-          <form>
+          <form onSubmit={handleSubmit}>
             <textarea value={replyMessage} onChange={(e) => setReplyMessage(e.target.value)} />
-            <button onClick={handleSendReply}>Enviar</button>
+            <button type='submit'>Enviar</button>
           </form>
         </div>
       )}
