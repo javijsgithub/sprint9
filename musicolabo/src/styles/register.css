@@ -6,6 +6,32 @@
     padding: 5px;
 }
 
+.col-logo-register {
+    text-align: center;
+}
+
+.col-logo-register h1 {
+    font-family: "Monoton";
+    color: rgb(63, 125, 128);
+}
+
+.musicolabo-logo-register {
+    margin: auto;
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgb(63, 125, 128);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.musicolabo-logo-register h1 {
+    font-family: "Monoton";
+    margin-top: 25px;
+    color: rgb(63, 125, 128);
+}
+
 .row-header-register {
     display: flex;
     width: 100%;
@@ -13,21 +39,21 @@
 }
 
 #btn-home-register {
-    background-color: white;
-    color: rgb(0,128,128);
+    background-color: rgb(95,158,160);
+    color: rgb(46, 44, 44);
     border-radius: 3px;
     margin-left: 10px;
     margin-top: 20px;
 }
 #btn-home-register:hover {
-    background-color: rgb(1, 99, 99);
-    color: white;
-    border: 1px solid rgb(1, 99, 99);
+    background-color: white;
+    color: rgb(95,158,160);
+    border: 1px solid rgb(95,158,160);
 }
 
 
 .container-form-register {
-    border: 1px solid rgb(0,128,128);
+    border: 1px solid rgb(95,158,160);
     border-radius: 8px;
     width: min-content;
     padding: 15px;
@@ -38,36 +64,36 @@
 }
 
 .container-form-register h2 {
-    color: rgb(0,128,128);
+    color: rgb(95,158,160);
 }
 
 .input-email-form-register {
     background-color: white;
-    color: rgb(2, 82, 82);
-    border: 1px solid rgb(0,128,128);
+    color: rgb(95,158,160);
+    border: 1px solid rgb(95,158,160);
     border-radius: 3px;
     margin-bottom: 5px;
 }
 
 .input-password-form-register {
     background-color: white;
-    color: rgb(2, 82, 82);
-    border: 1px solid rgb(0,128,128);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(95,158,160);
     border-radius: 3px;
 }
 
 #btn-form-register {
-    background-color: rgb(1, 99, 99);
-    color: white;
-    border: 1px solid rgb(1, 99, 99);
+    background-color: rgb(95,158,160);
+    color:rgb(46, 44, 44);
+    border: 1px solid rgb(95,158,160);
 
     border-radius: 3px;
     margin-top: 9px;
 }
 #btn-form-register:hover {
     background-color: white;
-    color: rgb(1, 99, 99);
-    border: 1px solid rgb(1, 99, 99);
+    color: rgb(95,158,160);
+    border: 1px solid rgb(95,158,160);
 }
 
 .error-message-email-register {

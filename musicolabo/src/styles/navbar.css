@@ -1,7 +1,44 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+
 
 
 .navbar {
     background-color: rgb(63, 125, 128);
     border-radius: 5px;
 }
+    
+
+.container-navbar {
+    display: flex;
+}
+
+.navbar-brand {
+    color: rgb(46, 44, 44);
+    font-family: "Monoton";
+    font-size: large;
+    margin-left: 15px;
+    align-items: center;
+    justify-self: center;
+}
+
+.nav-link {
+    color: rgb(46, 44, 44);
+}
+
+.navbar-nav {
+    margin-left: 50px;
+    width: 300px;
+    justify-content: space-around;
+}
+
+#navbar-filter {
+    margin-left: 250px;
+}
+
+.form-control {
+    color: rgb(63, 125, 128);
+}
+
+
+

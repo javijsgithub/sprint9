@@ -5,6 +5,32 @@
     padding: 5px;
 }
 
+.col-logo-login {
+    text-align: center;
+}
+
+.col-logo-login h1 {
+    font-family: "Monoton";
+    color: rgb(63, 125, 128);
+}
+
+.musicolabo-logo-login {
+    margin: auto;
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgb(63, 125, 128);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.musicolabo-logo-login h1 {
+    font-family: "Monoton";
+    margin-top: 25px;
+    color: rgb(63, 125, 128);
+}
+
 .row-header-login {
     display: flex;
     width: 100%;
@@ -12,21 +38,21 @@
 }
 
 #btn-home-login {
-    background-color: white;
-    color: rgb(0,128,128);
+    background-color:rgb(63, 125, 128);
+    color: rgb(46, 44, 44);
     border-radius: 3px;
     margin-left: 10px;
     margin-top: 20px;
 }
 #btn-home-login:hover {
-    background-color: rgb(1, 99, 99);
-    color: white;
-    border: 1px solid rgb(1, 99, 99);
+    background-color: white;
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
 }
 
 
 .container-form-login {
-    border: 1px solid rgb(0,128,128);
+    border: 1px solid rgb(63, 125, 128);
     border-radius: 8px;
     width: min-content;
     padding: 15px;
@@ -38,13 +64,13 @@
 }
 
 .container-form-login h2 {
-    color: rgb(0,128,128);
+    color: rgb(63, 125, 128);
 }
 
 .input-email-form-login {
     background-color: white;
-    color: rgb(2, 82, 82);
-    border: 1px solid rgb(0,128,128);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
     border-radius: 3px;
     margin-bottom: 5px;
 }
@@ -54,22 +80,22 @@
 
 .input-password-form-login {
     background-color: white;
-    color: rgb(2, 82, 82);
-    border: 1px solid rgb(0,128,128);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgrgb(63, 125, 128);
     border-radius: 3px;
 }
 
 #btn-form-login {
-    background-color: rgb(1, 99, 99);
-    color: white;
-    border: 1px solid rgb(1, 99, 99);
+    background-color: rgb(63, 125, 128);
+    color: rgb(46, 44, 44);
+    border: 1px solid rgb(63, 125, 128);
     border-radius: 3px;
     margin-top: 9px;
 }
 #btn-form-login:hover {
     background-color: white;
-    color: rgb(1, 99, 99);
-    border: 1px solid rgb(1, 99, 99);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
 }
 
 .error-message-email-login {
