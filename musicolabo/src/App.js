@@ -1,5 +1,5 @@
-import React from 'react';
-import MusiColaboContextProvider from './context/context.js';
+import React, { useContext } from 'react';
+import MusiColaboContextProvider, { MusiColaboContext} from './context/context.js';
 import Login from './components/login.js';
 import Register from './components/register.js';
 import Header from './components/header.js';
@@ -10,7 +10,7 @@ import EditProfile from './components/editProfile.js';
 import UserProfile from './components/userProfile.js';
 import UserVideos from './components/userVideos.js';
 import Messages from './components/messages.js';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 
 function App() {
@@ -28,13 +28,18 @@ function App() {
               <Route path="/list" element={<UsersList/>} />
               <Route path="/messages" element={<Messages />} />
               <Route path="/user-profile/:userEmail" element={<UserProfile />} />
-              <Route path="/user-videos/:userEmail" element={<UserVideos />} />
+              <Route path="/user-videos/:userEmail" element={<ProtectedRoute><UserVideos /></ProtectedRoute>} />
             </Routes>
           </Router>
          </MusiColaboContextProvider>
       
     </div>
   );
+}
+
+function ProtectedRoute({ children }) {
+  const { loggedIn } = useContext(MusiColaboContext);
+  return loggedIn ? children : <Navigate to="/login" />;
 }
 
 export default App;
