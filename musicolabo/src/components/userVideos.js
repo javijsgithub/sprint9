@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { MusiColaboContext } from '../context/context';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-
 import '../styles/userVideos.css';
 
 const UserVideos = () => {
@@ -26,9 +25,22 @@ const UserVideos = () => {
   }, [userEmail, getVideosByUserEmail]);
 
   return (
-    <div className='container-user-videos'>
-        <Link to="/list" className="btn btn-secondary" id='btn-users-list-go-to-header'>Volver</Link>
-        <h2>Videos de {userEmail}</h2>
+    <div className='container-fluid' id='container-user-videos'>
+      <div className='container-header-videos'>
+        <div className='row-header-videos'>
+          <div className='col col-btn-home-videos'>
+          <Link to="/list" className="btn btn-secondary" id='btn-home-videos'>Volver</Link>
+          </div>
+          <div className='col col-logo-videos'>
+            <div className='musicolabo-logo-videos'> 
+              <h1>MC</h1>
+            </div>
+              <h1>MusiColabo</h1>
+          </div>
+          <div className='col col-vacia'></div>
+        </div>
+      </div>
+        <h2 className='videos-de'>Videos de {userEmail}:</h2>
       {videos.length > 0 ? (
         <div className="container-vid">
           {videos.map((video, index) => (
