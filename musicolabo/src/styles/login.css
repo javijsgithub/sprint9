@@ -45,7 +45,7 @@
     margin-top: 20px;
 }
 #btn-home-login:hover {
-    background-color: white;
+    background-color: rgb(46, 44, 44);;
     color: rgb(63, 125, 128);
     border: 1px solid rgb(63, 125, 128);
 }
@@ -68,20 +68,20 @@
 }
 
 .input-email-form-login {
-    background-color: white;
+    background-color: rgb(46, 44, 44);;
     color: rgb(63, 125, 128);
     border: 1px solid rgb(63, 125, 128);
     border-radius: 3px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 .input-email-form-login:focus {
     border: 1px;
 }
 
 .input-password-form-login {
-    background-color: white;
+    background-color: rgb(46, 44, 44);;
     color: rgb(63, 125, 128);
-    border: 1px solid rgrgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
     border-radius: 3px;
 }
 
@@ -93,7 +93,7 @@
     margin-top: 9px;
 }
 #btn-form-login:hover {
-    background-color: white;
+    background-color: rgb(46, 44, 44);;
     color: rgb(63, 125, 128);
     border: 1px solid rgb(63, 125, 128);
 }
@@ -109,7 +109,7 @@
 
 #link-register {
     text-decoration: none;
-    color: rgb(210,180,140);
+    color: rgb(212, 167, 108);
 }
 #link-register:hover {
     color: rgb(63, 125, 128);
