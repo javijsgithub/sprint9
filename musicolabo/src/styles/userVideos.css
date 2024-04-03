@@ -1,11 +1,103 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
 
-.container-user-videos {
-    color:rgb(63, 125, 128);;
+#container-user-videos {
+    color:rgb(63, 125, 128);
+    padding: 25px;
+}
+
+.container-header-videos {
+    padding: 5px;
+    margin-bottom: 50px;
+}
+
+.row-header-videos {
+    display: flex;
+    width: 100%;
+    padding: 15px;
+}
+
+.col-logo-videos {
+    text-align: center;
+}
+
+.col-logo-videos h1 {
+    font-family: "Monoton";
+    color: rgb(63, 125, 128);
+}
+
+.musicolabo-logo-videos {
+    margin: auto;
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgb(63, 125, 128);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.musicolabo-logo-videos h1 {
+    font-family: "Monoton";
+    margin-top: 25px;
+    color: rgb(63, 125, 128);
+}
+
+#btn-home-videos {
+    margin-bottom: 20px;
+    background-color:rgb(63, 125, 128);
+    color: rgb(46, 44, 44);
+    border-radius: 3px;
+}
+#btn-home-videos:hover {
+    background-color: rgb(46, 44, 44);;
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
+}
+
+
+
+.container-vid {
+    border: 2px solid rgb(63, 125, 128);
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+   align-items: self-start;
+    text-align: start;
 }
 
 video {
-    width: 250px;
-    height: 250px;
+    width: 255px;
+    height: 255px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+
+@media (max-width: 768.98px) {
+
+
+    .videos-de {
+        text-align: center;
+    }
+
+    .container-vid {
+        text-align: center;
+        justify-content: center;
+        padding: 20px;
+        width: min-content;
+        margin: auto;
+    }
+
+    video {
+        width: 375px;
+        height: 355px;
+        margin-bottom: 25px;
+        margin: auto;
+       
+    }
+    
 }
