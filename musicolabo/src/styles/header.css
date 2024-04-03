@@ -72,14 +72,15 @@
     height: max-content;
 }
 #btn-header-login:hover {
-    background-color: white;
-    color: rgb(63, 125, 128);
-    border: 1px solid white;
+    background-color: rgb(63, 125, 128);
+    color: rgb(46, 44, 44);
+    border: 1px solid rgb(46, 44, 44);
 }
 
 #btn-header-register {
-    background-color: white;
-    color: rgb(63, 125, 128);
+    background-color: rgb(63, 125, 128);
+    color: rgb(46, 44, 44);
+    border: 1px solid rgb(46, 44, 44);
     border-radius: 3px;
     margin-left: 5px;
     width: max-content;
@@ -101,9 +102,9 @@
     margin-bottom: 10px;
 }
 #btn-header-logout:hover {
-    background-color: white;
-    color: rgb(63, 125, 128);
-    border: 1px solid white;
+    background-color: rgb(63, 125, 128);
+    color: rgb(46, 44, 44);
+    border: 1px solid rgb(46, 44, 44);
 }
 
 
@@ -120,6 +121,16 @@
 
     #btn-header-register {
         width: 117px;
+        margin-bottom: 70px;
     }
+
+    .container-user-logged-header p {
+        margin-bottom: 70px;
+        color: rgb(46, 44, 44);
+        text-decoration: none; /* Esto quita el subrayado del texto */
+        color: inherit; /* Esto mantiene el color predeterminado del texto */
+        
+    }
+    
 }
 
