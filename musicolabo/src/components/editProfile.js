@@ -104,12 +104,11 @@ const EditProfile = () => {
 <div className='container-fluid' id='container-edit-profile'>
       <div className='container-header-edit-profile'>
         <div className='row-header-edit-profile'>
-          <div className='col col-volver'>
-          <Link to="/list" className='btn btn-sm btn-outline-secondary' type="button" id='btn-home-login'>Volver</Link>
-
+          <div className='col col-btn-home-edit-profile'>
+           <Link to="/list" className="btn btn-secondary" id='btn-home-edit-profile'>Volver</Link>
           </div>
-          <div className=' col col-logo'>
-            <div className='musicolabo-logo'> 
+          <div className=' col col-logo-edit-profile'>
+            <div className='musicolabo-logo-edit-profile'> 
               <h1>MC</h1>
             </div>
               <h1>MusiColabo</h1>
@@ -118,8 +117,11 @@ const EditProfile = () => {
         </div>
       </div>
       <div className='container-edit-profile'>
-      <h2>Perfil</h2>
-      <button onClick={toggleEditMode}>{isEditMode ? 'Cancelar' : 'Editar Perfil'}</button>
+        <div className='container-title-and-btn-edit'>
+          <h2>Tu perfil:</h2>
+          <button className='btn btn-sm btn-outline-secondary' id='btn-edit' onClick={toggleEditMode}>{isEditMode ? 'Cancelar' : 'Editar Perfil'}</button>
+        </div>
+      <hr></hr>
         <form onSubmit={handleSubmit} style={{ display: isEditMode ? 'block' : 'none' }}>      
         {pictureUrl && (
           <div className="preview">
@@ -160,6 +162,7 @@ const EditProfile = () => {
       Nombre:
       <label>
           <input
+            className='input-edit-profile'
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -168,6 +171,7 @@ const EditProfile = () => {
         Nombre de usuario:
         <label>
           <input
+           className='input-edit-profile'
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -176,6 +180,7 @@ const EditProfile = () => {
         Email:
         <label>
           <input
+           className='input-edit-profile'
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -185,6 +190,7 @@ const EditProfile = () => {
         Ubicación:
         <label>
           <input
+            className='input-edit-profile'
             type="text"
             value={city}
             onChange={(e) => setCity(e.target.value)}
@@ -246,40 +252,46 @@ const EditProfile = () => {
         Descripción:
         <label>
           <textarea
+            className='area-edit-profile'
             value={purpose}
             onChange={(e) => setPurpose(e.target.value)}
           ></textarea>
         </label>
-        <button type="submit" className="btn btn-secondary">
+        <button type="submit" className="btn btn-secondary" id='btn-save'>
           Guardar cambios
         </button>
       </form>
        {/* Mostrar la información del perfil */}
       <div style={{ display: isEditMode ? 'none' : 'block' }}>
         {pictureUrl && (
-       <div className="preview-picture"> Foto de perfil:
-        <img src={pictureUrl} alt="Imagen de perfil" />
+       <div className="preview-picture"> 
+         <h5>Foto de perfil:</h5>
+        <img src={pictureUrl} className='picture-edit-profile1' alt="Imagen de perfil" />
        </div>
        )}
+       
+       <div className='nom'>
+         <h5>Nombre: </h5> 
+         <p> { name}</p>
+       </div>
+       <div className='nom-us'><h5>Nombre de usuario: </h5><p> {username}</p></div>
+       <div className='em'><h5>Email: </h5><p> {email}</p></div>
+       <div className='ub'><h5>Ubicación: </h5><p> {city}</p></div>
+       <div className='inst'><h5>Instrumentos: </h5><p>{instruments.join(', ')}</p></div>
+       <div className='desc'><h5>Descripción: </h5><p>{purpose}</p></div>
+       <h3>Videos:</h3> 
        {videos.length > 0 && (
-        <div className='preview-video'>
-           <h3>Videos:</h3>
+         <div className='preview-video'>
            {videos.map((video, index) => (
           <div key={index}>
             <video controls>
-              <source src={video} type="video/mp4" />
+              <source src={video}  type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
         ))}
         </div>
        )}
-          <p>Nombre: {name}</p>
-          <p>Nombre de usuario: {username}</p>
-          <p>Email: {email}</p>
-          <p>Ubicación: {city}</p>
-          <p>Instrumentos: {instruments.join(', ')}</p>
-          <p>Descripción: {purpose}</p>
       </div>
     </div>
 </div>
