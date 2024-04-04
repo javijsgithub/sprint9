@@ -62,8 +62,8 @@ const CreateProfile = () => {
       <div className='container-header-create-profile'>
         <div className='row-header-create-profile'>
           <div className='col col-vacia1'></div>
-          <div className=' col col-logo'>
-            <div className='musicolabo-logo'> 
+          <div className=' col col-logo-create-profile'>
+            <div className='musicolabo-logo-create-profile'> 
               <h1>MC</h1>
             </div>
               <h1>MusiColabo</h1>
@@ -200,7 +200,7 @@ const CreateProfile = () => {
 
             </fieldset>
             <button
-              //onSubmit={updateCreateProfileContext}
+              onSubmit={createNewDocument}
               type="submit"
               className="btn btn-secondary"
               id='btn-form-create-profile'>
