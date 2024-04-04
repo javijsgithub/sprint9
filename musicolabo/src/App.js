@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import MusiColaboContextProvider, { MusiColaboContext} from './context/context.js';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './components/login.js';
 import Register from './components/register.js';
 import Header from './components/header.js';
@@ -10,7 +11,6 @@ import EditProfile from './components/editProfile.js';
 import UserProfile from './components/userProfile.js';
 import UserVideos from './components/userVideos.js';
 import Messages from './components/messages.js';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 
 function App() {
