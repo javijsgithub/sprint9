@@ -1,12 +1,64 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
 
 
 
 .container-user-profile {
     color: rgb(63, 125, 128);
-
 }
+
+.container-header-profile {
+    padding: 5px;
+    margin-bottom: 50px;
+}
+
+.row-header-profile {
+    display: flex;
+    width: 100%;
+    padding: 15px;
+}
+
+.col-logo-profile {
+    text-align: center;
+}
+
+.col-logo-profile h1 {
+    font-family: "Monoton";
+    color: rgb(63, 125, 128);
+}
+
+.musicolabo-logo-profile {
+    margin: auto;
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgb(63, 125, 128);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.musicolabo-logo-profile h1 {
+    font-family: "Monoton";
+    margin-top: 25px;
+    color: rgb(63, 125, 128);
+}
+
+#btn-home-profile {
+    margin-bottom: 20px;
+    background-color:rgb(63, 125, 128);
+    color: rgb(46, 44, 44);
+    border-radius: 3px;
+}
+#btn-home-profile:hover {
+    background-color: rgb(46, 44, 44);;
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
+}
+
 
 .profile {
     color: rgb(63, 125, 128);
+    border: 2px solid rgb(63, 125, 128);
+    border-radius: 5px;
 }
