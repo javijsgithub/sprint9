@@ -29,7 +29,7 @@ const UserVideos = () => {
       <div className='container-header-videos'>
         <div className='row-header-videos'>
           <div className='col col-btn-home-videos'>
-          <Link to="/list" className="btn btn-secondary" id='btn-home-videos'>Volver</Link>
+           <Link to="/list" className="btn btn-secondary" id='btn-home-videos'>Volver</Link>
           </div>
           <div className='col col-logo-videos'>
             <div className='musicolabo-logo-videos'> 
