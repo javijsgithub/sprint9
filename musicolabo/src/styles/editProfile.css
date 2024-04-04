@@ -1,11 +1,156 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
 
 
-#container-edit-profile {
+/*#container-edit-profile {
     color: rgb(63, 125, 128);
+}*/
+
+.container-header-edit-profile {
+    padding: 5px;
+    margin-bottom: 50px;
+}
+
+.row-header-edit-profile {
+    display: flex;
+    width: 100%;
+    padding: 15px;
+}
+
+.col-logo-edit-profile {
+    text-align: center;
+}
+
+.col-logo-edit-profile h1 {
+    font-family: "Monoton";
+    color: rgb(63, 125, 128);
+}
+
+.musicolabo-logo-edit-profile {
+    margin: auto;
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgb(63, 125, 128);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.musicolabo-logo-edit-profile h1 {
+    font-family: "Monoton";
+    margin-top: 25px;
+    color: rgb(63, 125, 128);
+}
+
+#btn-home-edit-profile {
+    margin-bottom: 20px;
+    background-color:rgb(63, 125, 128);
+    color: rgb(46, 44, 44);
+    border-radius: 3px;
+}
+#btn-home-edit-profile:hover {
+    background-color: rgb(46, 44, 44);;
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
+}
+
+.container-edit-profile {
+    color: rgb(63, 125, 128);
+    border: 2px solid rgb(63, 125, 128);
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.container-title-and-btn-edit {
+    display: flex;
+    justify-content: space-between;
+}
+
+#btn-edit {
+    background-color:rgb(63, 125, 128);
+    color: rgb(46, 44, 44);
+    border-radius: 3px;
+}
+#btn-edit:hover {
+    background-color: rgb(46, 44, 44);;
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
+}
+
+.container-edit-profile hr {
+    color: rgb(63, 125, 128);
+    
+}
+
+.picture-edit-profile1 {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+.nom, .nom-us, .em, .ub {
+    display: flex;
+}
+.nom h5, .nom-us h5, .em h5, .ub h5 {
+    margin-right: 5px;
+}
+.nom p, .nom-us p, .em p, .ub p {
+    margin-top: 2px;
+}
+
+.preview-video {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 video {
     width: 250px;
-    height: 250px;
+    height: 255px;
+    margin-right: 5px;
+    margin-bottom: 10px;
 }
+
+.input-edit-profile {
+    background-color: rgb(46, 44, 44);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
+    border-radius: 3px;
+}
+
+.checkboxes {
+    display: flex;
+    flex-direction: row;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid rgb(63, 125, 128);
+    border-radius: 3px;
+}
+
+.checkboxes label {
+    margin-right: 15px;
+}
+
+.area-edit-profile {
+    background-color: rgb(46, 44, 44);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
+    border-radius: 3px;
+}
+
+#btn-save {
+    background-color:rgb(63, 125, 128);
+    color: rgb(46, 44, 44);
+    border-radius: 3px;
+}
+#btn-save:hover {
+    background-color: rgb(46, 44, 44);;
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
+}
+
+
+
+
+
