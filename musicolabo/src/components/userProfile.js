@@ -42,8 +42,21 @@ const UserProfile = () => {
 
 
   return (
-    <div className='container-user-profile'>
-       <Link to="/messages" className="btn btn-secondary" id='btn-users-list-go-to-header'>Volver</Link>
+    <div className='container-fluid' id='container-user-profile'>
+      <div className='container-header-profile'>
+        <div className='row-header-profile'>
+          <div className='col col-btn-home-profile'>
+          <Link to="/" className='btn btn-sm btn-outline-secondary' type="button" id='btn-home-profile'>HOME</Link>
+          </div>
+          <div className='col col-logo-profile'>
+            <div className='musicolabo-logo-profile'> 
+              <h1>MC</h1>
+            </div>
+              <h1>MusiColabo</h1>
+          </div>
+          <div className='col col-vacia'></div>
+        </div>
+      </div>
       <h2>Perfil de {username}</h2>
       {email && (
         <div className='profile'>
