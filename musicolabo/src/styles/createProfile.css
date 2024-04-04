@@ -1,8 +1,11 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+
 
 
 .container-header-create-profile {
     padding: 5px;
+    margin-bottom: 50px;
 }
 
 .row-header-create-profile {
@@ -11,8 +14,34 @@
     padding: 15px;
 }
 
+.col-logo-create-profile {
+    text-align: center;
+}
+
+.col-logo-create-profile h1 {
+    font-family: "Monoton";
+    color: rgb(63, 125, 128);
+}
+
+.musicolabo-logo-create-profile {
+    margin: auto;
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgb(63, 125, 128);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.musicolabo-logo-create-profile h1 {
+    font-family: "Monoton";
+    margin-top: 25px;
+    color: rgb(63, 125, 128);
+}
+
 .container-form-create-profile {
-    border: 1px solid rgb(0,128,128);
+    border: 1px solid rgb(63, 125, 128);
     border-radius: 8px;
     width: 50%;
     padding: 15px;
@@ -24,12 +53,12 @@
 }
 
 .container-form-create-profile h2 {
-    color: rgb(0,128,128);
+    color: rgb(63, 125, 128);
     margin-bottom: 20px;
 }
 
 .container-form-create-profile p  {
-    color: rgb(0,128,128);
+    color: rgb(63, 125, 128);
     margin-bottom: 0px;
 }
 
@@ -39,34 +68,43 @@
 }
 
 .input-picture-form-create-profile {
-    background-color: white;
-    color: rgb(2, 82, 82);
-    border: 1px solid rgb(0,128,128);
+    background-color: rgb(46, 44, 44);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
+    border-radius: 3px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.input-video-form-create-profile {
+    background-color: rgb(46, 44, 44);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
     border-radius: 3px;
     margin-bottom: 5px;
     width: 100%;
 }
 
 .input-name-form-create-profile {
-    background-color: white;
-    color: rgb(2, 82, 82);
-    border: 1px solid rgb(0,128,128);
+    background-color: rgb(46, 44, 44);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
     border-radius: 3px;
     margin-bottom: 5px;
 }
 
 .input-username-form-create-profile {
-    background-color: white;
-    color: rgb(2, 82, 82);
-    border: 1px solid rgb(0,128,128);
+    background-color: rgb(46, 44, 44);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
     border-radius: 3px;
     margin-bottom: 5px;
 }
 
 .input-email-form-create-profile {
-    background-color: white;
-    color: rgb(2, 82, 82);
-    border: 1px solid rgb(0,128,128);
+    background-color: rgb(46, 44, 44);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
     border-radius: 3px;
     margin-bottom: 5px;
 }
@@ -76,51 +114,49 @@
     flex-direction: row;
     padding-left: 5px;
     padding-right: 5px;
-    background-color: white;
-    color: rgb(2, 82, 82);
-    border: 1px solid rgb(0,128,128);
+    background-color: rgb(46, 44, 44);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
     border-radius: 3px;
     margin-bottom: 5px;
 }
 
 .checks-instruments-form-create-profile label {
     margin-right: 15px;
-    color: rgb(0,128,128);
+    color: rgb(63, 125, 128);
 }
 
 .input-ubication-form-create-profile {
-    background-color: white;
-    color: rgb(2, 82, 82);
-    border: 1px solid rgb(0,128,128);
+    background-color: rgb(46, 44, 44);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
     border-radius: 3px;
     margin-bottom: 5px;
 }
 
 .input-description-form-create-profile {
-    background-color: white;
-    color: rgb(2, 82, 82);
-    border: 1px solid rgb(0,128,128);
+    background-color: rgb(46, 44, 44);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
     border-radius: 3px;
 }
 
 #btn-form-create-profile {
-    background-color: rgb(1, 99, 99);
-    color: white;
-    border: 1px solid rgb(1, 99, 99);
-
+    background-color:rgb(63, 125, 128);
+    color: rgb(46, 44, 44);
     border-radius: 3px;
     margin-top: 9px;
 }
 #btn-form-create-profile:hover {
-    background-color: white;
-    color: rgb(1, 99, 99);
-    border: 1px solid rgb(1, 99, 99);
+    background-color: rgb(46, 44, 44);;
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
 }
 
 fieldset {
     border: none;
     padding: 2rem 0;
-    border-bottom: 1px solid rgb(1, 99, 99);
+    border-bottom: 1px solid rgb(63, 125, 128);
   }
   
   fieldset:last-of-type {
