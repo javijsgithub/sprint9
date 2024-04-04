@@ -1,4 +1,6 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+
 
 
 .container-header-login {
@@ -68,7 +70,7 @@
 }
 
 .input-email-form-login {
-    background-color: rgb(46, 44, 44);;
+    background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(63, 125, 128);
     border-radius: 3px;

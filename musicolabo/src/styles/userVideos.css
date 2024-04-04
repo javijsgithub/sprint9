@@ -1,4 +1,6 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+
 
 
 #container-user-videos {
@@ -65,14 +67,12 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-   align-items: self-start;
-    text-align: start;
 }
 
 video {
-    width: 255px;
+    width: 250px;
     height: 255px;
-    margin-right: 10px;
+    margin-right: 5px;
     margin-bottom: 10px;
 }
 
