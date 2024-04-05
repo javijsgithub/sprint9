@@ -11,6 +11,8 @@
 .container-header-videos {
     padding: 5px;
     margin-bottom: 50px;
+    border: 2px solid rgb(212, 167, 108);
+    border-radius: 5px;
 }
 
 .row-header-videos {

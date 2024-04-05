@@ -43,7 +43,7 @@ img {
 }
 
 .card-name-and-city {
-    border-bottom: 1px solid rgb(63, 125, 128);
+    border-bottom: 1px solid rgb(212, 167, 108);
     
 }
 
@@ -54,7 +54,7 @@ img {
 .card-city {
     margin-top: 0px;
     margin-bottom: 25px;
-    border-bottom: 1px solid rgb(63, 125, 128);
+    border-bottom: 1px solid rgb(212, 167, 108);
 }
 
 .card-instruments {
@@ -79,7 +79,7 @@ img {
     color: rgb(212, 167, 108);
 }
 #link-message:hover, #link-videos:hover {
-    color:rgb(63, 125, 128);
+    color:rgb(105, 99, 99);
 }
 
 .message-popup {

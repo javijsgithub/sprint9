@@ -4,7 +4,9 @@
 
 
 .navbar {
-    background-color: rgb(63, 125, 128);
+    background-color: rgb(46, 44, 44);
+    color: rgb(212, 167, 108);
+    border: 2px solid rgb(212, 167, 108);
     border-radius: 5px;
 }
     
@@ -14,7 +16,7 @@
 }
 
 .navbar-brand {
-    color: rgb(46, 44, 44);
+    color: rgb(91, 176, 180);
     font-family: "Monoton";
     font-size: large;
     margin-left: 15px;
@@ -22,14 +24,14 @@
     justify-self: center;
 }
 .navbar-brand:hover {
-    color: rgb(77, 74, 74);
+    color: rgb(105, 99, 99);
 }
 
 .nav-link {
-    color: rgb(46, 44, 44);
+    color: rgb(212, 167, 108);
 }
 .nav-link:hover {
-    color: rgb(77, 74, 74);
+    color: rgb(105, 99, 99);
 }
 
 .navbar-nav {
@@ -39,15 +41,24 @@
 }
 
 #input-instrument-navbar {
-    background-color: rgb(134, 132, 132);
-    color: rgb(46, 44, 44);
-    border: 1px solid rgb(91, 176, 180);
+    background-color: rgb(46, 44, 44);
+    color: rgb(91, 176, 180);
+    border: 1px solid rgb(212, 167, 108);
+}
+
+#input-instrument-navbar::placeholder {
+    color: rgb(212, 167, 108);
+    opacity: 0.4;
 }
 
 #input-city-navbar {
-    background-color: rgb(134, 132, 132);
-    color: rgb(46, 44, 44);
-    border: 1px solid rgb(91, 176, 180);
+    background-color: rgb(46, 44, 44);
+    color: rgb(91, 176, 180);
+    border: 1px solid rgb(212, 167, 108);
+}
+#input-city-navbar::placeholder {
+    color: rgb(212, 167, 108);
+    opacity: 0.4;
 }
 
 #navbar-filter {
@@ -56,14 +67,14 @@
 }
 
 #btn-filter {
-    color: rgb(46, 44, 44);
-    border: 1px solid rgb(46, 44, 44);
+    color: rgb(91, 176, 180);
+    border: 1px solid rgb(91, 176, 180);
 }
 
 #btn-filter:hover {
     background-color: rgb(46, 44, 44);
-    color: rgb(63, 125, 128);
-    border: 1px solid rgb(92, 89, 89);
+    color: rgb(105, 99, 99);
+    border: 1px solid rgb(105, 99, 99);
 }
 
 .form-control {
