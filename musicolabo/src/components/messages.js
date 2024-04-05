@@ -89,15 +89,30 @@ const Messages = () => {
   };
 
   return (
-    <div className='container-messages'>
-      <Link to="/list" className="btn btn-secondary" id='btn-users-list-go-to-header'>Volver</Link>
-      <h2>Mensajes</h2>
+    <div className='container-fluid' id='container-messages'>
+      <div className='container-header-messages'>
+        <div className='row-header-messages'>
+          <div className='col col-btn-home-messages'>
+          <Link to="/list" className='btn btn-sm btn-outline-secondary' type="button" id='btn-volver-messages'>Volver</Link>
+          </div>
+          <div className='col col-logo-messages'>
+            <div className='musicolabo-logo-messages'> 
+              <h1>MC</h1>
+            </div>
+              <h1>MusiColabo</h1>
+          </div>
+          <div className='col col-vacia'></div>
+        </div>
+      </div>
+      <div className='container-recibidos'>
+      <h2>Bandeja:</h2>
+      <hr></hr>
       {unreadMessages > 0 && <p>Tienes {unreadMessages} mensaje/s no leídos.</p>}
-      <h3>Mensajes no leídos</h3>
-      <ul>
+      <h3>Mensajes no leídos:</h3>
+      <ul className='mensajes-no-leidos'>
       {unreadMessagesList.map((message, index) => (
           <li key={index}>
-            <strong>De:</strong> {message.sender}, <Link to={`/user-profile/${message.sender}`}> Ver perfil</Link><br />
+            <strong>De:</strong> {message.sender}, <Link to={`/user-profile/${message.sender}`} className='link-messages'> Ver perfil</Link><br />
             <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
 
             {expandedMessageIndexes.includes(index) ? (
@@ -109,14 +124,15 @@ const Messages = () => {
             ) : (
               <button onClick={() => openMessage(index)}>Ver mensaje</button>
             )}
+            <hr></hr>
           </li>
         ))}
       </ul>
-      <h3>Mensajes leídos</h3>
-      <ul>
+      <h3>Mensajes leídos:</h3>
+      <ul className='mensajes-leidos'>
         {readMessagesList.map((message, index) => (
           <li key={index}>
-            <strong>De:</strong> {message.sender}, <Link to={`/user-profile/${message.sender}`}> Ver perfil</Link><br />
+            <strong>De:</strong> {message.sender}, <Link to={`/user-profile/${message.sender}`} className='link-messages'> Ver perfil</Link><br />
             <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
 
             {expandedMessageIndexes.includes(index) ? (
@@ -128,9 +144,12 @@ const Messages = () => {
             ) : (
               <button onClick={() => openMessage(index)}>Ver mensaje</button>
             )}
+            <hr></hr>
           </li>
+          
         ))}
       </ul>
+      
 
       {showReplyForm && (
         <div className="reply-message-popup">
@@ -142,6 +161,8 @@ const Messages = () => {
           </form>
         </div>
       )}
+      </div>
+      
     </div>
   );
 };
