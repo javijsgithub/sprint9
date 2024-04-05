@@ -71,7 +71,7 @@ const Login = () => {
           </button>
         </form>
         <div className='container-link-register'>
-         <p>Nuevo en MusiColabo? <Link to="/register" type="submit" id='link-register'>Registrate</Link></p> 
+         <p>Nueva/o en MusiColabo? <Link to="/register" type="submit" id='link-register'>Registrate</Link></p> 
         </div>
       </div>
     </div>
