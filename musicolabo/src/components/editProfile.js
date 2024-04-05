@@ -100,6 +100,11 @@ const EditProfile = () => {
     setVideos(updatedVideos);
   };
 
+  const handleRemovePicture = () => {
+    setPictureUrl('/images/profile_image.jpg'); // Ruta relativa a la carpeta imagen de la carpeta public
+  };
+
+
   return (
 <div className='container-fluid' id='container-edit-profile'>
       <div className='container-header-edit-profile'>
@@ -122,44 +127,65 @@ const EditProfile = () => {
           <button className='btn btn-sm btn-outline-secondary' id='btn-edit' onClick={toggleEditMode}>{isEditMode ? 'Cancelar' : 'Editar Perfil'}</button>
         </div>
       <hr></hr>
+     
+        
         <form onSubmit={handleSubmit} style={{ display: isEditMode ? 'block' : 'none' }}>      
         {pictureUrl && (
-          <div className="preview">
-            <img src={pictureUrl} alt="Imagen de perfil" />
-          </div>
-        )}
-      Cambiar imagen de perfil:
+          <div className="preview-picture">
+             <h6>Cambiar imagen de perfil:</h6>
         <label>
           <input
+            className='input-edit-profile'
             type="file"
             onChange={(e) => setPicture(e.target.files[0])}
           />
         </label>
-      <p>Cargar video(s) de perfil:</p> 
+            <img src={pictureUrl} className='picture-edit-profile2' alt="Imagen de perfil" />
+            {pictureUrl && pictureUrl !== '/images/profile_image.jpg' && (
+            <button
+              type="button"
+              onClick={() => handleRemovePicture()}
+              className="btn btn-danger btn-sm"
+              id='btn-delete-picture'
+            >
+            Eliminar
+            </button>
+            )}
+          </div>
+          
+        )}
+        
+        <hr></hr>
+      <h6>Cargar video(s) de perfil:</h6> 
         <label> 
           <input
+            className='input-edit-profile'
             type="file"
             accept="video/*"
             multiple
             onChange={handleVideoChange}
           />
         </label>
+      <div className='preview-video'>
         {videos.map((video, index) => (
-       <div key={index} className="video-item">
-        <video controls>
-          <source src={video} type="video/mp4" />
-          Tu navegador no admite la etiqueta de video.
-        </video>
-        <button
-          type="button"
-          onClick={() => handleRemoveVideo(index)}
-          className="btn btn-danger btn-sm"
-        >
-        Eliminar
-       </button>
-    </div>
-    ))}
-      Nombre:
+          <div key={index} className="video-item">
+           <video controls>
+            <source src={video} type="video/mp4" />
+             Tu navegador no admite la etiqueta de video.
+           </video>
+           <button
+             type="button"
+             onClick={() => handleRemoveVideo(index)}
+             className="btn btn-danger btn-sm"
+             id='btn-delete-video'
+            >
+            Eliminar
+           </button>
+          </div>
+        ))}
+      </div>
+    <hr></hr>
+      <h6>Nombre:</h6>
       <label>
           <input
             className='input-edit-profile'
@@ -168,7 +194,7 @@ const EditProfile = () => {
             onChange={(e) => setName(e.target.value)}
           />
         </label>
-        Nombre de usuario:
+        <h6>Nombre de usuario:</h6>
         <label>
           <input
            className='input-edit-profile'
@@ -177,7 +203,7 @@ const EditProfile = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
         </label>
-        Email:
+        <h6>Email:</h6>
         <label>
           <input
            className='input-edit-profile'
@@ -187,7 +213,7 @@ const EditProfile = () => {
             disabled // El email no debe ser editable
           />
         </label>
-        Ubicación:
+        <h6>Ubicación:</h6>
         <label>
           <input
             className='input-edit-profile'
@@ -196,7 +222,7 @@ const EditProfile = () => {
             onChange={(e) => setCity(e.target.value)}
           />
         </label>
-        Instrumentos:
+        <h6>Instrumentos:</h6>
         <label>
           <div className="checkboxes">
             <label>
@@ -249,7 +275,7 @@ const EditProfile = () => {
             </label>
           </div>
         </label>
-        Descripción:
+        <h6>Descripción:</h6>
         <label>
           <textarea
             className='area-edit-profile'
@@ -265,7 +291,6 @@ const EditProfile = () => {
       <div style={{ display: isEditMode ? 'none' : 'block' }}>
         {pictureUrl && (
        <div className="preview-picture"> 
-         <h5>Foto de perfil:</h5>
         <img src={pictureUrl} className='picture-edit-profile1' alt="Imagen de perfil" />
        </div>
        )}
@@ -279,6 +304,7 @@ const EditProfile = () => {
        <div className='ub'><h5>Ubicación: </h5><p> {city}</p></div>
        <div className='inst'><h5>Instrumentos: </h5><p>{instruments.join(', ')}</p></div>
        <div className='desc'><h5>Descripción: </h5><p>{purpose}</p></div>
+       <hr></hr>
        <h3>Videos:</h3> 
        {videos.length > 0 && (
          <div className='preview-video'>
