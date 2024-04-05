@@ -89,10 +89,16 @@
     margin-bottom: 15px;
 }
 
-.nom, .nom-us, .em, .ub {
+#btn-delete-picture {
+    position: absolute;
+    margin-left: -70px;
+    margin-top: 3px;
+}
+
+.nom, .nom-us, .em, .ub, .inst {
     display: flex;
 }
-.nom h5, .nom-us h5, .em h5, .ub h5 {
+.nom h5, .nom-us h5, .em h5, .ub, .inst h5 {
     margin-right: 5px;
 }
 .nom p, .nom-us p, .em p, .ub p {
@@ -112,11 +118,26 @@ video {
     margin-bottom: 10px;
 }
 
+#btn-delete-video {
+    position: absolute;
+    margin-left: -75px;
+    margin-top: 3px;
+}
+
+
+
+.picture-edit-profile2 {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 15px;
+}
+
 .input-edit-profile {
     background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(63, 125, 128);
     border-radius: 3px;
+    margin-bottom: 10px;
 }
 
 .checkboxes {
