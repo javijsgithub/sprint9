@@ -156,7 +156,7 @@ const EditProfile = () => {
         )}
         
         <hr></hr>
-      <h6>Cargar video(s) de perfil:</h6> 
+      <h6>Cargar video(s):</h6> 
         <label> 
           <input
             className='input-edit-profile'
