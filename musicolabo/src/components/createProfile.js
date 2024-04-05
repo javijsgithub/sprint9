@@ -33,8 +33,14 @@ const CreateProfile = () => {
     e.preventDefault();
     
     try {
-      console.log("Archivo seleccionado:", picture);
-      const pictureUrl = await uploadImage(picture);
+      let pictureUrl = ''; // Inicializar la URL de la imagen como vacía por defecto
+    // Verificar si se proporcionó una imagen
+    if (picture) {
+      pictureUrl = await uploadImage(picture);
+    } else {
+      // Si no se proporcionó una imagen, usar la imagen predeterminada
+      pictureUrl = '/images/profile_image.jpg'; // Ruta relativa a la carpeta imagen de la carpeta public
+    }
       const videoUrls = await Promise.all(videos.map(async (video) => {
         return await uploadVideo(video);
       }));
