@@ -7,7 +7,6 @@ import '../styles/userProfile.css';
 const UserProfile = () => {
   const { getProfilesFromFirestore } = useContext(MusiColaboContext);
   const { userEmail } = useParams();
-  const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [city, setCity] = useState('');
@@ -17,20 +16,19 @@ const UserProfile = () => {
   const [videoUrls, setVideoUrls] = useState([]);
 
   useEffect(() => {
-    // Obtener el perfil del usuario actual y establecer los valores iniciales en los campos de entrada
+    // Obtener el perfil del usuario y establecer los valores iniciales en los campos de entrada
     const fetchUserProfile = async () => {
       try {
         const profiles = await getProfilesFromFirestore();
         const userProfile = profiles.find(profile => profile.email === userEmail);
         if (userProfile) {
-          setName(userProfile.name);
           setUsername(userProfile.username);
           setEmail(userProfile.email);
           setCity(userProfile.city);
           setInstruments(userProfile.instruments);
           setPurpose(userProfile.purpose);
-          setPictureUrl(userProfile.picture);  // Obtener la URL de la foto del usuario
-          setVideoUrls(userProfile.videos || []);  // Obtener las URLs de los videos del usuario
+          setPictureUrl(userProfile.picture);  
+          setVideoUrls(userProfile.videos || []);  
         }
       } catch (error) {
         console.error('Error al obtener el perfil del usuario:', error);
@@ -46,7 +44,7 @@ const UserProfile = () => {
       <div className='container-header-profile'>
         <div className='row-header-profile'>
           <div className='col col-btn-home-profile'>
-          <Link to="/" className='btn btn-sm btn-outline-secondary' type="button" id='btn-home-profile'>HOME</Link>
+          <Link to="/messages" className='btn btn-secondary' type="button" id='btn-volver-profile'>Volver</Link>
           </div>
           <div className='col col-logo-profile'>
             <div className='musicolabo-logo-profile'> 
@@ -57,15 +55,17 @@ const UserProfile = () => {
           <div className='col col-vacia'></div>
         </div>
       </div>
-      <h2>Perfil de {username}</h2>
+      
       {email && (
         <div className='profile'>
-          <img src={pictureUrl} alt="Foto de perfil" />
-          <p>Nombre: {name}</p>
-          <p>Nombre de usuario: {username}</p>
-          <p>Ubicación: {city}</p>
-          <p>Instrumentos: {instruments.join(', ')}</p>
-          <p>Descripción: {purpose}</p>
+          <h2>Perfil de {username}:</h2>
+          <hr></hr>
+          <img src={pictureUrl} className='picture-profile' alt="Foto de perfil" />
+          <div className='nom-us'><h5>Nombre de usuario: </h5><p> {username}</p></div>
+          <div className='ub'><h5>Ubicación: </h5><p> {city}</p></div>
+          <div className='inst'><h5>Instrumentos: </h5><p>{instruments.join(', ')}</p></div>
+          <div className='desc'><h5>Descripción: </h5><p>{purpose}</p></div>
+          <hr></hr>
             <div className="video-container">
               <h3>Videos:</h3>
               {videoUrls.map((videoUrl, index) => (
@@ -82,6 +82,5 @@ const UserProfile = () => {
     </div>
   );
 };
-
 
 export default UserProfile;
