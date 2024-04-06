@@ -93,7 +93,7 @@ const Messages = () => {
       <div className='container-header-messages'>
         <div className='row-header-messages'>
           <div className='col col-btn-home-messages'>
-          <Link to="/list" className='btn btn-sm btn-outline-secondary' type="button" id='btn-volver-messages'>Volver</Link>
+          <Link to="/list" className='btn btn-secondary' type="button" id='btn-volver-messages'>Volver</Link>
           </div>
           <div className='col col-logo-messages'>
             <div className='musicolabo-logo-messages'> 
