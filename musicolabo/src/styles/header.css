@@ -56,6 +56,16 @@
     text-decoration: none; /* Esto quita el subrayado del texto */
 }
 
+.unread-messages {
+    color: rgb(212, 167, 108);
+    /*padding: 5px;*/
+    text-decoration: none;
+}
+.unread-messages:hover {
+    background-color: rgb(46, 44, 44);
+    color: rgb(105, 99, 99);
+}
+
 .col-buttons-header {
     margin-top: 5px;
     display: flex;
