@@ -121,7 +121,7 @@ const EditProfile = () => {
           <div className='col col-vacia2'></div>
         </div>
       </div>
-      <div className='container-edit-profile'>
+      <div className='container-edit'>
         <div className='container-title-and-btn-edit'>
           <h2>Tu perfil:</h2>
           <button className='btn btn-sm btn-outline-secondary' id='btn-edit' onClick={toggleEditMode}>{isEditMode ? 'Cancelar' : 'Editar Perfil'}</button>
@@ -295,10 +295,7 @@ const EditProfile = () => {
        </div>
        )}
        
-       <div className='nom'>
-         <h5>Nombre: </h5> 
-         <p> { name}</p>
-       </div>
+       <div className='nom'><h5>Nombre: </h5><p> { name}</p></div>
        <div className='nom-us'><h5>Nombre de usuario: </h5><p> {username}</p></div>
        <div className='em'><h5>Email: </h5><p> {email}</p></div>
        <div className='ub'><h5>Ubicación: </h5><p> {city}</p></div>
