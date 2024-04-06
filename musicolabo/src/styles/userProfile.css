@@ -3,8 +3,9 @@
 
 
 
-.container-user-profile {
+#container-user-profile {
     color: rgb(63, 125, 128);
+    padding: 10px;
 }
 
 .container-header-profile {
@@ -46,16 +47,17 @@
     color: rgb(63, 125, 128);
 }
 
-#btn-home-profile {
-    margin-bottom: 20px;
-    background-color:rgb(63, 125, 128);
-    color: rgb(46, 44, 44);
-    border-radius: 3px;
-}
-#btn-home-profile:hover {
-    background-color: rgb(46, 44, 44);;
+#btn-volver-profile {
+    background-color:rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(63, 125, 128);
+    border-radius: 3px;
+}
+#btn-volver-profile:hover {
+    background-color: rgb(46, 44, 44);
+    color: rgb(105, 99, 99);
+    border: 1px solid rgb(105, 99, 99);
+    border-radius: 3px;
 }
 
 
@@ -63,4 +65,9 @@
     color: rgb(63, 125, 128);
     border: 2px solid rgb(63, 125, 128);
     border-radius: 5px;
+    padding: 15px;
+}
+
+.picture-profile {
+    margin-bottom: 10px;
 }

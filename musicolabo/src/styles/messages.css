@@ -5,6 +5,7 @@
 
 #container-messages {
     color: rgb(63, 125, 128);
+    padding: 10px;
 }
 
 .container-header-messages {
@@ -53,8 +54,6 @@
     color: rgb(63, 125, 128);
     border: 1px solid rgb(63, 125, 128);
     border-radius: 3px;
-    margin-left: 10px;
-    margin-top: 20px;
 }
 #btn-volver-messages:hover {
     background-color: rgb(46, 44, 44);

@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
 
 
-/*#container-edit-profile {
-    color: rgb(63, 125, 128);
-}*/
+#container-edit-profile {
+    padding: 10px;
+}
 
 .container-header-edit-profile {
     padding: 5px;
@@ -58,13 +58,13 @@
     border-radius: 3px;
 }
 
-.container-edit-profile {
+.container-edit {
     color: rgb(63, 125, 128);
     border: 2px solid rgb(63, 125, 128);
     border-radius: 5px;
     padding: 15px;
 }
-hr {
+.container-edit hr {
     color: rgb(212, 167, 108);
 }
 
@@ -84,11 +84,6 @@ hr {
     color: rgb(105, 99, 99);
     border: 1px solid rgb(105, 99, 99);
     border-radius: 3px;
-}
-
-.container-edit-profile hr {
-    color: rgb(63, 125, 128);
-    
 }
 
 .picture-edit-profile1 {
@@ -173,14 +168,15 @@ video {
 }
 
 #btn-save {
-    background-color: rgb(46, 44, 44);;
-    color: rgb(63, 125, 128);
-    border: 1px solid rgb(63, 125, 128);
+    background-color: rgb(212, 167, 108);
+    color: rgb(46, 44, 44);
+    border: 1px solid rgb(212, 167, 108);
+    border-radius: 3px;
     border-radius: 3px;
 }
 #btn-save:hover {
-    background-color: rgb(46, 44, 44);
-    color: rgb(105, 99, 99);
+    background-color: rgb(105, 99, 99);
+    color: rgb(46, 44, 44);
     border: 1px solid rgb(105, 99, 99);
     border-radius: 3px;
 }
