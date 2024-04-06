@@ -49,9 +49,9 @@
     margin-top: 20px;
 }
 #btn-home-register:hover {
-    background-color:rgb(212, 167, 108);
-    color: rgb(46, 44, 44);
-    border: rgb(212, 167, 108);
+    background-color: rgb(46, 44, 44);
+    color: rgb(105, 99, 99);
+    border: 1px solid rgb(105, 99, 99);
     border-radius: 3px;
 }
 
@@ -95,9 +95,10 @@
     margin-top: 9px;
 }
 #btn-form-register:hover {
-    background-color: rgb(46, 44, 44);;
-    color: rgb(212, 167, 108);
-    border: 1px solid rgb(212, 167, 108);
+    background-color:  rgb(105, 99, 99);
+    color: rgb(46, 44, 44);
+    border: 1px solid  rgb(105, 99, 99);
+    border-radius: 3px;
 }
 
 .error-message-email-register {
