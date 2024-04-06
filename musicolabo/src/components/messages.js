@@ -107,7 +107,7 @@ const Messages = () => {
       <div className='container-recibidos'>
       <h2>Bandeja:</h2>
       <hr></hr>
-      {unreadMessages > 0 && <p>Tienes {unreadMessages} mensaje/s no leídos.</p>}
+      {unreadMessages > 0 && <p className='aviso'>Tienes {unreadMessages} mensaje/s no leídos.</p>}
       <h3>Mensajes no leídos:</h3>
       <ul className='mensajes-no-leidos'>
       {unreadMessagesList.map((message, index) => (
