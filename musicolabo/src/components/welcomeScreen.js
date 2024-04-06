@@ -6,7 +6,7 @@ import '../styles/welcomeScreen.css';
 
 function WelcomeScreen() {
     return (
-      <div className='container-content'>
+      <div className='container-welcomeScreen'>
          <Header />
         <div className="container-welcome shadow p-3">
         <Link to="/list" className="btn btn-secondary" id='btn-welcome-screen-go-to-user-list'>Ir al listado de MusiColabors</Link>
