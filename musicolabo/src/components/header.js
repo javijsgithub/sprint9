@@ -30,7 +30,7 @@ const Header = () => {
               <div className='container--mensajes-no-leidos'> 
                 {unreadMessages > 0 && 
                  <Link to="/messages"
-                   className="unread-messages">{unreadMessages} mensaje(s) nuevo(s).
+                   className="unread-messages"><h6>{unreadMessages} mensaje(s) nuevo(s).</h6>
                  </Link>}              
               </div>
             </div>

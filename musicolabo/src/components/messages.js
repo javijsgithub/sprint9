@@ -107,7 +107,8 @@ const Messages = () => {
       <div className='container-recibidos'>
       <h2>Bandeja:</h2>
       <hr></hr>
-      {unreadMessages > 0 && <p className='aviso'>Tienes {unreadMessages} mensaje/s no leídos.</p>}
+      {unreadMessages > 0 && <h6 className='aviso'>Tienes {unreadMessages} mensaje/s no leídos.</h6>}
+      <br/>
       <h3>Mensajes no leídos:</h3>
       <ul className='mensajes-no-leidos'>
       {unreadMessagesList.map((message, index) => (
@@ -128,6 +129,7 @@ const Messages = () => {
           </li>
         ))}
       </ul>
+      <br/>
       <h3>Mensajes leídos:</h3>
       <ul className='mensajes-leidos'>
         {readMessagesList.map((message, index) => (
@@ -153,11 +155,11 @@ const Messages = () => {
 
       {showReplyForm && (
         <div className="reply-message-popup">
-            <button className="close" onClick={() => setShowReplyForm(false)}>&times;</button>
-          <h3>Responder a {recipientName}</h3>
+            <button id="reply-popup-close" onClick={() => setShowReplyForm(false)}>&times;</button>
+          <h2>Responder a {recipientName}</h2>
           <form onSubmit={handleSubmit}>
             <textarea value={replyMessage} onChange={(e) => setReplyMessage(e.target.value)} />
-            <button type='submit'>Enviar</button>
+            <button id='btn-reply-message-popup-submit' type='submit'>Enviar</button>
           </form>
         </div>
       )}
