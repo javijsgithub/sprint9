@@ -283,6 +283,7 @@ const EditProfile = () => {
             onChange={(e) => setPurpose(e.target.value)}
           ></textarea>
         </label>
+        <hr></hr>
         <button type="submit" className="btn btn-secondary" id='btn-save'>
           Guardar cambios
         </button>
