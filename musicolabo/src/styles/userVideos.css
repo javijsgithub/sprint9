@@ -10,7 +10,7 @@
 
 .container-header-videos {
     padding: 5px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     border: 2px solid rgb(212, 167, 108);
     border-radius: 5px;
 }
@@ -60,12 +60,19 @@
     border-radius: 3px;
 }
 
-
-
-.container-vid {
+.container-videos {
     border: 2px solid rgb(63, 125, 128);
     border-radius: 5px;
-    padding: 20px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.container-videos hr {
+    color: rgb(212, 167, 108);
+}
+
+.container-vid {
+    padding: 15px;
     margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
