@@ -113,11 +113,11 @@ const UsersList = () => {
       
       {showForm && (
         <div className="message-popup">
-            <button className="close" onClick={() => setShowForm(false)}>&times;</button>
+            <button id="popup-close" onClick={() => setShowForm(false)}>&times;</button>
             <h2>Enviar mensaje a {recipientUserName}</h2>
             <form onSubmit={handleSubmit}>
               <textarea value={message} onChange={(e) => setMessage(e.target.value)} />
-              <button type="submit">Enviar</button>
+              <button id='btn-message-popup-submit' type="submit">Enviar</button>
             </form>
         </div>
       )}
