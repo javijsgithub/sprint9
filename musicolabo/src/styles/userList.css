@@ -78,22 +78,60 @@ img {
 }
 
 .message-popup {
-    position: absolute;
-    top: 20px; /* Ajusta la distancia desde la parte superior según sea necesario */
-    right: 20px; /* Ajusta la distancia desde la derecha según sea necesario */
-    background-color: white;
-    border: 1px solid #ccc;
+    position: fixed; /* El elemento permanece en la misma posición independientemente del desplazamiento */
+    bottom: 40%; /* Posiciona el mensaje emergente al 40% de la parte inferior */
+    left: 50%; /* Posiciona el mensaje emergente en el centro horizontal */
+    transform: translateX(-50%); /* Centra el mensaje emergente horizontalmente */
+    background-color: rgb(46, 44, 44);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(212, 167, 108);
+    border-radius: 5px;
     padding: 20px;
     z-index: 1000; /* Asegúrate de que el mensaje emergente esté por encima de otros elementos */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Añade sombra */
+    box-shadow: 0 0 5px rgb(212, 167, 108); /* Añade sombra */
   }
   
     
-  .message-popup .close {
+  .message-popup #popup-close {
     position: absolute;
     top: 10px;
     right: 10px;
     cursor: pointer;
+    background-color: rgb(212, 167, 108);
+    border: 1px solid rgb(212, 167, 108);
+    border-radius: 3px;
+    color:  rgb(46, 44, 44);
+    
+  }
+  .message-popup #popup-close:hover {
+    color: rgb(46, 44, 44);
+    border: 1px solid rgb(46, 44, 44);
+    border-radius: 5px;
+  }
+ 
+  .message-popup h2 {
+    margin-top: 20px;
+  }
+
+  .message-popup textarea {
+    background-color: rgb(46, 44, 44);
+    color: rgb(212, 167, 108);
+    border: 1px solid rgb(63, 125, 128);
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+
+  .message-popup #btn-message-popup-submit {
+    background-color: rgb(212, 167, 108);
+    border: 1px solid rgb(212, 167, 108);
+    border-radius: 3px;
+    color:  rgb(46, 44, 44);
+  }
+  .message-popup #btn-message-popup-submit:hover {
+    background-color: rgb(212, 167, 108);
+    border: 1px solid rgb(46, 44, 44);
+    border-radius: 3px;
+    color:  rgb(46, 44, 44);
   }
   
 

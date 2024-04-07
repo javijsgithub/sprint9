@@ -70,6 +70,10 @@
     padding: 15px;
 }
 
+.container-recibidos hr {
+    color: rgb(212, 167, 108);
+}
+
 .mensajes-no-leidos {
     list-style-type: none;
     border: 1px solid rgb(212, 167, 108);
@@ -122,6 +126,63 @@
     border: 1px solid rgb(105, 99, 99);
     border-radius: 3px;
 }
+
+.reply-message-popup {
+    position: fixed; /* El elemento permanece en la misma posición independientemente del desplazamiento */
+    bottom: 40%; /* Posiciona el mensaje emergente al 40% de la parte inferior */
+    left: 50%; /* Posiciona el mensaje emergente en el centro horizontal */
+    transform: translateX(-50%); /* Centra el mensaje emergente horizontalmente */
+    background-color: rgb(46, 44, 44);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(212, 167, 108);
+    border-radius: 5px;
+    padding: 20px;
+    z-index: 1000; /* Asegúrate de que el mensaje emergente esté por encima de otros elementos */
+    box-shadow: 0 0 5px rgb(212, 167, 108); /* Añade sombra */
+  }
+  
+    
+  .reply-message-popup #reply-popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background-color: rgb(212, 167, 108);
+    border: 1px solid rgb(212, 167, 108);
+    border-radius: 3px;
+    color:  rgb(46, 44, 44);
+    
+  }
+  .reply-message-popup #reply-popup-close:hover {
+    color: rgb(46, 44, 44);
+    border: 1px solid rgb(46, 44, 44);
+    border-radius: 5px;
+  }
+ 
+  .reply-message-popup h2 {
+    margin-top: 20px;
+  }
+
+  .reply-message-popup textarea {
+    background-color: rgb(46, 44, 44);
+    color: rgb(212, 167, 108);
+    border: 1px solid rgb(63, 125, 128);
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+
+  .reply-message-popup #btn-reply-message-popup-submit {
+    background-color: rgb(212, 167, 108);
+    border: 1px solid rgb(212, 167, 108);
+    border-radius: 3px;
+    color:  rgb(46, 44, 44);
+  }
+  .reply-message-popup #btn-reply-message-popup-submit:hover {
+    background-color: rgb(212, 167, 108);
+    border: 1px solid rgb(46, 44, 44);
+    border-radius: 3px;
+    color:  rgb(46, 44, 44);
+  }
 
 
 
