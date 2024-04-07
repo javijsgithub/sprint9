@@ -40,10 +40,12 @@ const UserVideos = () => {
           <div className='col col-vacia'></div>
         </div>
       </div>
-        <h2 className='videos-de'>Videos de {userEmail}:</h2>
       {videos.length > 0 ? (
-        <div className="container-vid">
-          {videos.map((video, index) => (
+        <div className="container-videos">
+           <h2 className='videos-de'>Videos de {userEmail}:</h2>
+           <hr></hr>
+           <div className='container-vid'>
+           {videos.map((video, index) => (
             <div key={index}>
               <video controls>
                 <source src={video} type="video/mp4" />
@@ -51,6 +53,8 @@ const UserVideos = () => {
               </video>
             </div>
           ))}
+           </div>
+          
         </div>
       ) : (
         <p>No hay videos disponibles.</p>
