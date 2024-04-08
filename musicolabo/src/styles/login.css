@@ -3,6 +3,10 @@
 
 
 
+#container-login {
+    padding: 10px;
+}
+
 .container-header-login {
     padding: 5px;
     
@@ -119,6 +123,5 @@
     color: rgb(212, 167, 108);
 }
 #link-register:hover {
-    text-decoration: underline;
-    color: rgb(212, 167, 108);
+    color: rgb(105, 99, 99);
 }
