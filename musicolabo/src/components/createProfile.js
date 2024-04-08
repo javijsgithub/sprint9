@@ -79,17 +79,18 @@ const CreateProfile = () => {
       </div>
       <div className="container-form-create-profile">
        <h2>Crea tu perfil de usuario</h2>
+       <hr></hr>
          <form onSubmit={handleSubmit}>
             <fieldset>
 
-               <p>Cargar imagen de perfil:</p> 
+               <h6>Cargar imagen de perfil:</h6> 
                <label> 
                  <input
                  className='input-picture-form-create-profile' 
                  type="file" 
                  onChange={(e) => setPicture(e.target.files[0])}                />
                </label>
-               <p>Cargar video(s):</p> 
+               <h6>Cargar video(s):</h6> 
               <label> 
                 <input
                 className='input-video-form-create-profile' 
@@ -99,7 +100,7 @@ const CreateProfile = () => {
                 onChange={handleVideoChange}
                 />
             </label>
-               <p>Nombre:</p>
+               <h6>Nombre:</h6>
                <label>
                  <input
                  className='input-name-form-create-profile'
@@ -108,7 +109,7 @@ const CreateProfile = () => {
                  onChange={(e) => setName(e.target.value)}
                 />
               </label>
-              <p>Nombre de usuario:</p> 
+              <h6>Nombre de usuario:</h6> 
               <label>
                  <input
                  className='input-username-form-create-profile'
@@ -117,7 +118,7 @@ const CreateProfile = () => {
                  onChange={(e) => setUsername(e.target.value)}
                 />
                </label>
-               <p>Email:</p>
+               <h6>Email:</h6>
                <label>
                  <input
                  className='input-email-form-create-profile'
@@ -127,7 +128,7 @@ const CreateProfile = () => {
                  disabled // El email no debe ser editable
                 />
                </label>
-               <p>Ubicación:</p>
+               <h6>Ubicación:</h6>
                <label> 
                  <input
                  className='input-ubication-form-create-profile'
@@ -140,7 +141,7 @@ const CreateProfile = () => {
             </fieldset>
             <fieldset>
               
-                <p>Instrumentos:</p> 
+                <h6>Instrumentos:</h6> 
                 <label>
                  <div className='checks-instruments-form-create-profile'>
                   <label>
@@ -194,7 +195,7 @@ const CreateProfile = () => {
                  </div>
                 </label>
                 <br/>
-              <p>Descripcion:</p>
+              <h6>Descripcion:</h6>
                 <label>
                   <textarea
                     className='input-description-form-create-profile'
