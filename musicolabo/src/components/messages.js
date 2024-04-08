@@ -8,13 +8,13 @@ const Messages = () => {
   const [messages, setMessages] = useState([]);
   const [unreadMessagesList, setUnreadMessagesList] = useState([]);
   const [readMessagesList, setReadMessagesList] = useState([]);
-  const [expandedMessageIndexes, setExpandedMessageIndexes] = useState([]);
   const [recipientEmail, setRecipientEmail] = useState('');
   const [recipientName, setRecipientName] = useState('');
   const [replyMessage, setReplyMessage] = useState('');
   const [showReplyForm, setShowReplyForm] = useState(false);
   const [userProfiles, setUserProfiles] = useState([]);
-
+   const [expandedUnreadMessageIndexes, setExpandedUnreadMessageIndexes] = useState([]);
+  const [expandedReadMessageIndexes, setExpandedReadMessageIndexes] = useState([]);
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -34,6 +34,7 @@ const Messages = () => {
           setUnreadMessagesList(unread.reverse());
           setReadMessagesList(read.reverse());
           setMessages(userMessages.reverse());
+          
         }       
       } catch (error) {
         console.error('Error al obtener mensajes del usuario:', error);
@@ -41,31 +42,35 @@ const Messages = () => {
     };
     fetchMessages();
   }, [getMessagesFromFirestore, user]);
-
- 
   
-  const openMessage = async (index) => {
+  const openMessage = async (index, isUnread) => {
     try {
-      if (!expandedMessageIndexes.includes(index)) {
-        const updatedMessages = [...messages];
-        updatedMessages[index].read = true; // Marcar el mensaje como leído
-        setMessages(updatedMessages);
-        await updateMessageReadStatus(messages[index].recipient); // Actualizar el estado de leído en Firestore
-        setExpandedMessageIndexes([...expandedMessageIndexes, index]);
+      if (isUnread) {
+        if (!expandedUnreadMessageIndexes.includes(index)) {
+          setExpandedUnreadMessageIndexes([...expandedUnreadMessageIndexes, index]);
+        }
+      } else {
+        if (!expandedReadMessageIndexes.includes(index)) {
+          setExpandedReadMessageIndexes([...expandedReadMessageIndexes, index]);
+        }
       }
     } catch (error) {
       console.error('Error al abrir el mensaje:', error);
     }
   };
 
-  const closeMessage = (index) => {
+  const closeMessage = async (index, isUnread) => {
     try {
       const updatedMessages = [...messages];
       updatedMessages[index].read = true;
       setMessages(updatedMessages);
-      updateMessageReadStatus(messages[index].recipient);
-      setExpandedMessageIndexes(expandedMessageIndexes.filter((i) => i !== index));
-      setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1));
+      await updateMessageReadStatus(messages[index].recipient);
+      if (isUnread) {
+        setExpandedUnreadMessageIndexes(expandedUnreadMessageIndexes.filter((i) => i !== index));
+        setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1));
+      } else {
+        setExpandedReadMessageIndexes(expandedReadMessageIndexes.filter((i) => i !== index));
+      }
     } catch (error) {
       console.error('Error al cerrar el mensaje:', error);
     }
@@ -131,17 +136,17 @@ const Messages = () => {
       <ul className='mensajes-no-leidos'>
       {unreadMessagesList.map((message, index) => (
           <li key={index}>
-            <strong>De:</strong> <strong>{getUserNameByEmail(message.sender)},</strong> <Link to={`/user-profile/${message.sender}`} className='link-messages'> Ver perfil</Link><br />
+            <strong>De:</strong> {getUserNameByEmail(message.sender)}, <Link to={`/user-profile/${message.sender}`} className='link-messages'> Ver perfil</Link><br />
             <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
 
-            {expandedMessageIndexes.includes(index) ? (
+            {expandedUnreadMessageIndexes.includes(index) ? (
               <>
                 <strong>Mensaje:</strong> {message.message}<br />
-                <button onClick={() => closeMessage(index)}>Cerrar mensaje</button>
+                <button onClick={() => closeMessage(index, true)}>Cerrar mensaje</button>
                 <button onClick={() => handleReply(message.sender, message.sender)}>Responder</button>
               </>
             ) : (
-              <button onClick={() => openMessage(index)}>Ver mensaje</button>
+              <button onClick={() => openMessage(index, true)}>Ver mensaje</button>
             )}
             <hr></hr>
           </li>
@@ -152,18 +157,18 @@ const Messages = () => {
       <ul className='mensajes-leidos'>
         {readMessagesList.map((message, index) => (
           <li key={index}>
-            <strong>De:</strong> <strong>{getUserNameByEmail(message.sender)},</strong> <Link to={`/user-profile/${message.sender}`} className='link-messages'> Ver perfil</Link>
+            <strong>De:</strong> {getUserNameByEmail(message.sender)}, <Link to={`/user-profile/${message.sender}`} className='link-messages'> Ver perfil</Link>
             <br/>
             <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
 
-            {expandedMessageIndexes.includes(index) ? (
+            {expandedReadMessageIndexes.includes(index) ? (
               <>
                 <strong>Mensaje:</strong> {message.message}<br />
-                <button onClick={() => closeMessage(index)}>Cerrar mensaje</button>
+                <button onClick={() => closeMessage(index, false)}>Cerrar mensaje</button>
                 <button onClick={() => handleReply(message.sender, message.sender)}>Responder</button>
               </>
             ) : (
-              <button onClick={() => openMessage(index)}>Ver mensaje</button>
+              <button onClick={() => openMessage(index, false)}>Ver mensaje</button>
             )}
             <hr></hr>
           </li>
