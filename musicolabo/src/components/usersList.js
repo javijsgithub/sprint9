@@ -8,19 +8,19 @@ import '../styles/userList.css';
 
 const UsersList = () => {
   const { getProfilesFromFirestore, sendMessage, unreadMessages, updateMessageReadStatus, setUnreadMessages, filteredProfiles } = useContext(MusiColaboContext);
-  const [profiles, setProfiles] = useState([]);
+  const [userProfiles, setUserProfiles] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [recipientEmail, setRecipientEmail] = useState('');
-  const [recipientUserName, setRecipientUserName] = useState('');
+  const [recipientName, setRecipientName] = useState('');
   const [message, setMessage] = useState('');
 
 
 
-  const handleSendMessage = (recipientEmail, recipientUserName) => {
+  const handleSendMessage = (recipientEmail, recipientName) => {
     console.log("Se hizo clic en el enlace 'Enviar mensaje'");
     console.log("ID del usuario destinatario:", recipientEmail);
     setRecipientEmail(recipientEmail);
-    setRecipientUserName(recipientUserName);
+    setRecipientName(recipientName);
     setShowForm(true);
     updateMessageReadStatus(recipientEmail);
     // Actualizar el estado de mensajes no leídos en el contexto
@@ -30,7 +30,7 @@ const UsersList = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await sendMessage(recipientEmail, recipientUserName, message);
+      await sendMessage(recipientEmail, recipientName, message);
       setShowForm(false);
       setMessage('');
     } catch (error) {
@@ -40,18 +40,15 @@ const UsersList = () => {
     
 
   useEffect(() => {
-    const fetchProfiles = async () => {
+    const fetchUserProfiles = async () => {
       try {
-        const fetchedProfiles = await getProfilesFromFirestore();
-        console.log("Perfiles obtenidos:", fetchedProfiles);
-        setProfiles(fetchedProfiles);
-        // Establecemos los perfiles filtrados
+        const profiles = await getProfilesFromFirestore();
+        setUserProfiles(profiles);
       } catch (error) {
-        console.error('Error al obtener perfiles:', error);
+        console.error('Error al obtener perfiles de usuario:', error);
       }
     };
-
-    fetchProfiles();
+    fetchUserProfiles();
   }, [getProfilesFromFirestore]);
 
   console.log("Mensajes no leídos:", unreadMessages);
@@ -85,7 +82,7 @@ const UsersList = () => {
             </div>
           </div>
         )) :
-        profiles.map(profile => (
+        userProfiles.map(profile => (
           <div className="col-md-3 mb-4 sm-3 col-cards" key={profile.email}>
             <div className="cards">
               <img src={profile.picture} className="card-img-top" alt="Imagen de perfil" />
@@ -101,7 +98,7 @@ const UsersList = () => {
                   </div>
                   <div className='container-link'>
                   <Link to={`/user-videos/${profile.email}`} className='link-card1' id='link-videos'>Ver videos</Link>
-                  <Link to='' className='link-card2' id='link-message' onClick={() => handleSendMessage(profile.email, profile.name)}>Enviar mensaje</Link>  
+                  <Link to='' className='link-card2' id='link-message' onClick={() => handleSendMessage(profile.email, profile.username)}>Enviar mensaje</Link>  
                   </div>
                 </div>
                 
@@ -114,7 +111,7 @@ const UsersList = () => {
       {showForm && (
         <div className="message-popup">
             <button id="popup-close" onClick={() => setShowForm(false)}>&times;</button>
-            <h2>Enviar mensaje a {recipientUserName}</h2>
+            <h2>Enviar mensaje a {recipientName}</h2>
             <form onSubmit={handleSubmit}>
               <textarea value={message} onChange={(e) => setMessage(e.target.value)} />
               <button id='btn-message-popup-submit' type="submit">Enviar</button>
