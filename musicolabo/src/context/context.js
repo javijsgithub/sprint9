@@ -9,6 +9,7 @@ const MusiColaboContextProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [username, setUsername] = useState('');
+  const [picture, setPicture] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [filteredProfiles, setFilteredProfiles] = useState([]);
@@ -39,6 +40,14 @@ const MusiColaboContextProvider = ({ children }) => {
     if (!usernameSnapshot.empty) {
       const userData = usernameSnapshot.docs[0].data();
       setUsername(userData.username);
+    }
+
+    // Obtener el nombre de usuario y la URL de la imagen de perfil en una sola consulta
+    const userDataSnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', email)));
+    if (!userDataSnapshot.empty) {
+      const userData = userDataSnapshot.docs[0].data();
+      setUsername(userData.username);
+      setPicture(userData.picture);
     }
     } catch (error) {
       throw error;
@@ -274,6 +283,7 @@ const MusiColaboContextProvider = ({ children }) => {
       user,
       storage,
       username,
+      picture,
       userEmail,
       loggedIn,
       unreadMessages,
