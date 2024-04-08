@@ -4,7 +4,7 @@ import { MusiColaboContext } from '../context/context';
 import '../styles/messages.css';
 
 const Messages = () => {
-  const { user, getMessagesFromFirestore, unreadMessages, sendMessage, updateMessageReadStatus, setUnreadMessages  } = useContext(MusiColaboContext);
+  const { user, getMessagesFromFirestore, unreadMessages, sendMessage, updateMessageReadStatus, setUnreadMessages, getProfilesFromFirestore  } = useContext(MusiColaboContext);
   const [messages, setMessages] = useState([]);
   const [unreadMessagesList, setUnreadMessagesList] = useState([]);
   const [readMessagesList, setReadMessagesList] = useState([]);
@@ -13,6 +13,7 @@ const Messages = () => {
   const [recipientName, setRecipientName] = useState('');
   const [replyMessage, setReplyMessage] = useState('');
   const [showReplyForm, setShowReplyForm] = useState(false);
+  const [userProfiles, setUserProfiles] = useState([]);
 
 
   useEffect(() => {
@@ -88,6 +89,23 @@ const Messages = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchUserProfiles = async () => {
+      try {
+        const profiles = await getProfilesFromFirestore();
+        setUserProfiles(profiles);
+      } catch (error) {
+        console.error('Error al obtener perfiles de usuario:', error);
+      }
+    };
+    fetchUserProfiles();
+  }, [getProfilesFromFirestore]);
+
+  const getUserNameByEmail = (email) => {
+    const userProfile = userProfiles.find(profile => profile.email === email);
+    return userProfile ? userProfile.username : email; // Si se encuentra el perfil, devolver el nombre de usuario, de lo contrario, devolver el correo electrónico
+  };
+
   return (
     <div className='container-fluid' id='container-messages'>
       <div className='container-header-messages'>
@@ -113,7 +131,7 @@ const Messages = () => {
       <ul className='mensajes-no-leidos'>
       {unreadMessagesList.map((message, index) => (
           <li key={index}>
-            <strong>De:</strong> {message.sender}, <Link to={`/user-profile/${message.sender}`} className='link-messages'> Ver perfil</Link><br />
+            <strong>De:</strong> <strong>{getUserNameByEmail(message.sender)},</strong> <Link to={`/user-profile/${message.sender}`} className='link-messages'> Ver perfil</Link><br />
             <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
 
             {expandedMessageIndexes.includes(index) ? (
@@ -134,7 +152,8 @@ const Messages = () => {
       <ul className='mensajes-leidos'>
         {readMessagesList.map((message, index) => (
           <li key={index}>
-            <strong>De:</strong> {message.sender}, <Link to={`/user-profile/${message.sender}`} className='link-messages'> Ver perfil</Link><br />
+            <strong>De:</strong> <strong>{getUserNameByEmail(message.sender)},</strong> <Link to={`/user-profile/${message.sender}`} className='link-messages'> Ver perfil</Link>
+            <br/>
             <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
 
             {expandedMessageIndexes.includes(index) ? (
@@ -156,7 +175,7 @@ const Messages = () => {
       {showReplyForm && (
         <div className="reply-message-popup">
             <button id="reply-popup-close" onClick={() => setShowReplyForm(false)}>&times;</button>
-          <h2>Responder a {recipientName}</h2>
+          <h2>Responder a {getUserNameByEmail(recipientName)}</h2>
           <form onSubmit={handleSubmit}>
             <textarea value={replyMessage} onChange={(e) => setReplyMessage(e.target.value)} />
             <button id='btn-reply-message-popup-submit' type='submit'>Enviar</button>
