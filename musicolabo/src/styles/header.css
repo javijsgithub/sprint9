@@ -51,11 +51,24 @@
     display: block;
 }
 
-.userlogged{
+.userlogged {
+    margin-top: 3px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.username-header {
     color: rgb(63, 125, 128);
 }
 
-.unread-messages {
+.picture-header {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+}
+
+.unread-messages-header {
     color: rgb(212, 167, 108);
     text-decoration: none;
 }
