@@ -8,8 +8,9 @@ import { FaYoutube } from "react-icons/fa";
 import '../styles/header.css';
 
 const Header = () => {
-  const { handleLogout, loggedIn, username, unreadMessages } = useContext(MusiColaboContext);
- 
+  const { handleLogout, loggedIn, username, picture, unreadMessages } = useContext(MusiColaboContext);
+
+   
   return (
     <div className='container-header'>
       <div className='row-header'>
@@ -25,15 +26,18 @@ const Header = () => {
         <div className=' col col-buttons-header'>
           {loggedIn ? (
             <div className='container-user-logged-header'>
-              <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-header-logout'>Cerrar sesion</Link>
-              <h6 className='userlogged'>{username}</h6>
-              <div className='container--mensajes-no-leidos'> 
-                {unreadMessages > 0 && 
-                 <Link to="/messages"
-                   className="unread-messages"><h6>{unreadMessages} mensaje(s) nuevo(s).</h6>
-                 </Link>}              
-              </div>
+            <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-header-logout'>Cerrar sesión</Link>
+            <div className='userlogged'>
+              <img src={picture} className='picture-header' alt="Imagen de perfil" />
+              <h6 className='username-header'><strong>{username}</strong></h6>
             </div>
+            <div className='container--mensajes-no-leidos'> 
+              {unreadMessages > 0 && 
+                <Link to="/messages" className="unread-messages-header">
+                  <h6>{unreadMessages} mensaje(s) nuevo(s).</h6>
+                </Link>}              
+            </div>
+          </div>
           ) : (
           <>
               <Link to="/login" type="submit" className="btn btn-secondary" id='btn-header-login'>Iniciar sesión</Link>
