@@ -35,14 +35,8 @@ const MusiColaboContextProvider = ({ children }) => {
       setUser(userCredential.user);
       setUserEmail(email);
       setLoggedIn(true);
-      // Obtener el nombre de usuario y establecerlo en el estado
-    const usernameSnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', email)));
-    if (!usernameSnapshot.empty) {
-      const userData = usernameSnapshot.docs[0].data();
-      setUsername(userData.username);
-    }
 
-    // Obtener el nombre de usuario y la URL de la imagen de perfil en una sola consulta
+    // Obtener el nombre de usuario y la imagen de perfil en una sola consulta
     const userDataSnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', email)));
     if (!userDataSnapshot.empty) {
       const userData = userDataSnapshot.docs[0].data();
