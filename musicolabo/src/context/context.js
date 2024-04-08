@@ -8,6 +8,7 @@ export const MusiColaboContext = createContext();
 const MusiColaboContextProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const [username, setUsername] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [filteredProfiles, setFilteredProfiles] = useState([]);
@@ -33,6 +34,12 @@ const MusiColaboContextProvider = ({ children }) => {
       setUser(userCredential.user);
       setUserEmail(email);
       setLoggedIn(true);
+      // Obtener el nombre de usuario y establecerlo en el estado
+    const usernameSnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', email)));
+    if (!usernameSnapshot.empty) {
+      const userData = usernameSnapshot.docs[0].data();
+      setUsername(userData.username);
+    }
     } catch (error) {
       throw error;
     }
@@ -148,9 +155,9 @@ const MusiColaboContextProvider = ({ children }) => {
 
 
   //  Funcion para enviar mensajes utilizando firestore
-  const sendMessage = async (recipientEmail, recipientUserName, message) => {
+  const sendMessage = async (recipientEmail, recipientName, message) => {
     try {
-      console.log("Enviando mensaje a...", recipientUserName);
+      console.log("Enviando mensaje a...", recipientName);
       console.log("Destinatario userId:", recipientEmail);
       console.log("Mensaje:", message);
       // Obtener la referencia al documento del destinatario usando el correo electrónico
@@ -207,7 +214,8 @@ const MusiColaboContextProvider = ({ children }) => {
       const querySnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', userEmail)));
       if (!querySnapshot.empty) {
         const userDocRef = querySnapshot.docs[0].ref;
-        const messagesQuerySnapshot = await getDocs(query(collection(userDocRef, 'messages'), orderBy('timestamp', 'asc')));        const messages = messagesQuerySnapshot.docs.map(doc => {
+        const messagesQuerySnapshot = await getDocs(query(collection(userDocRef, 'messages'), orderBy('timestamp', 'asc')));       
+        const messages = messagesQuerySnapshot.docs.map(doc => {
           const messageData = doc.data();
           console.log('Mensaje obtenido:', messageData);
           if (!messageData.hasOwnProperty('read')) {
@@ -265,6 +273,7 @@ const MusiColaboContextProvider = ({ children }) => {
     <MusiColaboContext.Provider value={{ 
       user,
       storage,
+      username,
       userEmail,
       loggedIn,
       unreadMessages,
