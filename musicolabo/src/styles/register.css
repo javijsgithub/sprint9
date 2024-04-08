@@ -80,6 +80,7 @@
     border: 1px solid rgb(95,158,160);
     border-radius: 3px;
     margin-bottom: 10px;
+    padding: 5px;
 }
 
 .input-password-form-register {
@@ -87,6 +88,7 @@
     color: rgb(63, 125, 128);
     border: 1px solid rgb(95,158,160);
     border-radius: 3px;
+    padding: 5px;
 }
 
 #btn-form-register {

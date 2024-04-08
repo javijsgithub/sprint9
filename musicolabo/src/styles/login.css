@@ -82,6 +82,7 @@
     border: 1px solid rgb(63, 125, 128);
     border-radius: 3px;
     margin-bottom: 10px;
+    padding-left: 5px;
 }
 .input-email-form-login:focus {
     border: 1px;
@@ -92,6 +93,7 @@
     color: rgb(63, 125, 128);
     border: 1px solid rgb(63, 125, 128);
     border-radius: 3px;
+    padding-left: 5px;
 }
 
 #btn-form-login {
