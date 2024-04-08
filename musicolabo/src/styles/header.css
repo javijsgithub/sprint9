@@ -51,14 +51,12 @@
     display: block;
 }
 
-.container-user-logged-header p{
+.userlogged{
     color: rgb(63, 125, 128);
-    text-decoration: none; /* Esto quita el subrayado del texto */
 }
 
 .unread-messages {
     color: rgb(212, 167, 108);
-    /*padding: 5px;*/
     text-decoration: none;
 }
 .unread-messages:hover {
