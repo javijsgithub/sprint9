@@ -7,12 +7,14 @@ import '../styles/userList.css';
 
 
 const UsersList = () => {
-  const { getProfilesFromFirestore, sendMessage, unreadMessages, updateMessageReadStatus, setUnreadMessages, filteredProfiles } = useContext(MusiColaboContext);
+  const { getProfilesFromFirestore, sendMessage, unreadMessages, filteredProfiles } = useContext(MusiColaboContext);
   const [userProfiles, setUserProfiles] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [recipientEmail, setRecipientEmail] = useState('');
   const [recipientName, setRecipientName] = useState('');
   const [message, setMessage] = useState('');
+  const [messageSent, setMessageSent] = useState(false);
+
 
 
 
@@ -22,17 +24,21 @@ const UsersList = () => {
     setRecipientEmail(recipientEmail);
     setRecipientName(recipientName);
     setShowForm(true);
-    updateMessageReadStatus(recipientEmail);
-    // Actualizar el estado de mensajes no leídos en el contexto
-  setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await sendMessage(recipientEmail, recipientName, message);
-      setShowForm(false);
       setMessage('');
+      setMessageSent(true); // para "mensaje enviado!"
+      
+       //Temporizador para restablecer messageSent después de 2 segundos
+      setTimeout(() => {
+        setMessageSent(false);
+        setShowForm(false);
+      }, 2000); 
+
     } catch (error) {
       console.error('Error al enviar el mensaje:', error);
     }
@@ -115,6 +121,7 @@ const UsersList = () => {
             <form onSubmit={handleSubmit}>
               <textarea value={message} onChange={(e) => setMessage(e.target.value)} />
               <button id='btn-message-popup-submit' type="submit">Enviar</button>
+               {messageSent && <span>Mensaje enviado!</span>} 
             </form>
         </div>
       )}
@@ -128,3 +135,4 @@ const UsersList = () => {
   /* <div className='container-btn-view-more'>
          <button type="button" id='btn-view-more' onClick={loadMoreUsers} class="btn btn-secondary">Ver mas...</button>
      </div>*/
+
