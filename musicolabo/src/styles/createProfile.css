@@ -183,6 +183,10 @@ fieldset {
   textarea {
     width: 100%;
   }
+  .container-form-create-profile span {
+    color: rgb(16, 202, 16);
+    margin-left: 10px;
+  }
 
 
   @media (max-width: 767.98px) {

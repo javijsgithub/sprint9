@@ -134,6 +134,11 @@ img {
     border-radius: 3px;
     color:  rgb(46, 44, 44);
   }
+
+  .message-popup span {
+    color: rgb(16, 202, 16);
+    margin-left: 10px;
+  }
   
 
 
