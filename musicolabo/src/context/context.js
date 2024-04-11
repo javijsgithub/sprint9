@@ -1,8 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { auth, db, storage } from '../firebase';
-import { addDoc, collection, getDocs, query, where, orderBy, setDoc, onSnapshot } from 'firebase/firestore';
+import { addDoc, collection, getDocs, deleteDoc, query, where, orderBy, setDoc, onSnapshot } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, deleteUser } from "firebase/auth";
 export const MusiColaboContext = createContext();
 
 const MusiColaboContextProvider = ({ children }) => {
@@ -13,6 +13,7 @@ const MusiColaboContextProvider = ({ children }) => {
   const [userEmail, setUserEmail] = useState('');
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [filteredProfiles, setFilteredProfiles] = useState([]);
+  //const [profileDeleted, setProfileDeleted] = useState(false);
 
   
   // Función para registrar un nuevo usuario.
@@ -70,6 +71,45 @@ const MusiColaboContextProvider = ({ children }) => {
       
     } catch (error) {
       console.error('Error al crear el documento:', error);
+      throw error;
+    }
+  };
+
+  const deleteUserProfileFromFirestore = async (userEmail) => {
+    try {
+      // Obtener el documento del usuario basado en el correo electrónico
+      const querySnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', userEmail)));
+      if (!querySnapshot.empty) {
+        const userDocRef = querySnapshot.docs[0].ref;
+  
+        // Eliminar todas las subcolecciones de 'messages'
+        const messagesCollectionRef = collection(userDocRef, 'messages');
+        const messagesSnapshot = await getDocs(messagesCollectionRef);
+        // Eliminar cada mensaje individualmente
+        const deletePromises = messagesSnapshot.docs.map(doc => deleteDoc(doc.ref));
+        await Promise.all(deletePromises);
+  
+        // Ahora que las subcolecciones están vacías, eliminar el documento principal
+        await deleteDoc(userDocRef);
+        console.log('Perfil del usuario y subcolecciones eliminados exitosamente de Firestore');
+        
+        // Para eliminar la cuenta de autenticación de Firebase
+        if (auth.currentUser) {
+          await deleteUser(auth.currentUser);
+          console.log('Cuenta de autenticación de Firebase eliminada con éxito');
+        }
+  
+        // Resetear estados relevantes o realizar otras operaciones de limpieza
+        setUser(null);
+        setLoggedIn(false);
+        setUserEmail('');
+        setUsername('');
+        setPicture('');
+        setUnreadMessages(0);
+        alert("Tu cuenta ha sido eliminada con éxito.");
+      }
+    } catch (error) {
+      console.error('Error al eliminar el perfil del usuario de Firestore y la cuenta de autenticación:', error);
       throw error;
     }
   };
@@ -187,28 +227,32 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   };
     // mostrar los avisos de mensajes
-  useEffect(() => {
-    if (userEmail && loggedIn) {
-      const unsubscribeMessages = onSnapshot(collection(db, 'userData'), async (snapshot) => {
-        let unreadCount = 0;
-        for (const doc of snapshot.docs) {
-          const messagesCollectionRef = collection(doc.ref, 'messages');
-          const messagesSnapshot = await getDocs(messagesCollectionRef);
-          for (const messageDoc of messagesSnapshot.docs) {
-            const messageData = messageDoc.data();
-            if (!messageData.read && messageData.recipient === userEmail) {
-              unreadCount++;
+    useEffect(() => {
+      let unsubscribe = () => {}; // Inicializa una función de desuscripción vacía
+    
+      if (userEmail && loggedIn) {
+        const queryRef = collection(db, 'userData');
+        unsubscribe = onSnapshot(queryRef, async (snapshot) => {
+          let unreadCount = 0;
+          for (const doc of snapshot.docs) {
+            const messagesCollectionRef = collection(doc.ref, 'messages');
+            const messagesSnapshot = await getDocs(messagesCollectionRef);
+            for (const messageDoc of messagesSnapshot.docs) {
+              const messageData = messageDoc.data();
+              if (!messageData.read && messageData.recipient === userEmail) {
+                unreadCount++;
+              }
             }
           }
-        }
-        setUnreadMessages(unreadCount);
-      });
-  
+          setUnreadMessages(unreadCount);
+        });
+      }
+    
       return () => {
-        unsubscribeMessages();
+        unsubscribe(); // Esto se llama cuando el componente se desmonta o cuando los valores de userEmail o loggedIn cambian
       };
-    }
-  }, [userEmail, loggedIn]);
+    }, [userEmail, loggedIn]);
+    
 
 
   // Función para obtener los mensajes del usuario.
@@ -286,6 +330,7 @@ const MusiColaboContextProvider = ({ children }) => {
       uploadImage,
       uploadVideo,
       createNewDocument,
+      deleteUserProfileFromFirestore,
       handleRegister,
       handleLogin,
       handleLogout, 
