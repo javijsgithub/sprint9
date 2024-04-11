@@ -132,7 +132,5 @@ const UsersList = () => {
   
   export default UsersList;
 
-  /* <div className='container-btn-view-more'>
-         <button type="button" id='btn-view-more' onClick={loadMoreUsers} class="btn btn-secondary">Ver mas...</button>
-     </div>*/
+ 
 
