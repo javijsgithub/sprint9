@@ -14,6 +14,8 @@ const CreateProfile = () => {
   const [city, setCity] = useState('');
   const [purpose, setPurpose] = useState('');
   const navigate = useNavigate();
+  const [profileSent, setProfileSent] = useState(false);
+
   
 
   const handleInstrumentChange = (e) => {
@@ -31,7 +33,7 @@ const CreateProfile = () => {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+        
     try {
       let pictureUrl = ''; // Inicializar la URL de la imagen como vacía por defecto
     // Verificar si se proporcionó una imagen
@@ -56,7 +58,12 @@ const CreateProfile = () => {
       };
 
       await createNewDocument(userProfile);
-      navigate('/list'); // Redirecciona al usuario al listado
+      setProfileSent(true); // para "Perfil creado con exito!"
+      
+      setTimeout(() => {
+        setProfileSent(false);
+        navigate('/login'); // Redirecciona al usuario al login
+      }, 1500); 
    
     } catch (error) {
       console.error('Error al guardar el perfil:', error);
@@ -207,12 +214,13 @@ const CreateProfile = () => {
 
             </fieldset>
             <button
-              onSubmit={createNewDocument}
+             // onSubmit={createNewDocument}
               type="submit"
               className="btn btn-secondary"
               id='btn-form-create-profile'>
               Crear perfil
             </button>
+            {profileSent && <span>Perfil creado con Exito!</span>}
          </form>
       </div>
     </div>
