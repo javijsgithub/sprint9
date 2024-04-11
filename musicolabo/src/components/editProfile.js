@@ -5,7 +5,7 @@ import { MusiColaboContext } from '../context/context';
 import '../styles/editProfile.css';
 
 const EditProfile = () => {
-  const { userEmail, getProfilesFromFirestore, updateProfileInFirestore, uploadImage, uploadVideo } = useContext(MusiColaboContext);
+  const { userEmail, getProfilesFromFirestore, updateProfileInFirestore, deleteUserProfileFromFirestore, handleLogout, uploadImage, uploadVideo } = useContext(MusiColaboContext);
   const [picture, setPicture] = useState(null);
   const [pictureUrl, setPictureUrl] = useState('');
   const [videos, setVideos] = useState([]);
@@ -102,6 +102,18 @@ const EditProfile = () => {
 
   const handleRemovePicture = () => {
     setPictureUrl('/images/profile_image.jpg'); // Ruta relativa a la carpeta imagen de la carpeta public
+  };
+
+  const handleDeleteProfile = async () => {
+    if (window.confirm("¿Estás seguro de que deseas eliminar tu perfil? Esta acción no se puede deshacer.")) {
+      try {
+        await deleteUserProfileFromFirestore(userEmail);
+        handleLogout(); // Hacer logout si la eliminación fue exitosa
+        navigate('/login'); // Redirigir al usuario a la pagina de login
+      } catch (error) {
+        alert("Ocurrió un error al eliminar el perfil: " + error.message);
+      }
+    }
   };
 
 
@@ -287,6 +299,7 @@ const EditProfile = () => {
         <button type="submit" className="btn btn-secondary" id='btn-save'>
           Guardar cambios
         </button>
+        <button className="btn btn-danger" onClick={handleDeleteProfile}>Eliminar Cuenta</button>
       </form>
        {/* Mostrar la información del perfil */}
       <div style={{ display: isEditMode ? 'none' : 'block' }}>
