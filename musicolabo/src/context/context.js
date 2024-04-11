@@ -13,7 +13,6 @@ const MusiColaboContextProvider = ({ children }) => {
   const [userEmail, setUserEmail] = useState('');
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [filteredProfiles, setFilteredProfiles] = useState([]);
-  //const [profileDeleted, setProfileDeleted] = useState(false);
 
   
   // Función para registrar un nuevo usuario.

@@ -296,10 +296,11 @@ const EditProfile = () => {
           ></textarea>
         </label>
         <hr></hr>
-        <button type="submit" className="btn btn-secondary" id='btn-save'>
-          Guardar cambios
-        </button>
-        <button className="btn btn-danger" onClick={handleDeleteProfile}>Eliminar Cuenta</button>
+        <div className='container-btns-save-delete'>
+          <button type="submit" className="btn btn-secondary" id='btn-save'>Guardar cambios</button>
+          <button className="btn btn-danger" onClick={handleDeleteProfile}>Eliminar Cuenta</button>
+        </div>
+        
       </form>
        {/* Mostrar la información del perfil */}
       <div style={{ display: isEditMode ? 'none' : 'block' }}>

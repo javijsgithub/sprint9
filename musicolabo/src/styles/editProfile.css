@@ -167,6 +167,11 @@ video {
     border-radius: 3px;
 }
 
+.container-btns-save-delete {
+    display: flex;
+    justify-content: space-between;
+}
+
 #btn-save {
     background-color: rgb(212, 167, 108);
     color: rgb(46, 44, 44);
