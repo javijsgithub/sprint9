@@ -13,8 +13,9 @@ const Messages = () => {
   const [replyMessage, setReplyMessage] = useState('');
   const [showReplyForm, setShowReplyForm] = useState(false);
   const [userProfiles, setUserProfiles] = useState([]);
-   const [expandedUnreadMessageIndexes, setExpandedUnreadMessageIndexes] = useState([]);
+  const [expandedUnreadMessageIndexes, setExpandedUnreadMessageIndexes] = useState([]);
   const [expandedReadMessageIndexes, setExpandedReadMessageIndexes] = useState([]);
+  const [messageSent, setMessageSent] = useState(false);
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -61,16 +62,19 @@ const Messages = () => {
 
   const closeMessage = async (index, isUnread) => {
     try {
-      const updatedMessages = [...messages];
-      updatedMessages[index].read = true;
-      setMessages(updatedMessages);
-      await updateMessageReadStatus(messages[index].recipient);
+      const updatedMessages = isUnread ? [...unreadMessagesList] : [...readMessagesList];
+  
       if (isUnread) {
-        setExpandedUnreadMessageIndexes(expandedUnreadMessageIndexes.filter((i) => i !== index));
-        setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1));
-      } else {
-        setExpandedReadMessageIndexes(expandedReadMessageIndexes.filter((i) => i !== index));
+        setUnreadMessagesList(updatedMessages); // Actualiza la lista de no leídos
+        updateMessageReadStatus(messages[index].recipient); // Actualiza el estado a 'leído' en Firestore
+        setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1)); // Reduce el contador de mensajes no leídos
       }
+  
+      if (!isUnread && expandedReadMessageIndexes.includes(index)) {
+        // Si el mensaje está abierto y se cierra, elimina su índice de la lista de mensajes leídos expandidos
+        setExpandedReadMessageIndexes(expandedReadMessageIndexes.filter(i => i !== index));
+      } 
+  
     } catch (error) {
       console.error('Error al cerrar el mensaje:', error);
     }
@@ -87,8 +91,16 @@ const Messages = () => {
     e.preventDefault();
     try {
       await sendMessage(recipientEmail, recipientName, replyMessage);
-      setShowReplyForm(false);
       setReplyMessage('');
+      setMessageSent(true); // para "mensaje enviado!"
+
+      //Temporizador para restablecer messageSent después de 1,5 segundos
+      setTimeout(() => {
+        setMessageSent(false);
+        setShowReplyForm(false);
+      }, 1500); 
+
+
     } catch (error) {
       console.error('Error al enviar el mensaje:', error);
     }
@@ -184,6 +196,7 @@ const Messages = () => {
           <form onSubmit={handleSubmit}>
             <textarea value={replyMessage} onChange={(e) => setReplyMessage(e.target.value)} />
             <button id='btn-reply-message-popup-submit' type='submit'>Enviar</button>
+            {messageSent && <span>Mensaje enviado!</span>} 
           </form>
         </div>
       )}
