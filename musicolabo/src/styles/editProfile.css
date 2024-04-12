@@ -115,13 +115,14 @@
 .preview-video {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    gap: 10px;
+    /*justify-content: space-between;*/
 }
 
 video {
     width: 250px;
     height: 255px;
-    margin-right: 5px;
+    margin-right: 10px;
     margin-bottom: 10px;
 }
 
