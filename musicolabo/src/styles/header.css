@@ -61,6 +61,7 @@
 
 .username-header {
     color: rgb(63, 125, 128);
+    margin-top: 3px;
 }
 
 .picture-header {
@@ -146,7 +147,7 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-end;
-        gap: 5px;
+        gap: 7px;
     }
 
     #btn-header-register {
