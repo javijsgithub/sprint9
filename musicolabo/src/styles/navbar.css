@@ -9,19 +9,15 @@
     border: 2px solid rgb(212, 167, 108);
     border-radius: 5px;
 }
-    
-
-.container-navbar {
-    display: flex;
-}
 
 .navbar-brand {
-    color: rgb(91, 176, 180);
+    color: rgb(63, 125, 128);
     font-family: "Monoton";
     font-size: large;
     margin-left: 15px;
     align-items: center;
     justify-self: center;
+    text-decoration: none;
 }
 .navbar-brand:hover {
     color: rgb(105, 99, 99);
@@ -29,6 +25,7 @@
 
 .nav-link {
     color: rgb(212, 167, 108);
+    text-decoration: none;
 }
 .nav-link:hover {
     color: rgb(105, 99, 99);
@@ -37,12 +34,17 @@
 .navbar-nav {
     margin-left: 50px;
     width: 300px;
-    justify-content: space-around;
+    justify-content: space-between;
+}
+
+#navbar-filter {
+    margin-left: 250px;
+    margin-right: 15px;
 }
 
 #input-instrument-navbar {
     background-color: rgb(46, 44, 44);
-    color: rgb(91, 176, 180);
+    color: rgb(63, 125, 128);
     border: 1px solid rgb(212, 167, 108);
 }
 
@@ -53,7 +55,7 @@
 
 #input-city-navbar {
     background-color: rgb(46, 44, 44);
-    color: rgb(91, 176, 180);
+    color: rgb(63, 125, 128);
     border: 1px solid rgb(212, 167, 108);
 }
 #input-city-navbar::placeholder {
@@ -61,14 +63,11 @@
     opacity: 0.4;
 }
 
-#navbar-filter {
-    margin-left: 250px;
-    margin-right: 15px;
-}
+
 
 #btn-filter {
-    color: rgb(91, 176, 180);
-    border: 1px solid rgb(91, 176, 180);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
 }
 
 #btn-filter:hover {
@@ -77,9 +76,71 @@
     border: 1px solid rgb(105, 99, 99);
 }
 
-.form-control {
-    color: rgb(63, 125, 128);
+.custom-toggler {
+    width: min-content;
+    border: 2px solid rgb(63, 125, 128);
+    color: transparent;
+    
+}
+.custom-toggler:hover {
+    border: 3px solid rgb(63, 125, 128);
+}
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(63, 125, 128)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
+
+@media (max-width: 991.98px) {
+
+    .navbar {
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-bottom: 20px;
+        
+    }
+
+    .navbar-nav {
+        display: flex;
+        flex-direction: row;
+        margin-left: 0px;
+        justify-content: flex-start;
+        padding: 5px;
+    }
+
+    .nav-link {
+        margin-right: 50px;
+    }
+
+    #navbar-filter {
+        margin-left: 0px;
+    }
+
+}
+
+@media (max-width: 768.98px) {
+
+    .navbar {
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-bottom: 20px;
+        
+    }
+
+    .navbar-nav {
+        display: flex;
+        flex-direction: row;
+        margin-left: 0px;
+        justify-content: flex-start;
+        padding: 5px;
+    }
+
+    .nav-link {
+        margin-right: 18px;
+    }
+
+    #navbar-filter {
+        margin-left: 0px;
+    }
+}
 
 

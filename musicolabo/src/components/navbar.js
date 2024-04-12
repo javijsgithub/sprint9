@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { MusiColaboContext } from '../context/context';
 import '../styles/navbar.css';
 
-const Navbar = () => {
+const MyNavbar = () => {
 
-  const { getProfilesFromFirestore, setFilteredProfiles } = useContext(MusiColaboContext);
+  const { getProfilesFromFirestore, setFilteredProfiles, loggedIn } = useContext(MusiColaboContext);
   const [instrumentFilter, setInstrumentFilter] = useState('');
   const [cityFilter, setCityFilter] = useState('');
   const [noProfilesFound, setNoProfilesFound] = useState(false);
@@ -44,38 +45,53 @@ const Navbar = () => {
 
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark ">
-      <div className="container-navbar">
+    
+    <Navbar className='navbar' collapseOnSelect expand="lg"  variant="dark">
         <Link className="navbar-brand" id='navbar-logo' to="/"><h4>MusiColabo</h4></Link>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
+      <Navbar.Toggle id='toggle' aria-controls="responsive-navbar-nav" className="custom-toggler" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="me-auto">
+          {loggedIn && (
+            <>
+            <div className='navbar-nav'>
               <Link className="nav-link" id='nav-link-1' to="/">Home</Link>
-            </li>
-            <li className="nav-item">
               <Link className="nav-link" id='nav-link-2' to="/edit-profile">Perfil</Link>
-            </li>
-            <li className="nav-item">
               <Link className="nav-link" id='nav-link-3' to="/messages">Mensajes</Link>
-            </li>
-          </ul>
-          <form className="d-flex" id='navbar-filter'>
-            <input className="form-control me-2" id='input-instrument-navbar' type="search" placeholder="Filtrar por instrumento" aria-label="Search" value={instrumentFilter} onChange={(e) => setInstrumentFilter(e.target.value)} />
-            <input className="form-control me-2" id='input-city-navbar' type="search" placeholder="Filtrar por ciudad" aria-label="Search" value={cityFilter} onChange={(e) => setCityFilter(e.target.value)} />
-            <button className="btn btn-outline-light" id='btn-filter' type="button" onClick={handleFilter}>Filtrar</button>
-          </form>
-          {noProfilesFound && (
-            <div className="alert alert-warning" role="alert">
-              No se encontraron perfiles con los filtros seleccionados.
             </div>
+            </>
           )}
-        </div>
+        </Nav>
+        <Form className="d-flex" id='navbar-filter'>
+          <FormControl
+            id='input-instrument-navbar'
+            type="search"
+            placeholder="Filtrar por instrumento"
+            className="me-2"
+            aria-label="Search"
+            value={instrumentFilter}
+            onChange={(e) => setInstrumentFilter(e.target.value)}
+          />
+          <FormControl
+            id='input-city-navbar'
+            type="search"
+            placeholder="Filtrar por ciudad"
+            className="me-2"
+            aria-label="Search"
+            value={cityFilter}
+            onChange={(e) => setCityFilter(e.target.value)}
+          />
+          <Button id='btn-filter' variant="outline-success" onClick={handleFilter}>Filtrar</Button>
+        </Form>
+      </Navbar.Collapse>
+      {noProfilesFound && (
+        <div className="alert alert-warning" role="alert">
+        No se encontraron perfiles con los filtros seleccionados.
       </div>
-    </nav>
+      )}
+    </Navbar>
+    
+   
   );
 }
 
-export default Navbar;
+export default MyNavbar;
