@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { MusiColaboContext } from '../context/context';
 import { Link } from 'react-router-dom';
 import Header from './header';
-import Navbar from './navbar';
+import MyNavbar from './navbar';
 import '../styles/userList.css';
 
 
@@ -62,7 +62,7 @@ const UsersList = () => {
     return (
   <div className='container-users-list'>
         <Header />
-        <Navbar />
+        <MyNavbar />
      
       <div className="row-list">
       {filteredProfiles.length > 0 ? filteredProfiles.map(profile => (
