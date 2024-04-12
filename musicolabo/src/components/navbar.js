@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { MusiColaboContext } from '../context/context';
@@ -11,38 +11,36 @@ const MyNavbar = () => {
   const [cityFilter, setCityFilter] = useState('');
   const [noProfilesFound, setNoProfilesFound] = useState(false);
 
-  const handleFilter = async () => {
+  // Utiliza useCallback para memorizar la función de filtrado
+  const filterProfiles = useCallback(async () => {
     try {
-      // Lógica para filtrar los perfiles según el instrumento y la ciudad seleccionados
       const profiles = await getProfilesFromFirestore();
       let filteredProfiles = profiles;
 
       if (instrumentFilter) {
         filteredProfiles = filteredProfiles.filter(profile =>
              profile.instruments.some(instrument =>
-                 instrument.toLowerCase().includes(instrumentFilter.toLowerCase()))); 
-     }
+                 instrument.toLowerCase().includes(instrumentFilter.toLowerCase())));
+      }
 
       if (cityFilter) {
         filteredProfiles = filteredProfiles.filter(profile =>
              profile.city.toLowerCase() === cityFilter.toLowerCase());
       }
 
-       // Actualizar el estado en el contexto con los perfiles filtrados
-       setFilteredProfiles(filteredProfiles);
-
-       if (filteredProfiles.length === 0) {
-        setNoProfilesFound(true); // Mostrar mensaje de "No se encontraron perfiles"
-      } else {
-        setNoProfilesFound(false);
-      }
+      setFilteredProfiles(filteredProfiles);
+      setNoProfilesFound(filteredProfiles.length === 0);
       
       console.log('Perfiles filtrados:', filteredProfiles);
     } catch (error) {
       console.error('Error al filtrar perfiles:', error);
     }
-  };
+  }, [getProfilesFromFirestore, instrumentFilter, cityFilter, setFilteredProfiles]);
 
+  // Observar cambios en los filtros y recargar todos los perfiles si ambos están vacíos
+  useEffect(() => {
+    filterProfiles(); // Llama a filterProfiles cada vez que hay un cambio en los filtros
+  }, [instrumentFilter, cityFilter, filterProfiles]);
 
   return (
     
@@ -80,7 +78,7 @@ const MyNavbar = () => {
             value={cityFilter}
             onChange={(e) => setCityFilter(e.target.value)}
           />
-          <Button id='btn-filter' variant="outline-success" onClick={handleFilter}>Filtrar</Button>
+          <Button id='btn-filter' variant="outline-success" onClick={filterProfiles}>Filtrar</Button>
         </Form>
       </Navbar.Collapse>
       {noProfilesFound && (
