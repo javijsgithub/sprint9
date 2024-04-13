@@ -25,12 +25,11 @@ const MyNavbar = () => {
 
       if (cityFilter) {
         filteredProfiles = filteredProfiles.filter(profile =>
-             profile.city.toLowerCase() === cityFilter.toLowerCase());
+            profile.city.toLowerCase().includes(cityFilter.toLowerCase()));
       }
 
       setFilteredProfiles(filteredProfiles);
       setNoProfilesFound(filteredProfiles.length === 0);
-      
       console.log('Perfiles filtrados:', filteredProfiles);
     } catch (error) {
       console.error('Error al filtrar perfiles:', error);
