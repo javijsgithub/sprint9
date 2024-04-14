@@ -76,6 +76,16 @@
     border: 1px solid rgb(105, 99, 99);
 }
 
+.alert-warning {
+    background-color: rgb(63, 125, 128);
+    border: 2px solid rgb(63, 125, 128);
+    color:rgb(46, 44, 44);
+    margin-top: 10px;
+    margin-right: 10px;
+    text-align: center;
+    padding: 3px;
+}
+
 .custom-toggler {
     width: min-content;
     border: 2px solid rgb(63, 125, 128);

@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl/*, Button */} from 'react-bootstrap';
 import { MusiColaboContext } from '../context/context';
 import '../styles/navbar.css';
 
@@ -77,12 +77,12 @@ const MyNavbar = () => {
             value={cityFilter}
             onChange={(e) => setCityFilter(e.target.value)}
           />
-          <Button id='btn-filter' variant="outline-success" onClick={filterProfiles}>Filtrar</Button>
+         {/* <Button id='btn-filter' variant="outline-success" onClick={filterProfiles}>Filtrar</Button>*/} 
         </Form>
       </Navbar.Collapse>
       {noProfilesFound && (
         <div className="alert alert-warning" role="alert">
-        No se encontraron perfiles con los filtros seleccionados.
+        No se encontraron perfiles.
       </div>
       )}
     </Navbar>
