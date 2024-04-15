@@ -69,12 +69,22 @@ img {
     padding: 5px 5px 8px 5px;
 }
 
-#link-message, #link-videos {
+#link-videos {
     text-decoration: none;
     color: rgb(212, 167, 108);
 }
-#link-message:hover, #link-videos:hover {
+#link-videos:hover {
     color:rgb(105, 99, 99);
+}
+
+#button-message {
+    border: 0px;
+    background-color: transparent;
+    color: rgb(212, 167, 108);
+}
+#button-message:hover {
+    color:rgb(105, 99, 99);
+
 }
 
 .message-popup {

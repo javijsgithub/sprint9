@@ -1,29 +1,37 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { MusiColaboContext } from '../context/context';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from './header';
 import MyNavbar from './navbar';
 import '../styles/userList.css';
 
 
 const UsersList = () => {
-  const { getProfilesFromFirestore, sendMessage, unreadMessages, filteredProfiles } = useContext(MusiColaboContext);
+  const { getProfilesFromFirestore, sendMessage, unreadMessages, filteredProfiles, loggedIn } = useContext(MusiColaboContext);
   const [userProfiles, setUserProfiles] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [recipientEmail, setRecipientEmail] = useState('');
   const [recipientName, setRecipientName] = useState('');
   const [message, setMessage] = useState('');
   const [messageSent, setMessageSent] = useState(false);
+  const navigate = useNavigate(); // Usar el hook useNavigate para la redirección a login si no estas logeado y quieres enviar un mensaje a un usuario
 
 
 
 
-  const handleSendMessage = (recipientEmail, recipientName) => {
-    console.log("Se hizo clic en el enlace 'Enviar mensaje'");
-    console.log("ID del usuario destinatario:", recipientEmail);
-    setRecipientEmail(recipientEmail);
-    setRecipientName(recipientName);
-    setShowForm(true);
+  const handleSendMessage = (email, name) => {
+    if (!loggedIn) {
+      // Redirigir al usuario a la página de inicio de sesión si no está logeado
+      navigate('/login');
+
+      } else {
+      console.log("Se hizo clic en el enlace 'Enviar mensaje'");
+      console.log("ID del usuario destinatario:", recipientEmail);
+      setRecipientEmail(email);
+      setRecipientName(name);
+      setShowForm(true);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -81,7 +89,7 @@ const UsersList = () => {
                   </div>
                   <div className='container-link'>
                     <Link to={`/user-videos/${profile.email}`} className='link-card' id='link-videos'>Ver videos</Link>
-                    <Link to='' className='link-card' id='link-message' onClick={() => handleSendMessage(profile.email, profile.name)}>Enviar mensaje</Link>
+                    <button className='link-card2' id='button-message' onClick={() => handleSendMessage(profile.email, profile.name)}>Enviar mensaje</button>
                   </div>
                 </div>
               </div>
