@@ -67,13 +67,12 @@ const UsersList = () => {
 
   console.log("Mensajes no leídos:", unreadMessages);
 
-    return (
-  <div className='container-users-list'>
-        <Header />
-        <MyNavbar />
-     
+  return (
+    <div className='container-users-list'>
+      <Header />
+      <MyNavbar />
       <div className="row-list">
-      {filteredProfiles.length > 0 ? filteredProfiles.map(profile => (
+        {(filteredProfiles.length > 0 ? filteredProfiles : userProfiles).map(profile => (
           <div className="col-md-3 mb-4 sm-3 col-cards" key={profile.email}>
             <div className="cards">
               <img src={profile.picture} className="card-img-top" alt="Imagen de perfil" />
@@ -95,50 +94,21 @@ const UsersList = () => {
               </div>
             </div>
           </div>
-        )) :
-        userProfiles.map(profile => (
-          <div className="col-md-3 mb-4 sm-3 col-cards" key={profile.email}>
-            <div className="cards">
-              <img src={profile.picture} className="card-img-top" alt="Imagen de perfil" />
-              <div className="card-body">
-                <div className='card-name-and-city'>
-                  <h3 className="card-user-name">{profile.username}</h3>
-                  <p className='card-city'>{profile.city}</p>
-                  <p className='card-instruments'>{profile.instruments.join(', ')}</p>
-                </div>
-                <div className='container-purpose-link'>
-                  <div className='container-purpose'>
-                    <p className='card-purpose'>{profile.purpose}</p>
-                  </div>
-                  <div className='container-link'>
-                  <Link to={`/user-videos/${profile.email}`} className='link-card1' id='link-videos'>Ver videos</Link>
-                  <Link to='' className='link-card2' id='link-message' onClick={() => handleSendMessage(profile.email, profile.username)}>Enviar mensaje</Link>  
-                  </div>
-                </div>
-                
-              </div>
-            </div>
-          </div>
         ))}
       </div>
-      
       {showForm && (
         <div className="message-popup">
-            <button id="popup-close" onClick={() => setShowForm(false)}>&times;</button>
-            <h2>Enviar mensaje a {recipientName}</h2>
-            <form onSubmit={handleSubmit}>
-              <textarea value={message} onChange={(e) => setMessage(e.target.value)} />
-              <button id='btn-message-popup-submit' type="submit">Enviar</button>
-               {messageSent && <span>Mensaje enviado!</span>} 
-            </form>
+          <button id="popup-close" onClick={() => setShowForm(false)}>&times;</button>
+          <h2>Enviar mensaje a {recipientName}</h2>
+          <form onSubmit={handleSubmit}>
+            <textarea value={message} onChange={(e) => setMessage(e.target.value)} />
+            <button id='btn-message-popup-submit' type="submit">Enviar</button>
+            {messageSent && <span>Mensaje enviado!</span>}
+          </form>
         </div>
       )}
-      
-  </div>
-    );
-  };
-  
-  export default UsersList;
+    </div>
+  );
+};
 
- 
-
+export default UsersList;
