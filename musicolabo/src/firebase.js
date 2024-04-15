@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth } from "firebase/auth";
+import { getAuth, setPersistence, browserSessionPersistence } from "firebase/auth";
 import { getFirestore, collection } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
@@ -27,5 +27,13 @@ const auth = getAuth(app, analytics);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
+const initializeAuth = async () => {
+  try {
+    await setPersistence(auth, browserSessionPersistence);
+    console.log("Firebase Auth persistence set to session.");
+  } catch (error) {
+    console.error("Error setting Firebase Auth persistence:", error);
+  }
+};
 
-export { auth,db, collection, storage };
+export { auth, db, collection, storage, initializeAuth };
