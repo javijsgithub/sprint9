@@ -20,7 +20,7 @@ const UsersList = () => {
 
 
 
-  const handleSendMessage = (email, name) => {
+  const handleSendMessage = (recipientEmail, recipientName) => {
     if (!loggedIn) {
       // Redirigir al usuario a la página de inicio de sesión si no está logeado
       navigate('/login');
@@ -28,8 +28,8 @@ const UsersList = () => {
       } else {
       console.log("Se hizo clic en el enlace 'Enviar mensaje'");
       console.log("ID del usuario destinatario:", recipientEmail);
-      setRecipientEmail(email);
-      setRecipientName(name);
+      setRecipientEmail(recipientEmail);
+      setRecipientName(recipientName);
       setShowForm(true);
     }
   };
@@ -88,7 +88,7 @@ const UsersList = () => {
                   </div>
                   <div className='container-link'>
                     <Link to={`/user-videos/${profile.email}`} className='link-card' id='link-videos'>Ver videos</Link>
-                    <button className='link-card2' id='button-message' onClick={() => handleSendMessage(profile.email, profile.name)}>Enviar mensaje</button>
+                    <button className='link-card2' id='button-message' onClick={() => handleSendMessage(profile.email, profile.username)}>Enviar mensaje</button>
                   </div>
                 </div>
               </div>
