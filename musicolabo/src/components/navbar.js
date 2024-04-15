@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Form, FormControl/*, Button */} from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { MusiColaboContext } from '../context/context';
 import '../styles/navbar.css';
 
@@ -11,7 +11,6 @@ const MyNavbar = () => {
   const [cityFilter, setCityFilter] = useState('');
   const [noProfilesFound, setNoProfilesFound] = useState(false);
 
-  // Utiliza useCallback para memorizar la función de filtrado
   const filterProfiles = useCallback(async () => {
     try {
       const profiles = await getProfilesFromFirestore();
@@ -35,11 +34,6 @@ const MyNavbar = () => {
       console.error('Error al filtrar perfiles:', error);
     }
   }, [getProfilesFromFirestore, instrumentFilter, cityFilter, setFilteredProfiles]);
-
-  // Observar cambios en los filtros y recargar todos los perfiles si ambos están vacíos
-  useEffect(() => {
-    filterProfiles(); // Llama a filterProfiles cada vez que hay un cambio en los filtros
-  }, [instrumentFilter, cityFilter, filterProfiles]);
 
   return (
     
@@ -77,7 +71,7 @@ const MyNavbar = () => {
             value={cityFilter}
             onChange={(e) => setCityFilter(e.target.value)}
           />
-         {/* <Button id='btn-filter' variant="outline-success" onClick={filterProfiles}>Filtrar</Button>*/} 
+         <Button id='btn-filter' variant="outline-success" onClick={filterProfiles}>Filtrar</Button> 
         </Form>
       </Navbar.Collapse>
       {noProfilesFound && (
