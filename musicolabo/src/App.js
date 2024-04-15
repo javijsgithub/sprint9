@@ -38,7 +38,10 @@ function App() {
 }
 
 function ProtectedRoute({ children }) {
-  const { loggedIn } = useContext(MusiColaboContext);
+  const { loggedIn, loadingAuth  } = useContext(MusiColaboContext);
+  if (loadingAuth) {
+    return <div>Cargando...</div>;
+  }
   return loggedIn ? children : <Navigate to="/login" />;
 }
 
