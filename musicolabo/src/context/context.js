@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import { auth, db, storage } from '../firebase';
 import { addDoc, collection, getDocs, deleteDoc, query, where, orderBy, setDoc, onSnapshot } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, deleteUser } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, deleteUser, onAuthStateChanged } from "firebase/auth";
 export const MusiColaboContext = createContext();
 
 const MusiColaboContextProvider = ({ children }) => {
@@ -13,6 +13,41 @@ const MusiColaboContextProvider = ({ children }) => {
   const [userEmail, setUserEmail] = useState('');
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [filteredProfiles, setFilteredProfiles] = useState([]);
+  const [loadingAuth, setLoadingAuth] = useState(true);
+
+  // hook para que no se desloguee la app al recargar la pagina
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // Usuario está logueado
+        setUser(user);
+        setUserEmail(user.email);
+        setLoggedIn(true);
+        fetchUserDetails(user.email);
+      } else {
+        // Usuario no está logueado
+        setUser(null);
+        setUserEmail('');
+        setLoggedIn(false);
+        setUsername('');
+        setPicture('');
+        setLoggedIn(false);
+      }
+      setLoadingAuth(false);
+    });
+
+    return () => unsubscribe(); // Limpiar el observador cuando el componente se desmonte
+  }, []);
+
+  const fetchUserDetails = async (email) => {
+    const userQuery = query(collection(db, 'userData'), where('email', '==', email));
+    const querySnapshot = await getDocs(userQuery);
+    if (!querySnapshot.empty) {
+      const userData = querySnapshot.docs[0].data();
+      setUsername(userData.username || '');
+      setPicture(userData.picture || '');
+    }
+  };
 
   
   // Función para registrar un nuevo usuario.
@@ -315,6 +350,8 @@ const MusiColaboContextProvider = ({ children }) => {
   };
 
   
+
+  
   return (
     <MusiColaboContext.Provider value={{ 
       user,
@@ -325,6 +362,7 @@ const MusiColaboContextProvider = ({ children }) => {
       loggedIn,
       unreadMessages,
       filteredProfiles,
+      loadingAuth,
       sendMessage,
       uploadImage,
       uploadVideo,
