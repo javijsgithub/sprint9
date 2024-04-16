@@ -6,9 +6,7 @@ import '../styles/navbar.css';
 
 const MyNavbar = () => {
 
-  const { getProfilesFromFirestore, setFilteredProfiles, loggedIn } = useContext(MusiColaboContext);
-  const [instrumentFilter, setInstrumentFilter] = useState('');
-  const [cityFilter, setCityFilter] = useState('');
+  const { getProfilesFromFirestore, setFilteredProfiles, loggedIn, instrumentFilter, setInstrumentFilter, cityFilter, setCityFilter } = useContext(MusiColaboContext);
   const [noProfilesFound, setNoProfilesFound] = useState(false);
 
   const filterProfiles = useCallback(async () => {

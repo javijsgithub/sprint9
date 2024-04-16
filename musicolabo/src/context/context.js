@@ -14,6 +14,8 @@ const MusiColaboContextProvider = ({ children }) => {
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [filteredProfiles, setFilteredProfiles] = useState([]);
   const [loadingAuth, setLoadingAuth] = useState(true);
+  const [instrumentFilter, setInstrumentFilter] = useState('');
+  const [cityFilter, setCityFilter] = useState('');
 
   // hook para que no se desloguee la app al recargar la pagina
   useEffect(() => {
@@ -363,6 +365,10 @@ const MusiColaboContextProvider = ({ children }) => {
       unreadMessages,
       filteredProfiles,
       loadingAuth,
+      instrumentFilter, 
+      cityFilter, 
+      setCityFilter,
+      setInstrumentFilter,
       sendMessage,
       uploadImage,
       uploadVideo,
