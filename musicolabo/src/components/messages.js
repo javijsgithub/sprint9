@@ -6,8 +6,10 @@ import '../styles/messages.css';
 const Messages = () => {
   const { user, getMessagesFromFirestore, unreadMessages, sendMessage, updateMessageReadStatus, setUnreadMessages, getProfilesFromFirestore  } = useContext(MusiColaboContext);
   const [messages, setMessages] = useState([]);
-  const [unreadMessagesList, setUnreadMessagesList] = useState([]);
-  const [readMessagesList, setReadMessagesList] = useState([]);
+  //const [unreadMessagesList, setUnreadMessagesList] = useState([]);
+  const [newUnreadList, setNewUnreadList] = useState([]);
+  const [newReadList, setNewReadList] = useState([]);
+ // const [readMessagesList, setReadMessagesList] = useState([]);
   const [recipientEmail, setRecipientEmail] = useState('');
   const [recipientName, setRecipientName] = useState('');
   const [replyMessage, setReplyMessage] = useState('');
@@ -16,82 +18,93 @@ const Messages = () => {
   const [expandedUnreadMessageIndexes, setExpandedUnreadMessageIndexes] = useState([]);
   const [expandedReadMessageIndexes, setExpandedReadMessageIndexes] = useState([]);
   const [messageSent, setMessageSent] = useState(false);
+  const [originalMessageId, setOriginalMessageId] = useState(null);
 
   useEffect(() => {
     const fetchMessages = async () => {
       try {
         if (user) {
-          const userMessages = await getMessagesFromFirestore(user.email);
-          console.log('Mensajes obtenidos en el componente:', userMessages);
-          const unread = [];
-          const read = [];
-          userMessages.forEach(message => {
-            if (!message.read) {
-              unread.push(message);
-            } else {
-              read.push(message);
-            }
+          const threads = await getMessagesFromFirestore(user.email);
+          console.log('Hilos de mensajes obtenidos:', threads);
+  
+          // Aquí adaptamos la nueva estructura a las listas existentes de leídos y no leídos.
+          const newUnreadList = [];
+          const newReadList = [];
+          threads.forEach(thread => {
+            thread.unread.forEach(msg => newUnreadList.push(msg));
+            thread.read.forEach(msg => newReadList.push(msg));
           });
-          setUnreadMessagesList(unread.reverse());
-          setReadMessagesList(read.reverse());
-          setMessages(userMessages.reverse());
-          
-        }       
+
+          // Ordena los mensajes por fecha, los más recientes primero
+        const sortedUnreadList = newUnreadList.sort((a, b) => b.timestamp.toDate() - a.timestamp.toDate());
+        const sortedReadList = newReadList.sort((a, b) => b.timestamp.toDate() - a.timestamp.toDate());
+  
+          setNewUnreadList(sortedUnreadList);
+          setNewReadList(sortedReadList);
+          setMessages(threads);  // Mantiene todos los hilos si necesitas usarlos en otro contexto.
+        }
       } catch (error) {
         console.error('Error al obtener mensajes del usuario:', error);
       }
     };
     fetchMessages();
   }, [getMessagesFromFirestore, user]);
+
   
-  const openMessage = async (index, isUnread) => {
-    try {
-      if (isUnread) {
-        if (!expandedUnreadMessageIndexes.includes(index)) {
-          setExpandedUnreadMessageIndexes([...expandedUnreadMessageIndexes, index]);
-        }
-      } else {
-        if (!expandedReadMessageIndexes.includes(index)) {
-          setExpandedReadMessageIndexes([...expandedReadMessageIndexes, index]);
-        }
+  
+  const openMessage = (threadIndex, isUnread) => {
+    const updatedIndexes = isUnread ? expandedUnreadMessageIndexes : expandedReadMessageIndexes;
+    setExpandedUnreadMessageIndexes([...updatedIndexes, threadIndex]); // Asegura usar threadIndex
+  };
+
+
+  const closeMessage = async (messageId, userId, threadIndex, isUnread) => {
+    if (isUnread) {
+      const message = newUnreadList.find(msg => msg.id === messageId);
+      if (message) {
+        // Elimina el mensaje de la lista de no leídos
+        const updatedUnreadList = newUnreadList.filter(msg => msg.id !== messageId);
+        setNewUnreadList(updatedUnreadList);
+  
+        // Agrega el mensaje a la lista de leídos
+        const updatedReadList = [message, ...newReadList];
+        setNewReadList(updatedReadList);
+  
+        // Actualiza el estado del mensaje a leído en Firestore
+        await updateMessageReadStatus(userId, messageId);
+  
+        // Actualiza el contador de mensajes no leídos
+        setUnreadMessages(prev => Math.max(0, prev - 1));
       }
-    } catch (error) {
-      console.error('Error al abrir el mensaje:', error);
+    }
+  
+    // Cierra la visualización del mensaje (actualiza los índices expandidos)
+    const updatedIndexes = isUnread ? expandedUnreadMessageIndexes : expandedReadMessageIndexes;
+    const newIndexes = updatedIndexes.filter(index => index !== threadIndex);
+    if (isUnread) {
+      setExpandedUnreadMessageIndexes(newIndexes);
+    } else {
+      setExpandedReadMessageIndexes(newIndexes);
     }
   };
 
-  const closeMessage = async (index, isUnread) => {
-    try {
-      const updatedMessages = isUnread ? [...unreadMessagesList] : [...readMessagesList];
-  
-      if (isUnread) {
-        setUnreadMessagesList(updatedMessages); // Actualiza la lista de no leídos
-        updateMessageReadStatus(messages[index].recipient); // Actualiza el estado a 'leído' en Firestore
-        setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1)); // Reduce el contador de mensajes no leídos
-      }
-  
-      if (!isUnread && expandedReadMessageIndexes.includes(index)) {
-        // Si el mensaje está abierto y se cierra, elimina su índice de la lista de mensajes leídos expandidos
-        setExpandedReadMessageIndexes(expandedReadMessageIndexes.filter(i => i !== index));
-      } 
-  
-    } catch (error) {
-      console.error('Error al cerrar el mensaje:', error);
-    }
-  };
-
-  const handleReply = (recipientEmail, recipientName) => {
+  const handleReply = (recipientEmail, recipientName, originalMessageId) => {
+    console.log('Message ID received:', originalMessageId);
     setRecipientEmail(recipientEmail);
     setRecipientName(recipientName);
+    setOriginalMessageId(originalMessageId);
     setShowReplyForm(true);
   };
+  
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await sendMessage(recipientEmail, recipientName, replyMessage);
+      console.log('Original Message ID:', originalMessageId);
+      await sendMessage(recipientEmail, recipientName, replyMessage, originalMessageId);
       setReplyMessage('');
+      setOriginalMessageId(null);
       setMessageSent(true); // para "mensaje enviado!"
 
       //Temporizador para restablecer messageSent después de 1,5 segundos
@@ -122,86 +135,100 @@ const Messages = () => {
     const userProfile = userProfiles.find(profile => profile.email === email);
     return userProfile ? userProfile.username : email; // Si se encuentra el perfil, devolver el nombre de usuario, de lo contrario, devolver el correo electrónico
   };
+  
+
+   
 
   return (
     <div className='container-fluid' id='container-messages'>
       <div className='container-header-messages'>
         <div className='row-header-messages'>
           <div className='col col-btn-home-messages'>
-          <Link to="/list" className='btn btn-secondary' type="button" id='btn-volver-messages'>Volver</Link>
+            <Link to="/list" className='btn btn-secondary' type="button" id='btn-volver-messages'>Volver</Link>
           </div>
           <div className='col col-logo-messages'>
-            <div className='musicolabo-logo-messages'> 
+            <div className='musicolabo-logo-messages'>
               <h1>MC</h1>
             </div>
-              <h1>MusiColabo</h1>
+            <h1>MusiColabo</h1>
           </div>
           <div className='col col-vacia'></div>
         </div>
       </div>
       <div className='container-recibidos'>
-      <h2>Bandeja:</h2>
-      <hr></hr>
-      {unreadMessages > 0 && <h6 className='aviso'>Tienes {unreadMessages} mensaje/s no leídos.</h6>}
-      <br/>
-      <h3>Mensajes no leídos:</h3>
-      <ul className='mensajes-no-leidos'>
-      {unreadMessagesList.map((message, index) => (
-          <li key={index}>
-            <strong>De:</strong> {getUserNameByEmail(message.sender)}, <Link to={`/user-profile/${message.sender}`} className='link-messages'> Ver perfil</Link><br />
-            <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
-
-            {expandedUnreadMessageIndexes.includes(index) ? (
-              <>
-                <strong>Mensaje:</strong> {message.message}<br />
-                <button onClick={() => closeMessage(index, true)}>Cerrar mensaje</button>
-                <button onClick={() => handleReply(message.sender, message.sender)}>Responder</button>
-              </>
-            ) : (
-              <button onClick={() => openMessage(index, true)}>Ver mensaje</button>
-            )}
-            <hr></hr>
-          </li>
-        ))}
-      </ul>
-      <br/>
-      <h3>Mensajes leídos:</h3>
-      <ul className='mensajes-leidos'>
-        {readMessagesList.map((message, index) => (
-          <li key={index}>
-            <strong>De:</strong> {getUserNameByEmail(message.sender)}, <Link to={`/user-profile/${message.sender}`} className='link-messages'> Ver perfil</Link>
+        <h2>Bandeja:</h2>
+        <hr/>
+        {unreadMessages > 0 && <h6 className='aviso'>Tienes {unreadMessages} mensaje/s no leídos.</h6>}
+        <br/>
+        <h3>Mensajes no leídos:</h3>
+        <ul className='mensajes-no-leidos'>
+          {messages.map((thread, threadIndex) => thread.unread.map((message, index) => (
+  <li key={`${threadIndex}-${index}`} className={message.replyTo ? "reply-message" : "original-message"}>
+    <strong>De:</strong> {getUserNameByEmail(message.sender)}, <Link to={`/user-profile/${message.sender}`} className='link-messages'>Ver perfil</Link><br />
+    <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
+    <strong>Mensaje:</strong> {message.message}<br />
+    
+      {message.replyTo && (
+        <div className='container-reply'>
+          <em>
+            En respuesta a tu mensaje:
             <br/>
             <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
-
-            {expandedReadMessageIndexes.includes(index) ? (
-              <>
-                <strong>Mensaje:</strong> {message.message}<br />
-                <button onClick={() => closeMessage(index, false)}>Cerrar mensaje</button>
-                <button onClick={() => handleReply(message.sender, message.sender)}>Responder</button>
-              </>
-            ) : (
-              <button onClick={() => openMessage(index, false)}>Ver mensaje</button>
-            )}
-            <hr></hr>
-          </li>
-          
-        ))}
-      </ul>
-      
-
-      {showReplyForm && (
-        <div className="reply-message-popup">
-            <button id="reply-popup-close" onClick={() => setShowReplyForm(false)}>&times;</button>
-          <h2>Responder a {getUserNameByEmail(recipientName)}</h2>
-          <form onSubmit={handleSubmit}>
-            <textarea value={replyMessage} onChange={(e) => setReplyMessage(e.target.value)} />
-            <button id='btn-reply-message-popup-submit' type='submit'>Enviar</button>
-            {messageSent && <span>Mensaje enviado!</span>} 
-          </form>
+            <strong>Mensaje:</strong> {message.replyTo}
+          </em>
         </div>
-      )}
-      </div>
+       )}
+
+    {expandedUnreadMessageIndexes.includes(threadIndex) ? (
+      <>
+        <button onClick={() => closeMessage(threadIndex, true)}>Cerrar mensaje</button>
+        <button onClick={() => handleReply(message.sender, getUserNameByEmail(message.sender), message.id)}>Responder</button>
+      </>
+    ) : (
+      <button onClick={() => openMessage(threadIndex, true)}>Ver mensaje</button>
       
+    )}
+    <hr></hr>
+  </li>
+  
+)))}
+        </ul>
+        <br/>
+        <h3>Mensajes leídos:</h3>
+        <ul className='mensajes-leidos'>
+          {messages.map((thread, threadIndex) => thread.read.map((message, index) => (
+  <li key={`${threadIndex}-${index}`} className={message.replyTo ? "reply-message" : "original-message"}>
+    <strong>De:</strong> {getUserNameByEmail(message.sender)}, <Link to={`/user-profile/${message.sender}`} className='link-messages'>Ver perfil</Link><br />
+    <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
+    <strong>Mensaje:</strong> {message.message}<br />
+    {message.replyTo && (
+      <em>En respuesta a: {messages.find(msg => msg.id === message.replyTo)? message : "Mensaje original no encontrado"}</em>
+    )}
+    {expandedReadMessageIndexes.includes(threadIndex) ? (
+      <>
+        <button onClick={() => closeMessage(threadIndex, true)}>Cerrar mensaje</button>
+        <button onClick={() => handleReply(message.sender, getUserNameByEmail(message.sender), message.id)}>Responder</button>
+      </>
+    ) : (
+      <button onClick={() => openMessage(threadIndex, true)}>Ver mensaje</button>
+    )}
+    <hr></hr>
+  </li>
+)))}
+        </ul>
+        {/* Formulario de respuesta */}
+        {showReplyForm && (
+          <div className="reply-message-popup">
+            <button id="reply-popup-close" onClick={() => setShowReplyForm(false)}>&times;</button>
+            <h2>Responder a {getUserNameByEmail(recipientName)}</h2>
+            <form onSubmit={handleSubmit}>
+              <textarea value={replyMessage} onChange={(e) => setReplyMessage(e.target.value)} />
+              <button id='btn-reply-message-popup-submit' type='submit'>Enviar</button>
+              {messageSent && <span>Mensaje enviado!</span>} 
+            </form>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
