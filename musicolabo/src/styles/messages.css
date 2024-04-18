@@ -112,6 +112,14 @@
     color: rgb(105, 99, 99);
 }
 
+.container-reply {
+    border: 1px solid rgb(212, 167, 108);
+    border-radius: 3px;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .mensajes-leidos button {
     background-color:rgb(46, 44, 44);
     color: rgb(212, 167, 108);
