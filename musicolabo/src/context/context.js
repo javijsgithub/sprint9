@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { auth, db, storage } from '../firebase';
-import { addDoc, collection, getDocs, deleteDoc, query, where, orderBy, setDoc, onSnapshot } from 'firebase/firestore';
+import { addDoc, collection, getDocs, doc, updateDoc, deleteDoc, query, where, orderBy, setDoc, onSnapshot } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, deleteUser, onAuthStateChanged } from "firebase/auth";
 export const MusiColaboContext = createContext();
@@ -234,22 +234,27 @@ const MusiColaboContextProvider = ({ children }) => {
 
 
   //  Funcion para enviar mensajes utilizando firestore
-  const sendMessage = async (recipientEmail, recipientName, message) => {
+  const sendMessage = async (recipientEmail, recipientName, message, originalMessageId = null, originalThreadId = null) => {
     try {
       console.log("Enviando mensaje a...", recipientName);
       console.log("Destinatario userId:", recipientEmail);
       console.log("Mensaje:", message);
+      console.log("Message ID:", originalMessageId); 
+
       // Obtener la referencia al documento del destinatario usando el correo electrónico
     const querySnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', recipientEmail)));
     if (!querySnapshot.empty) {
       const recipientDocRef = querySnapshot.docs[0].ref;
       const messagesCollectionRef = collection(recipientDocRef, 'messages');
+      const threadId = originalThreadId || originalMessageId || (await addDoc(messagesCollectionRef, {})).id; // Si no hay original, crea un nuevo hilo
       await addDoc(messagesCollectionRef, {
         sender: userEmail,
         recipient: recipientEmail, 
         message: message,
         timestamp: new Date(),
-        read: false // Marcar el mensaje como no leído cuando se envía
+        read: false, // Marcar el mensaje como no leído cuando se envía
+        replyTo: originalMessageId,
+        threadId: threadId
       });
       console.log('Mensaje enviado exitosamente.');
        if (recipientEmail === userEmail) {
@@ -262,6 +267,8 @@ const MusiColaboContextProvider = ({ children }) => {
       console.error('Error al enviar el mensaje:', error);
     }
   };
+ 
+  
     // mostrar los avisos de mensajes
     useEffect(() => {
       let unsubscribe = () => {}; // Inicializa una función de desuscripción vacía
@@ -294,28 +301,45 @@ const MusiColaboContextProvider = ({ children }) => {
   // Función para obtener los mensajes del usuario.
   const getMessagesFromFirestore = async (userEmail) => {
     try {
-      const querySnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', userEmail)));
-      if (!querySnapshot.empty) {
-        const userDocRef = querySnapshot.docs[0].ref;
-        const messagesQuerySnapshot = await getDocs(query(collection(userDocRef, 'messages'), orderBy('timestamp', 'asc')));       
-        const messages = messagesQuerySnapshot.docs.map(doc => {
-          const messageData = doc.data();
-          console.log('Mensaje obtenido:', messageData);
-          if (!messageData.hasOwnProperty('read')) {
-            messageData.read = false;
+      const userDocSnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', userEmail)));
+      if (!userDocSnapshot.empty) {
+        const userDocRef = userDocSnapshot.docs[0].ref;
+        const messagesQuerySnapshot = await getDocs(query(collection(userDocRef, 'messages'), orderBy('timestamp', 'asc')));
+        const messages = messagesQuerySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        const messageMap = {};
+        
+        // Organizar mensajes por 'threadId' y clasificar por leídos y no leídos
+        messages.forEach(message => {
+          if (!messageMap[message.threadId]) {
+            messageMap[message.threadId] = {
+              original: null,
+              responses: [],
+              unread: [],
+              read: []
+            };
           }
-          return messageData;
+          const target = message.read ? 'read' : 'unread';
+          if (!message.replyTo) {
+            messageMap[message.threadId].original = message;
+          } else {
+            messageMap[message.threadId].responses.push(message);
+          }
+          messageMap[message.threadId][target].push(message);
         });
-        return messages;
+        
+        // Convertir el mapa en una lista ordenada de hilos
+        const threads = Object.values(messageMap);
+        return threads;
       } else {
         console.error('No se encontró ningún usuario con el correo electrónico proporcionado:', userEmail);
-        return []; // Devolver un array vacío si no se encuentra ningún usuario
+        return [];
       }
     } catch (error) {
       console.error('Error al obtener mensajes del usuario:', error);
       throw error;
     }
   };
+  
   
   useEffect(() => {
     if (user) {
@@ -335,23 +359,17 @@ const MusiColaboContextProvider = ({ children }) => {
 
 
   // Funcion para diferenciar mensajes entre leidos y no leidos.
-  const updateMessageReadStatus = async (recipientEmail) => {
+  const updateMessageReadStatus = async (userId, messageId) => {
     try {
-      const userDocSnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', recipientEmail)));
-      if (!userDocSnapshot.empty) {
-        const userDocRef = userDocSnapshot.docs[0].ref;
-        const messagesCollectionRef = collection(userDocRef, 'messages');
-        const unreadMessagesQuerySnapshot = await getDocs(query(messagesCollectionRef, where('read', '==', false)));
-        unreadMessagesQuerySnapshot.forEach(async (doc) => {
-          await setDoc(doc.ref, { read: true }, { merge: true });
-        });
-      }
+      const messageRef = doc(db, 'userData', userId, 'messages', messageId);
+      await updateDoc(messageRef, {
+        read: true  // Asegúrate de que este campo 'read' coincida con tu esquema de datos en Firestore
+      });
+      console.log("Mensaje actualizado a leído:", messageId);
     } catch (error) {
-      console.error('Error al actualizar el estado de leído del mensaje:', error);
+      console.error('Error al actualizar el estado de lectura del mensaje:', error);
     }
   };
-
-  
 
   
   return (
