@@ -34,13 +34,8 @@ const Messages = () => {
             thread.unread.forEach(msg => newUnreadList.push(msg));
             thread.read.forEach(msg => newReadList.push(msg));
           });
-
-          // Ordena los mensajes por fecha, los más recientes primero
-        const sortedUnreadList = newUnreadList.sort((a, b) => b.timestamp.toDate() - a.timestamp.toDate());
-        const sortedReadList = newReadList.sort((a, b) => b.timestamp.toDate() - a.timestamp.toDate());
-  
-          setNewUnreadList(sortedUnreadList);
-          setNewReadList(sortedReadList);
+ 
+         
           setMessages(threads);  // Mantiene todos los hilos si necesitas usarlos en otro contexto.
         }
       } catch (error) {
@@ -173,8 +168,7 @@ const Messages = () => {
           <em>
             En respuesta a tu mensaje:
             <br/>
-            <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
-            <strong>Mensaje:</strong> {message.replyTo}
+            <strong>Mensaje:</strong> {message.replyContent || "Mensaje original no encontrado"}       
           </em>
         </div>
        )}
@@ -202,8 +196,14 @@ const Messages = () => {
     <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
     <strong>Mensaje:</strong> {message.message}<br />
     {message.replyTo && (
-      <em>En respuesta a: {messages.find(msg => msg.id === message.replyTo)? message : "Mensaje original no encontrado"}</em>
-    )}
+      <div className='container-reply'>
+          <em>
+            En respuesta a tu mensaje:
+            <br/>
+            <strong>Mensaje:</strong> {message.replyContent || "Mensaje original no encontrado"}       
+          </em>
+        </div>
+     )}
     {expandedReadMessageIndexes.includes(threadIndex) ? (
       <>
         <button onClick={() => closeMessage(threadIndex, true)}>Cerrar mensaje</button>
