@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { auth, db, storage } from '../firebase';
-import { addDoc, collection, getDocs, doc, updateDoc, deleteDoc, query, where, orderBy, setDoc, onSnapshot } from 'firebase/firestore';
+import { addDoc, collection, getDocs, getDoc, doc, updateDoc, deleteDoc, query, where, orderBy, setDoc, onSnapshot } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, deleteUser, onAuthStateChanged } from "firebase/auth";
 export const MusiColaboContext = createContext();
@@ -247,6 +247,7 @@ const MusiColaboContextProvider = ({ children }) => {
       const recipientDocRef = querySnapshot.docs[0].ref;
       const messagesCollectionRef = collection(recipientDocRef, 'messages');
       const threadId = originalThreadId || originalMessageId || (await addDoc(messagesCollectionRef, {})).id; // Si no hay original, crea un nuevo hilo
+
       await addDoc(messagesCollectionRef, {
         sender: userEmail,
         recipient: recipientEmail, 
@@ -301,44 +302,64 @@ const MusiColaboContextProvider = ({ children }) => {
   // Función para obtener los mensajes del usuario.
   const getMessagesFromFirestore = async (userEmail) => {
     try {
-      const userDocSnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', userEmail)));
-      if (!userDocSnapshot.empty) {
-        const userDocRef = userDocSnapshot.docs[0].ref;
-        const messagesQuerySnapshot = await getDocs(query(collection(userDocRef, 'messages'), orderBy('timestamp', 'asc')));
-        const messages = messagesQuerySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        const messageMap = {};
-        
-        // Organizar mensajes por 'threadId' y clasificar por leídos y no leídos
-        messages.forEach(message => {
-          if (!messageMap[message.threadId]) {
-            messageMap[message.threadId] = {
-              original: null,
-              responses: [],
-              unread: [],
-              read: []
-            };
+      // Buscar el documento de usuario basado en el email
+      const userSnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', userEmail)));
+      if (!userSnapshot.empty) {
+        const userRef = userSnapshot.docs[0].ref;
+  
+        // Cargar mensajes del usuario
+        const messagesQuerySnapshot = await getDocs(query(collection(userRef, 'messages'), orderBy('timestamp', 'desc')));
+        let messages = messagesQuerySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data(), userRef: userRef.id }));
+  
+        // Mapa para almacenar mensajes y verificar los replyTo
+        const messagesMap = {};
+        const loadMessageDetails = async (message) => {
+          if (message.replyTo && !messagesMap[message.replyTo]) {
+            try {
+              const replyMessageDoc = await getDoc(doc(db, 'userData', message.userRef, 'messages', message.replyTo));
+              if (replyMessageDoc.exists()) {
+                messagesMap[message.replyTo] = { id: message.replyTo, ...replyMessageDoc.data() };
+              }
+            } catch (error) {
+              console.error("Failed to load reply message:", error);
+            }
           }
-          const target = message.read ? 'read' : 'unread';
-          if (!message.replyTo) {
-            messageMap[message.threadId].original = message;
-          } else {
-            messageMap[message.threadId].responses.push(message);
+        };
+  
+        // Cargar mensajes replyTo si no están presentes
+        await Promise.all(messages.map(loadMessageDetails));
+  
+        // Construir los mensajes con la información de replyTo
+        messages = messages.map(message => ({
+          ...message,
+          replyContent: messagesMap[message.replyTo]?.message || "Mensaje original no encontrado"
+        }));
+  
+        // Organizar mensajes en hilos
+        const threads = messages.reduce((acc, msg) => {
+          const threadId = msg.threadId || msg.id;
+          if (!acc[threadId]) {
+            acc[threadId] = { unread: [], read: [] };
           }
-          messageMap[message.threadId][target].push(message);
-        });
-        
-        // Convertir el mapa en una lista ordenada de hilos
-        const threads = Object.values(messageMap);
-        return threads;
+          acc[threadId][msg.read ? 'read' : 'unread'].push(msg);
+          return acc;
+        }, {});
+  
+        return Object.values(threads);
       } else {
-        console.error('No se encontró ningún usuario con el correo electrónico proporcionado:', userEmail);
+        console.error('No user found with the provided email:', userEmail);
         return [];
       }
     } catch (error) {
-      console.error('Error al obtener mensajes del usuario:', error);
+      console.error('Error retrieving user messages:', error);
       throw error;
     }
   };
+  
+  
+  
+  
+  
   
   
   useEffect(() => {
