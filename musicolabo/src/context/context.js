@@ -270,7 +270,7 @@ const MusiColaboContextProvider = ({ children }) => {
   };
  
   
-  // mostrar los avisos de mensajes
+  // hook para que muestren en pantalla los avisos de mensajes nuevos recibidos
   useEffect(() => {
     let unsubscribe = () => {}; // Inicializa una función de desuscripción vacía
   
@@ -359,30 +359,36 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   };
   
-  
+  // hook para que se contabilizen los mensajes nuevos recibidos
   useEffect(() => {
     if (user) {
-      // Llamar a la función getMessagesFromFirestore para obtener los mensajes del usuario.
-    getMessagesFromFirestore(user.email)
-    .then(messages => {
-      // Calcular el número de mensajes no leídos.
-      const unreadCount = messages.filter(message => !message.read).length;
-      setUnreadMessages(unreadCount);
-      console.log('unreadMessages actualizado:', unreadCount);
-    })
-    .catch(error => {
-      console.error('Error al obtener mensajes del usuario:', error);
-    });
+      getMessagesFromFirestore(user.email)
+        .then(threads => {
+          let unreadCount = 0;
+          // Aquí recorremos cada hilo y cada mensaje dentro del hilo
+          threads.forEach(thread => {
+            thread.unread.forEach(message => {
+              if (!message.read) {
+                unreadCount++;  // Aumentamos el conteo solo si el mensaje no ha sido leído
+              }
+            });
+          });
+          setUnreadMessages(unreadCount);  // Establecer el estado de mensajes no leídos
+          console.log('unreadMessages actualizado:', unreadCount);
+        })
+        .catch(error => {
+          console.error('Error al obtener mensajes del usuario:', error);
+        });
     }
   }, [user]);
-
+  
 
   // Funcion para diferenciar mensajes entre leidos y no leidos.
   const updateMessageReadStatus = async (userId, messageId) => {
     try {
       const messageRef = doc(db, 'userData', userId, 'messages', messageId);
       await updateDoc(messageRef, {
-        read: true  // Asegúrate de que este campo 'read' coincida con tu esquema de datos en Firestore
+        read: true  
       });
       console.log("Mensaje actualizado a leído:", messageId);
     } catch (error) {
