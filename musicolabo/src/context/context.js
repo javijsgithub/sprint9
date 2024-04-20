@@ -270,71 +270,74 @@ const MusiColaboContextProvider = ({ children }) => {
   };
  
   
-    // mostrar los avisos de mensajes
-    useEffect(() => {
-      let unsubscribe = () => {}; // Inicializa una función de desuscripción vacía
-    
-      if (userEmail && loggedIn) {
-        const queryRef = collection(db, 'userData');
-        unsubscribe = onSnapshot(queryRef, async (snapshot) => {
-          let unreadCount = 0;
-          for (const doc of snapshot.docs) {
-            const messagesCollectionRef = collection(doc.ref, 'messages');
-            const messagesSnapshot = await getDocs(messagesCollectionRef);
-            for (const messageDoc of messagesSnapshot.docs) {
-              const messageData = messageDoc.data();
-              if (!messageData.read && messageData.recipient === userEmail) {
-                unreadCount++;
-              }
+  // mostrar los avisos de mensajes
+  useEffect(() => {
+    let unsubscribe = () => {}; // Inicializa una función de desuscripción vacía
+  
+    if (userEmail && loggedIn) {
+      const queryRef = collection(db, 'userData');
+      unsubscribe = onSnapshot(queryRef, async (snapshot) => {
+        let unreadCount = 0;
+        for (const doc of snapshot.docs) {
+          const messagesCollectionRef = collection(doc.ref, 'messages');
+          const messagesSnapshot = await getDocs(messagesCollectionRef);
+          for (const messageDoc of messagesSnapshot.docs) {
+            const messageData = messageDoc.data();
+            if (!messageData.read && messageData.recipient === userEmail) {
+              unreadCount++;
             }
           }
-          setUnreadMessages(unreadCount);
-        });
-      }
+        }
+        console.log("Mensajes nuevos:", unreadCount);
+        setUnreadMessages(unreadCount);
+      });
+    }
+  
+    return () => {
+      unsubscribe(); // Esto se llama cuando el componente se desmonta o cuando los valores de userEmail o loggedIn cambian
+    };
+  }, [userEmail, loggedIn]);
     
-      return () => {
-        unsubscribe(); // Esto se llama cuando el componente se desmonta o cuando los valores de userEmail o loggedIn cambian
-      };
-    }, [userEmail, loggedIn]);
     
-
-
   // Función para obtener los mensajes del usuario.
   const getMessagesFromFirestore = async (userEmail) => {
     try {
-      // Buscar el documento de usuario basado en el email
       const userSnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', userEmail)));
       if (!userSnapshot.empty) {
         const userRef = userSnapshot.docs[0].ref;
-  
+
         // Cargar mensajes del usuario
         const messagesQuerySnapshot = await getDocs(query(collection(userRef, 'messages'), orderBy('timestamp', 'desc')));
         let messages = messagesQuerySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data(), userRef: userRef.id }));
-  
-        // Mapa para almacenar mensajes y verificar los replyTo
+
+        // Cargar detalles del mensaje original cuando es necesario
         const messagesMap = {};
         const loadMessageDetails = async (message) => {
           if (message.replyTo && !messagesMap[message.replyTo]) {
             try {
-              const replyMessageDoc = await getDoc(doc(db, 'userData', message.userRef, 'messages', message.replyTo));
-              if (replyMessageDoc.exists()) {
-                messagesMap[message.replyTo] = { id: message.replyTo, ...replyMessageDoc.data() };
+              // Busca en todos los documentos 'userData' el mensaje original
+              const allUsersSnapshot = await getDocs(collection(db, 'userData'));
+              for (const userDoc of allUsersSnapshot.docs) {
+                const potentialOriginalMessageDoc = await getDoc(doc(db, 'userData', userDoc.id, 'messages', message.replyTo));
+                if (potentialOriginalMessageDoc.exists()) {
+                  messagesMap[message.replyTo] = { id: message.replyTo, ...potentialOriginalMessageDoc.data() };
+                }
               }
             } catch (error) {
-              console.error("Failed to load reply message:", error);
+              console.error("Failed to load original message:", error);
             }
           }
         };
-  
+
         // Cargar mensajes replyTo si no están presentes
         await Promise.all(messages.map(loadMessageDetails));
-  
+
         // Construir los mensajes con la información de replyTo
         messages = messages.map(message => ({
           ...message,
           replyContent: messagesMap[message.replyTo]?.message || "Mensaje original no encontrado"
         }));
-  
+
         // Organizar mensajes en hilos
         const threads = messages.reduce((acc, msg) => {
           const threadId = msg.threadId || msg.id;
@@ -344,7 +347,7 @@ const MusiColaboContextProvider = ({ children }) => {
           acc[threadId][msg.read ? 'read' : 'unread'].push(msg);
           return acc;
         }, {});
-  
+
         return Object.values(threads);
       } else {
         console.error('No user found with the provided email:', userEmail);
@@ -355,11 +358,6 @@ const MusiColaboContextProvider = ({ children }) => {
       throw error;
     }
   };
-  
-  
-  
-  
-  
   
   
   useEffect(() => {
@@ -430,9 +428,3 @@ const MusiColaboContextProvider = ({ children }) => {
 };
 
 export default MusiColaboContextProvider;
-
-
-
-
-
-
