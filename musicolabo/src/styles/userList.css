@@ -14,7 +14,9 @@
     flex-wrap: wrap;
     padding: 20px;
     border-radius: 5px;
-    border: 2px solid rgb(63, 125, 128);
+    /*border: 2px solid rgb(63, 125, 128);*/
+    box-shadow: 0 0 7px rgb(63, 125, 128);
+
 }
 
 .cards {
@@ -37,11 +39,6 @@ img {
    
 }
 
-.card-name-and-city {
-    border-bottom: 1px solid rgb(212, 167, 108);
-    
-}
-
 .card-name {
     margin-bottom: 0px;
 }
@@ -49,11 +46,12 @@ img {
 .card-city {
     margin-top: 0px;
     margin-bottom: 25px;
-    border-bottom: 1px solid rgb(212, 167, 108);
+    border-bottom: 1px outset rgb(212, 167, 108);
 }
 
 .card-instruments {
     margin-bottom: 2px;
+    border-bottom: 1px outset rgb(212, 167, 108);
 }
 
 .container-purpose {
@@ -72,6 +70,7 @@ img {
 #link-videos {
     text-decoration: none;
     color: rgb(212, 167, 108);
+    opacity: 0.7;
 }
 #link-videos:hover {
     color:rgb(105, 99, 99);
@@ -81,6 +80,7 @@ img {
     border: 0px;
     background-color: transparent;
     color: rgb(212, 167, 108);
+    opacity: 0.7;
 }
 #button-message:hover {
     color:rgb(105, 99, 99);
@@ -94,11 +94,11 @@ img {
     transform: translateX(-50%); /* Centra el mensaje emergente horizontalmente */
     background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
-    border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
     border-radius: 5px;
     padding: 20px;
     z-index: 1000; /* Asegúrate de que el mensaje emergente esté por encima de otros elementos */
-    box-shadow: 0 0 5px rgb(212, 167, 108); /* Añade sombra */
+    box-shadow: 0 0 7px rgb(212, 167, 108); /* Añade sombra */
   }
   
     
@@ -109,6 +109,7 @@ img {
     cursor: pointer;
     background-color: rgb(212, 167, 108);
     border: 1px solid rgb(212, 167, 108);
+    opacity: 0.9;
     border-radius: 3px;
     color:  rgb(46, 44, 44);
     
@@ -127,6 +128,7 @@ img {
     background-color: rgb(46, 44, 44);
     color: rgb(212, 167, 108);
     border: 1px solid rgb(63, 125, 128);
+    box-shadow: 0 0 7px rgb(63, 125, 128);
     padding: 5px;
     border-radius: 5px;
     margin-bottom: 5px;
@@ -135,6 +137,7 @@ img {
   .message-popup #btn-message-popup-submit {
     background-color: rgb(212, 167, 108);
     border: 1px solid rgb(212, 167, 108);
+    opacity: 0.9;
     border-radius: 3px;
     color:  rgb(46, 44, 44);
   }
@@ -155,6 +158,12 @@ img {
 
 @media (max-width: 991.98px) {
 
+    .row-list {
+        display: block;
+        margin: auto;
+       
+    }
+
     .card-instruments {
         height: 45px;
         margin-bottom: 3px;
@@ -167,7 +176,9 @@ img {
     }
 
     .cards {
+        
         height: max-content;
+        margin: auto;
     }
 
 }

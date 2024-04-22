@@ -8,7 +8,9 @@
 
 .row-header {
     background-color:rgb(46, 44, 44);
-    border: 2px solid rgb(63, 125, 128);
+   /* border: 2px solid rgb(63, 125, 128);*/
+    box-shadow: 0 0 7px rgb(63, 125, 128);
+
     border-radius: 5px;
     display: flex;
     width: 100%;
@@ -17,6 +19,7 @@
 
 .col-redes {
     color: rgb(212, 167, 108);
+    opacity: 0.7;
 }
 
 .col-logo {
@@ -34,6 +37,7 @@
     width: 100px;
     height: 100px;
     border: 1px solid rgb(63, 125, 128);
+    box-shadow: 0 0 9px rgb(63, 125, 128);
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -77,6 +81,7 @@
 .unread-messages-header {
     color: rgb(212, 167, 108);
     text-decoration: none;
+    opacity: 0.7;
 }
 .unread-messages:hover {
     background-color: rgb(46, 44, 44);
@@ -93,6 +98,7 @@
     background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(63, 125, 128);
+    box-shadow: 0 0 7px rgb(63, 125, 128);
     border-radius: 3px;
     width: max-content;
     height: max-content;
@@ -108,15 +114,18 @@
 #btn-header-register {
     background-color: rgb(46, 44, 44);
     color: rgb(212, 167, 108);
+    opacity: 0.7;
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
     border-radius: 3px;
-    margin-left: 5px;
+    margin-left: 7px;
     width: max-content;
     height: max-content;
 }
 #btn-header-register:hover {
     background-color: rgb(46, 44, 44);
     color: rgb(105, 99, 99);
+    opacity: 1;
     border: 1px solid rgb(105, 99, 99);
     border-radius: 3px;
 
@@ -125,7 +134,9 @@
 #btn-header-logout {
     background-color: rgb(46, 44, 44);
     color: rgb(212, 167, 108);
+    opacity: 0.7;
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
     border-radius: 3px;
     height: max-content;
     margin-bottom: 10px;
@@ -133,6 +144,7 @@
 #btn-header-logout:hover {
     background-color: rgb(46, 44, 44);
     color: rgb(105, 99, 99);
+    opacity: 1;
     border: 1px solid rgb(105, 99, 99);
     border-radius: 3px;
 

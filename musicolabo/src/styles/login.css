@@ -27,6 +27,7 @@
     width: 100px;
     height: 100px;
     border: 1px solid rgb(63, 125, 128);
+    box-shadow: 0 0 9px rgb(63, 125, 128);
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -47,7 +48,9 @@
 #btn-home-login {
     background-color: rgb(46, 44, 44);
     color: rgb(212, 167, 108);
+    opacity: 0.7;
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);   
     border-radius: 3px;
     margin-left: 10px;
     margin-top: 20px;
@@ -55,6 +58,7 @@
 #btn-home-login:hover {
     background-color: rgb(46, 44, 44);
     color: rgb(105, 99, 99);
+    opacity: 1;
     border: 1px solid rgb(105, 99, 99);
     border-radius: 3px;
 }
@@ -62,6 +66,7 @@
 
 .container-form-login {
     border: 1px solid rgb(63, 125, 128);
+    box-shadow: 0 0 7px rgb(63, 125, 128);
     border-radius: 8px;
     width: min-content;
     padding: 15px;
@@ -74,39 +79,50 @@
 
 .container-form-login h2 {
     color: rgb(63, 125, 128);
+    opacity: 0.7;
 }
 
 .input-email-form-login {
     background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(63, 125, 128);
+    box-shadow: 0 0 7px rgb(63, 125, 128);
     border-radius: 3px;
     margin-bottom: 10px;
     padding-left: 5px;
 }
-.input-email-form-login:focus {
-    border: 1px;
+.input-email-form-login::placeholder {
+    color: rgb(63, 125, 128);
+    opacity: 0.5;
 }
 
 .input-password-form-login {
     background-color: rgb(46, 44, 44);;
     color: rgb(63, 125, 128);
     border: 1px solid rgb(63, 125, 128);
+    box-shadow: 0 0 7px rgb(63, 125, 128);
     border-radius: 3px;
     padding-left: 5px;
 }
+.input-password-form-login::placeholder {
+    color: rgb(63, 125, 128);
+    opacity: 0.5;
+}
 
 #btn-form-login {
-    background-color: rgb(212, 167, 108);
-    color: rgb(46, 44, 44);
+    background-color: rgb(46, 44, 44);
+    color: rgb(212, 167, 108);
+    opacity: 0.7;
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);   
     border-radius: 3px;
-    margin-top: 9px;
+    margin-top: 14px;
 }
 #btn-form-login:hover {
-    background-color:  rgb(105, 99, 99);
-    color: rgb(46, 44, 44);
-    border: 1px solid  rgb(105, 99, 99);
+    background-color: rgb(46, 44, 44);
+    color: rgb(105, 99, 99);
+    opacity: 1;
+    border: 1px solid rgb(105, 99, 99);
     border-radius: 3px;
 
 }
@@ -123,6 +139,7 @@
 #link-register {
     text-decoration: none;
     color: rgb(212, 167, 108);
+    opacity: 0.7;
 }
 #link-register:hover {
     color: rgb(105, 99, 99);

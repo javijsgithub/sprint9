@@ -11,32 +11,35 @@
 }
 
 .container-welcome {
-    border: 2px solid rgb(212, 167, 108);
+    /*border: 2px solid rgb(212, 167, 108);*/
+    box-shadow: 0 0 7px rgb(212, 167, 108);
     border-radius: 5px;
     padding: 15px;
     color: rgb(63, 125, 128);
     /*font-family: Nanum Gothic;*/
 }
 
-/*.container-welcome h2 {
-    font-family:Nanum Gothic;
-}*/
+.container-welcome h2 {
+opacity: 0.7;}
 
 .container-welcome hr {
     color: rgb(212, 167, 108);
 }
 
 #btn-welcome-screen-go-to-user-list {
-    background-color: rgb(212, 167, 108);
-    color: rgb(46, 44, 44);
+    background-color: rgb(46, 44, 44);
+    color: rgb(212, 167, 108);
+    opacity: 0.7;
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
     border-radius: 3px;
     width: max-content;
     height: max-content;
 }
 #btn-welcome-screen-go-to-user-list:hover {
-    background-color: rgb(105, 99, 99);
-    color: rgb(46, 44, 44);
+    background-color: rgb(46, 44, 44);
+    color: rgb(105, 99, 99);
+    opacity: 1;
     border: 1px solid rgb(105, 99, 99);
     border-radius: 3px;
     width: max-content;

@@ -6,8 +6,9 @@
 .navbar {
     background-color: rgb(46, 44, 44);
     color: rgb(212, 167, 108);
-    border: 2px solid rgb(212, 167, 108);
+   /* border: 2px solid rgb(212, 167, 108);*/
     border-radius: 5px;
+    box-shadow: 0 0 7px rgb(212, 167, 108);
 }
 
 .navbar-brand {
@@ -26,9 +27,11 @@
 .nav-link {
     color: rgb(212, 167, 108);
     text-decoration: none;
+    opacity: 0.7;
 }
 .nav-link:hover {
     color: rgb(105, 99, 99);
+    opacity: 1;
 }
 
 .navbar-nav {
@@ -46,6 +49,9 @@
     background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
+    opacity: 0.7;
+
 }
 #input-instrument-navbar::placeholder {
     color: rgb(212, 167, 108);
@@ -62,6 +68,9 @@
     background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
+    opacity: 0.7;
+
 }
 #input-city-navbar::placeholder {
     color: rgb(212, 167, 108);
@@ -80,6 +89,8 @@
 #btn-filter {
     color: rgb(63, 125, 128);
     border: 1px solid rgb(63, 125, 128);
+    box-shadow: 0 0 7px rgb(63, 125, 128);
+
 }
 
 #btn-filter:hover {
@@ -88,7 +99,6 @@
     border: 1px solid rgb(105, 99, 99);
 }
 #btn-filter:focus {
-    box-shadow: none; /* Elimina el resplandor que suele aparecer */
     background-color:rgb(46, 44, 44); /* Color de fondo cuando está enfocado */
     color: rgb(105, 99, 99); /* Color de texto cuando está enfocado */
     border: 1px solid rgb(105, 99, 99); /* Color del borde cuando está enfocado */
@@ -107,6 +117,7 @@
 .custom-toggler {
     width: min-content;
     border: 2px solid rgb(63, 125, 128);
+    box-shadow: 0 0 7px rgb(63, 125, 128);
     color: transparent;
     
 }
