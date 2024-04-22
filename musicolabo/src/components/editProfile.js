@@ -298,7 +298,7 @@ const EditProfile = () => {
         <hr></hr>
         <div className='container-btns-save-delete'>
           <button type="submit" className="btn btn-secondary" id='btn-save'>Guardar cambios</button>
-          <button className="btn btn-danger" onClick={handleDeleteProfile}>Eliminar Cuenta</button>
+          <button className="btn btn-danger" onClick={handleDeleteProfile} id='btn-delete'>Eliminar Cuenta</button>
         </div>
         
       </form>
