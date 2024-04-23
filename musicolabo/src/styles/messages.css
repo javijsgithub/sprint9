@@ -11,7 +11,7 @@
 .container-header-messages {
     padding: 5px;
     margin-bottom: 20px;
-    border: 2px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
     border-radius: 5px;
 }
 
@@ -36,6 +36,8 @@
     width: 100px;
     height: 100px;
     border: 1px solid rgb(63, 125, 128);
+    box-shadow: 0 0 9px rgb(63, 125, 128);
+
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -51,6 +53,7 @@
     background-color:rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(63, 125, 128);
+    box-shadow: 0 0 7px rgb(63, 125, 128);
     border-radius: 3px;
 }
 #btn-volver-messages:hover {
@@ -62,10 +65,12 @@
 
 .aviso {
     color: rgb(212, 167, 108);
+    opacity: 0.8;
+
 }
 
 .container-recibidos {
-    border: 2px solid rgb(63, 125, 128);
+    box-shadow: 0 0 7px rgb(63, 125, 128);
     border-radius: 3px;
     padding: 15px;
 }
@@ -76,7 +81,7 @@
 
 .mensajes-no-leidos {
     list-style-type: none;
-    border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
     border-radius: 3px;
     padding: 10px;
 }
@@ -85,6 +90,8 @@
     background-color:rgb(46, 44, 44);
     color: rgb(212, 167, 108);
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
+    opacity: 0.8;
     border-radius: 3px;
     margin-right: 3px;
     margin-top: 5px;
@@ -98,7 +105,7 @@
 
 .mensajes-leidos {
     list-style-type: none;
-    border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
     border-radius: 3px;
     padding: 10px;
     
@@ -107,13 +114,14 @@
 .link-messages {
     text-decoration: none;
     color: rgb(212, 167, 108);
+    opacity: 0.8;
 }
 .link-messages:hover {
     color: rgb(105, 99, 99);
 }
 
 .container-reply {
-    border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
     border-radius: 3px;
     padding: 5px;
     margin-top: 5px;
@@ -124,6 +132,7 @@
     background-color:rgb(46, 44, 44);
     color: rgb(212, 167, 108);
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
     border-radius: 3px;
     margin-right: 3px;
     margin-top: 5px;
@@ -142,7 +151,7 @@
     transform: translateX(-50%); /* Centra el mensaje emergente horizontalmente */
     background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
-    border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
     border-radius: 5px;
     padding: 20px;
     z-index: 1000; /* Asegúrate de que el mensaje emergente esté por encima de otros elementos */
@@ -157,6 +166,7 @@
     cursor: pointer;
     background-color: rgb(212, 167, 108);
     border: 1px solid rgb(212, 167, 108);
+    opacity: 0.9;
     border-radius: 3px;
     color:  rgb(46, 44, 44);
     
@@ -176,6 +186,7 @@
     padding: 5px;
     color: rgb(212, 167, 108);
     border: 1px solid rgb(63, 125, 128);
+    box-shadow: 0 0 7px rgb(63, 125, 128);
     border-radius: 5px;
     margin-bottom: 5px;
   }
@@ -183,6 +194,7 @@
   .reply-message-popup #btn-reply-message-popup-submit {
     background-color: rgb(212, 167, 108);
     border: 1px solid rgb(212, 167, 108);
+    opacity: 0.9;
     border-radius: 3px;
     color:  rgb(46, 44, 44);
   }

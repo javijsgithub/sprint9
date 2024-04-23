@@ -9,7 +9,7 @@
 .container-header-edit-profile {
     padding: 5px;
     margin-bottom: 20px;
-    border:2px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
     border-radius: 5px;
 }
 
@@ -34,6 +34,8 @@
     width: 100px;
     height: 100px;
     border: 1px solid rgb(63, 125, 128);
+    box-shadow: 0 0 9px rgb(63, 125, 128);
+
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -49,6 +51,7 @@
     background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(63, 125, 128);
+    box-shadow: 0 0 7px rgb(63, 125, 128);
     border-radius: 3px;
 }
 #btn-home-edit-profile:hover {
@@ -60,7 +63,8 @@
 
 .container-edit {
     color: rgb(63, 125, 128);
-    border: 2px solid rgb(63, 125, 128);
+    /*border: 2px solid rgb(63, 125, 128);*/
+    box-shadow: 0 0 7px rgb(63, 125, 128);
     border-radius: 5px;
     padding: 15px;
 }
@@ -76,12 +80,15 @@
 #btn-edit {
     background-color: rgb(46, 44, 44);
     color: rgb(212, 167, 108);
+    opacity: 0.7;
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);   
     border-radius: 3px;
 }
 #btn-edit:hover {
     background-color: rgb(46, 44, 44);
     color: rgb(105, 99, 99);
+    opacity: 1;
     border: 1px solid rgb(105, 99, 99);
     border-radius: 3px;
 }
@@ -94,6 +101,7 @@
 
 #btn-delete-picture {
     position: absolute;
+    opacity: 0.8;
     margin-left: -70px;
     margin-top: 3px;
 }
@@ -107,9 +115,11 @@
 .nom p, .nom-us p, .em p, .ub p, .inst p {
     margin-top: 2px;
     color: rgb(212, 167, 108);
+    opacity: 0.8;
 }
 .desc p {
     color: rgb(212, 167, 108);
+    opacity: 0.8;
 }
 
 .preview-video {
@@ -128,11 +138,10 @@ video {
 
 #btn-delete-video {
     position: absolute;
+    opacity: 0.8;
     margin-left: -75px;
     margin-top: 3px;
 }
-
-
 
 .picture-edit-profile2 {
     width: 250px;
@@ -142,8 +151,11 @@ video {
 
 .input-edit-profile {
     background-color: rgb(46, 44, 44);
+    padding-left: 5px;
     color: rgb(63, 125, 128);
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108); 
+    opacity: 0.7;  
     border-radius: 3px;
     margin-bottom: 10px;
 }
@@ -154,6 +166,8 @@ video {
     padding-left: 5px;
     padding-right: 5px;
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
+    opacity: 0.7;   
     border-radius: 3px;
 }
 
@@ -165,6 +179,8 @@ video {
     background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);   
+    opacity: 0.7;
     border-radius: 3px;
 }
 
@@ -176,6 +192,7 @@ video {
 #btn-save {
     background-color: rgb(212, 167, 108);
     color: rgb(46, 44, 44);
+    opacity: 0.8;
     border: 1px solid rgb(212, 167, 108);
     border-radius: 3px;
     border-radius: 3px;
@@ -185,6 +202,10 @@ video {
     color: rgb(46, 44, 44);
     border: 1px solid rgb(105, 99, 99);
     border-radius: 3px;
+}
+
+#btn-delete {
+    opacity: 0.7;
 }
 
 
