@@ -166,9 +166,10 @@ const Messages = () => {
       {message.replyTo && (
         <div className='container-reply'>
           <em>
-            En respuesta a tu mensaje:
+            <strong>En respuesta a tu mensaje:</strong>
             <br/>
-            <strong>Mensaje:</strong> {message.replyContent || "Mensaje original no encontrado"}       
+            <strong>Fecha y hora:</strong>  {message.originalMessageDate || "Fecha del mensaje original no encontrado"}<br />
+            <strong>Mensaje:</strong> {message.originalMessage || "Mensaje original no encontrado"}       
           </em>
         </div>
        )}
@@ -197,12 +198,13 @@ const Messages = () => {
     <strong>Mensaje:</strong> {message.message}<br />
     {message.replyTo && (
       <div className='container-reply'>
-          <em>
-            En respuesta a tu mensaje:
-            <br/>
-            <strong>Mensaje:</strong> {message.replyContent || "Mensaje original no encontrado"}       
-          </em>
-        </div>
+      <em>
+        <strong>En respuesta a tu mensaje:</strong>
+        <br/>
+        <strong>Fecha y hora:</strong>  {message.originalMessageDate || "Fecha del mensaje original no encontrado"}<br />
+        <strong>Mensaje:</strong> {message.originalMessage || "Mensaje original no encontrado"}       
+      </em>
+    </div>
      )}
     {expandedReadMessageIndexes.includes(threadIndex) ? (
       <>
