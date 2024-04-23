@@ -320,7 +320,14 @@ const MusiColaboContextProvider = ({ children }) => {
               for (const userDoc of allUsersSnapshot.docs) {
                 const potentialOriginalMessageDoc = await getDoc(doc(db, 'userData', userDoc.id, 'messages', message.replyTo));
                 if (potentialOriginalMessageDoc.exists()) {
-                  messagesMap[message.replyTo] = { id: message.replyTo, ...potentialOriginalMessageDoc.data() };
+                  const originalMessageData = potentialOriginalMessageDoc.data();
+                  messagesMap[message.replyTo] = {
+                    id: message.replyTo,
+                    message: originalMessageData.message,
+                    timestamp: originalMessageData.timestamp, // Incluimos timestamp del mensaje original
+                    originalMessage: message.message
+                  };
+                  console.log('Contenido del mensaje original:', messagesMap[message.replyTo]);
                 }
               }
             } catch (error) {
@@ -335,7 +342,9 @@ const MusiColaboContextProvider = ({ children }) => {
         // Construir los mensajes con la información de replyTo
         messages = messages.map(message => ({
           ...message,
-          replyContent: messagesMap[message.replyTo]?.message || "Mensaje original no encontrado"
+          originalMessageDate: messagesMap[message.replyTo]?.timestamp ? new Date(messagesMap[message.replyTo].timestamp.seconds * 1000).toLocaleString() : "Fecha y hora del mensaje original no encontradas",        
+          originalMessage: messagesMap[message.replyTo]?.message || "Mensaje original no encontrado"
+        
         }));
 
         // Organizar mensajes en hilos
