@@ -150,11 +150,11 @@ const Messages = () => {
               <li key={`${threadIndex}-${index}`} className={message.replyTo ? "reply-message" : "original-message"}>
                 <strong>De:</strong> {getUserNameByEmail(message.sender)}, <Link to={`/user-profile/${message.sender}`} className='link-messages'>Ver perfil</Link><br />
                 <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
-
+                <br/>
                  {expandedMessageIndexes.includes(threadIndex) && ( // Solo expande el mensaje si el índice del hilo está en expandedMessageIndexes
-          // Contenido expandido del mensaje
           <>
                 <strong>Mensaje:</strong> {message.message}<br />
+
                 {message.replyTo && (
                   <div className='container-reply'>
                     <em>
@@ -188,7 +188,8 @@ const Messages = () => {
               <li key={`${threadIndex}-${index}`} className={message.replyTo ? "reply-message" : "original-message"}>
                 <strong>De:</strong> {getUserNameByEmail(message.sender)}, <Link to={`/user-profile/${message.sender}`} className='link-messages'>Ver perfil</Link><br />
                 <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
-               
+                <br/>
+
                 {expandedMessageIndexes.includes(threadIndex) ? (
                   <>
                    <strong>Mensaje:</strong> {message.message}<br />

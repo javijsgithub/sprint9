@@ -96,7 +96,7 @@
     opacity: 0.8;
     border-radius: 3px;
     margin-right: 3px;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 .mensajes-no-leidos button:hover {
     background-color: rgb(46, 44, 44);
@@ -137,7 +137,7 @@
     box-shadow: 0 0 7px rgb(212, 167, 108);
     border-radius: 3px;
     margin-right: 3px;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 .mensajes-leidos button:hover {
     background-color: rgb(46, 44, 44);
