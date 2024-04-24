@@ -43,19 +43,54 @@ const Messages = () => {
     fetchMessages();
   }, [getMessagesFromFirestore, user]);
 
- 
-  const toggleMessage = (threadIndex) => {
-    const moveMessageToReadAndUpdateState = async () => {
-      const prevIndexes = [...expandedMessageIndexes];
+
+ //mover el mensaje de la lista de no leidos a la lista de leidos
+  const closeAndMoveMessage = async (threadIndex) => {
+    try {
       const thread = messages[threadIndex];
-      const messageToMove = thread.unread[0]; // Suponiendo que solo se puede abrir un mensaje a la vez
-      if (messageToMove) {
-        await moveMessageToRead(messageToMove.id, user.id); // Mover el mensaje a leídos
+      if (thread.unread.length > 0) { // Verifica si hay mensajes no leídos en el hilo
+        const messageToMove = thread.unread[0]; // Obtiene el primer mensaje no leído del hilo
+        await moveMessageToRead(messageToMove.id, user.id); // Mueve el mensaje a la lista de leídos
+
+        // Actualiza el estado de los mensajes y elimina el hilo de los mensajes expandidos
+        setMessages(prevMessages => {
+          const updatedThreads = [...prevMessages];
+          updatedThreads[threadIndex] = {
+            ...thread,
+            unread: thread.unread.slice(1), // Elimina el mensaje de la lista de no leídos
+            read: [messageToMove, ...thread.read] // Añade el mensaje a la lista de leídos
+          };
+          return updatedThreads;
+        });
+        setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1)); // Actualiza el contador de mensajes no leídos
       }
-      setExpandedMessageIndexes(prevIndexes.includes(threadIndex) ? prevIndexes.filter(index => index !== threadIndex) : [...prevIndexes, threadIndex]);
-    };
+    } catch (error) {
+      console.error('Error al cambiar el estado del mensaje:', error);
+    }
+  };
+
+  const moveMessageToRead = async (messageId, userId) => {
+    const message = newUnreadList.find(msg => msg.id === messageId);
+    if (message) {
+      const updatedUnreadList = newUnreadList.filter(msg => msg.id !== messageId);
+      setNewUnreadList(updatedUnreadList);
+
+      const updatedReadList = [message, ...newReadList];
+      setNewReadList(updatedReadList);
+
+      await updateMessageReadStatus(userId, messageId);
+      setUnreadMessages(prev => Math.max(0, prev - 1));
+    }
+  };
+
   
-    moveMessageToReadAndUpdateState();
+  const expandMessage = (threadIndex) => {
+    // Expandir o contraer el hilo según su estado actual
+    setExpandedMessageIndexes(prevIndexes =>
+      prevIndexes.includes(threadIndex) ?
+      prevIndexes.filter(index => index !== threadIndex) :
+      [...prevIndexes, threadIndex]
+    );
   };
   
   
@@ -107,20 +142,6 @@ const Messages = () => {
     return userProfile ? userProfile.username : email; // Si se encuentra el perfil, devolver el nombre de usuario, de lo contrario, devolver el correo electrónico
   };
   
-  const moveMessageToRead = async (messageId, userId) => {
-    const message = newUnreadList.find(msg => msg.id === messageId);
-    if (message) {
-      const updatedUnreadList = newUnreadList.filter(msg => msg.id !== messageId);
-      setNewUnreadList(updatedUnreadList);
-
-      const updatedReadList = [message, ...newReadList];
-      setNewReadList(updatedReadList);
-
-      await updateMessageReadStatus(userId, messageId);
-      setUnreadMessages(prev => Math.max(0, prev - 1));
-    }
-  };
-   
 
   return (
     <div className='container-fluid' id='container-messages'>
@@ -166,12 +187,12 @@ const Messages = () => {
                   </div>
                                   )}
 
-            <button onClick={() => toggleMessage(threadIndex)}>Cerrar mensaje</button>
-            <button onClick={() => handleReply(message.sender, getUserNameByEmail(message.sender), message.id)}>Responder</button>
+                     <button onClick={() => closeAndMoveMessage(threadIndex)}>Cerrar mensaje</button>            
+                     <button onClick={() => handleReply(message.sender, getUserNameByEmail(message.sender), message.id)}>Responder</button>
           </>
         )}
-        {!expandedMessageIndexes.includes(threadIndex) && ( // Renderiza el botón "Ver mensaje" solo si el índice del hilo NO está en expandedMessageIndexes
-          <button onClick={() => toggleMessage(threadIndex)}>Ver mensaje</button>
+        {!expandedMessageIndexes.includes(threadIndex) && ( // Renderiza el botón "Ver mensaje" solo si el índice del hilo NO está expandido
+          <button onClick={() => expandMessage(threadIndex)}>Ver mensaje</button>
         )}
         <hr></hr>
       </li>
@@ -203,11 +224,11 @@ const Messages = () => {
                     </em>
                   </div>
                 )}
-                    <button onClick={() => toggleMessage(threadIndex)}>Cerrar mensaje</button>
+                    <button onClick={() => expandMessage(threadIndex)}>Cerrar mensaje</button>
                     <button onClick={() => handleReply(message.sender, getUserNameByEmail(message.sender), message.id)}>Responder</button>
                   </>
                 ) : (
-                  <button onClick={() => toggleMessage(threadIndex)}>Ver mensaje</button>
+                  <button onClick={() => expandMessage(threadIndex)}>Ver mensaje</button>
                 )}
                 <hr></hr>
               </li>
