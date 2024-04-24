@@ -151,11 +151,10 @@ const Messages = () => {
         </div>
       </div>
       <div className='container-recibidos'>
-        <h2>Bandeja:</h2>
-        <hr/>
+        <h2>Mensajes recibidos:</h2>
         {unreadMessages > 0 && <h6 className='aviso'>Tienes {unreadMessages} mensaje/s no leídos.</h6>}
-        <br/>
-        <h3>Mensajes no leídos:</h3>
+        <hr/>
+        <h3>No leídos:</h3>
         <ul className='mensajes-no-leidos'>
           {messages.map((thread, threadIndex) => thread.unread.map((message, index) => (
   <li key={`${threadIndex}-${index}`} className={message.replyTo ? "reply-message" : "original-message"}>
@@ -189,7 +188,7 @@ const Messages = () => {
 )))}
         </ul>
         <br/>
-        <h3>Mensajes leídos:</h3>
+        <h3>Leídos:</h3>
         <ul className='mensajes-leidos'>
           {messages.map((thread, threadIndex) => thread.read.map((message, index) => (
   <li key={`${threadIndex}-${index}`} className={message.replyTo ? "reply-message" : "original-message"}>
