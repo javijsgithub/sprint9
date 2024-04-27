@@ -393,17 +393,25 @@ const MusiColaboContextProvider = ({ children }) => {
   
 
   // Funcion para diferenciar mensajes entre leidos y no leidos.
-  const updateMessageReadStatus = async (userId, messageId) => {
+  const updateMessageReadStatus = async (userEmail, messageId) => {
     try {
-      const messageRef = doc(db, 'userData', userId, 'messages', messageId);
-      await updateDoc(messageRef, {
-        read: true  
-      });
-      console.log("Mensaje actualizado a leído:", messageId);
+        
+      const userSnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', userEmail)));
+      if (!userSnapshot.empty) {
+        const userRef = userSnapshot.docs[0].ref;
+        const messageRef = doc(userRef, 'messages', messageId);
+        await updateDoc(messageRef, {
+          read: true  
+        });
+        console.log("Mensaje actualizado a leído:", messageId);
+      } else {
+        console.error('No se encontró ningún usuario con el correo electrónico proporcionado:', userEmail);
+      }
     } catch (error) {
       console.error('Error al actualizar el estado de lectura del mensaje:', error);
     }
   };
+  
 
   
   return (
