@@ -45,43 +45,49 @@ const Messages = () => {
 
 
  //mover el mensaje de la lista de no leidos a la lista de leidos
-  const closeAndMoveMessage = async (threadIndex) => {
-    try {
-      const thread = messages[threadIndex];
-      if (thread.unread.length > 0) { // Verifica si hay mensajes no leídos en el hilo
-        const messageToMove = thread.unread[0]; // Obtiene el primer mensaje no leído del hilo
-        await moveMessageToRead(messageToMove.id, user.id); // Mueve el mensaje a la lista de leídos
-
-        // Actualiza el estado de los mensajes y elimina el hilo de los mensajes expandidos
-        setMessages(prevMessages => {
-          const updatedThreads = [...prevMessages];
-          updatedThreads[threadIndex] = {
-            ...thread,
-            unread: thread.unread.slice(1), // Elimina el mensaje de la lista de no leídos
-            read: [messageToMove, ...thread.read] // Añade el mensaje a la lista de leídos
-          };
-          return updatedThreads;
-        });
-        setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1)); // Actualiza el contador de mensajes no leídos
-      }
-    } catch (error) {
-      console.error('Error al cambiar el estado del mensaje:', error);
-    }
-  };
-
-  const moveMessageToRead = async (messageId, userId) => {
+ const moveMessageToRead = async (messageId, userId) => {
+  try {
     const message = newUnreadList.find(msg => msg.id === messageId);
-    if (message) {
+    if (message) {    
+      await updateMessageReadStatus(userId, messageId);
+
       const updatedUnreadList = newUnreadList.filter(msg => msg.id !== messageId);
       setNewUnreadList(updatedUnreadList);
 
       const updatedReadList = [message, ...newReadList];
       setNewReadList(updatedReadList);
 
-      await updateMessageReadStatus(userId, messageId);
       setUnreadMessages(prev => Math.max(0, prev - 1));
     }
-  };
+  } catch (error) {
+    console.error('Error al mover el mensaje a la lista de leídos:', error);
+  }
+};
+
+const closeAndMoveMessage = async (threadIndex) => {
+  try {
+    const thread = messages[threadIndex];
+    if (thread.unread.length > 0) {
+      const messageToMove = thread.unread[0];
+      await moveMessageToRead(messageToMove.id, user.email); // Pasamos userEmail en lugar de user.id
+
+      // Actualizamos el estado localmente
+      setMessages(prevMessages => {
+        const updatedThreads = [...prevMessages];
+        updatedThreads[threadIndex] = {
+          ...thread,
+          unread: thread.unread.slice(1),
+          read: [messageToMove, ...thread.read]
+        };
+        return updatedThreads;
+      });
+      setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1));
+    }
+  } catch (error) {
+    console.error('Error al cambiar el estado del mensaje:', error);
+  }
+};
+
 
   
   const expandMessage = (threadIndex) => {
@@ -187,7 +193,7 @@ const Messages = () => {
                   </div>
                                   )}
 
-                     <button onClick={() => closeAndMoveMessage(threadIndex)}>Cerrar mensaje</button>            
+                     <button onClick={() => closeAndMoveMessage(threadIndex, user.email)}>Cerrar mensaje</button>            
                      <button onClick={() => handleReply(message.sender, getUserNameByEmail(message.sender), message.id)}>Responder</button>
           </>
         )}
