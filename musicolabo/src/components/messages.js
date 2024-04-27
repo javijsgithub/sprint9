@@ -66,7 +66,7 @@ const Messages = () => {
 };
 
 // Materializar que el mensaje se mueva de la lista de no leidos a la lista de leidos
-const closeAndMoveMessage = async (threadIndex) => {
+const moveMessage = async (threadIndex) => {
   try {
     const thread = messages[threadIndex];
     if (thread.unread.length > 0) {
@@ -193,9 +193,11 @@ const closeAndMoveMessage = async (threadIndex) => {
                     </em>
                   </div>
                                   )}
-
-                     <button onClick={() => closeAndMoveMessage(threadIndex, user.email)}>Cerrar mensaje</button>            
+                     
+                     <button onClick={() => expandMessage(threadIndex)}>Cerrar mensaje</button>
                      <button onClick={() => handleReply(message.sender, getUserNameByEmail(message.sender), message.id)}>Responder</button>
+                     <button onClick={() => moveMessage(threadIndex, user.email)}>Mover a leídos</button>            
+
           </>
         )}
         {!expandedMessageIndexes.includes(threadIndex) && ( // Renderiza el botón "Ver mensaje" solo si el índice del hilo NO está expandido
