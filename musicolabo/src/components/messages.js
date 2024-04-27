@@ -24,7 +24,7 @@ const Messages = () => {
           const threads = await getMessagesFromFirestore(user.email);
           console.log('Hilos de mensajes obtenidos:', threads);
   
-          // Aquí adaptamos la nueva estructura a las listas existentes de leídos y no leídos.
+          // Aquí adaptamos la estructura a las listas existentes de leídos y no leídos.
           const newUnreadList = [];
           const newReadList = [];
           threads.forEach(thread => {
@@ -45,11 +45,11 @@ const Messages = () => {
 
 
  //mover el mensaje de la lista de no leidos a la lista de leidos
- const moveMessageToRead = async (messageId, userId) => {
+ const moveMessageToRead = async (messageId, userEmail) => {
   try {
     const message = newUnreadList.find(msg => msg.id === messageId);
     if (message) {    
-      await updateMessageReadStatus(userId, messageId);
+      await updateMessageReadStatus(userEmail, messageId);
 
       const updatedUnreadList = newUnreadList.filter(msg => msg.id !== messageId);
       setNewUnreadList(updatedUnreadList);
@@ -57,19 +57,21 @@ const Messages = () => {
       const updatedReadList = [message, ...newReadList];
       setNewReadList(updatedReadList);
 
-      setUnreadMessages(prev => Math.max(0, prev - 1));
+      // Actualizar el contaddor de aviso de mensajes no leidos
+      setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1));
     }
   } catch (error) {
     console.error('Error al mover el mensaje a la lista de leídos:', error);
   }
 };
 
+// Materializar que el mensaje se mueva de la lista de no leidos a la lista de leidos
 const closeAndMoveMessage = async (threadIndex) => {
   try {
     const thread = messages[threadIndex];
     if (thread.unread.length > 0) {
       const messageToMove = thread.unread[0];
-      await moveMessageToRead(messageToMove.id, user.email); // Pasamos userEmail en lugar de user.id
+      await moveMessageToRead(messageToMove.id, user.email);
 
       // Actualizamos el estado localmente
       setMessages(prevMessages => {
@@ -81,7 +83,6 @@ const closeAndMoveMessage = async (threadIndex) => {
         };
         return updatedThreads;
       });
-      setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1));
     }
   } catch (error) {
     console.error('Error al cambiar el estado del mensaje:', error);
