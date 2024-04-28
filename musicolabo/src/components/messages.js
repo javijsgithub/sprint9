@@ -4,7 +4,7 @@ import { MusiColaboContext } from '../context/context';
 import '../styles/messages.css';
 
 const Messages = () => {
-  const { user, getMessagesFromFirestore, unreadMessages, sendMessage, updateMessageReadStatus, setUnreadMessages, getProfilesFromFirestore  } = useContext(MusiColaboContext);
+  const { user, getMessagesFromFirestore, deleteMessageFromFirestore, unreadMessages, sendMessage, updateMessageReadStatus, setUnreadMessages, getProfilesFromFirestore  } = useContext(MusiColaboContext);
   const [messages, setMessages] = useState([]);
   const [newUnreadList, setNewUnreadList] = useState([]);
   const [newReadList, setNewReadList] = useState([]);
@@ -86,6 +86,28 @@ const moveMessage = async (threadIndex) => {
     }
   } catch (error) {
     console.error('Error al cambiar el estado del mensaje:', error);
+  }
+};
+
+const deleteMessage = async (messageId, threadIndex) => {
+  try {
+    // Eliminar el mensaje de Firestore
+    await deleteMessageFromFirestore(user.email, messageId);
+
+    // Una vez eliminado el mensaje de Firestore, actualizamos el estado localmente para reflejar el cambio
+    const updatedMessages = [...messages];
+    updatedMessages[threadIndex].unread = updatedMessages[threadIndex].unread.filter(msg => msg.id !== messageId);
+    updatedMessages[threadIndex].read = updatedMessages[threadIndex].read.filter(msg => msg.id !== messageId);
+    setMessages(updatedMessages);
+
+    // Actualizar el contador de mensajes no leídos si es necesario
+    const message = messages[threadIndex].unread.find(msg => msg.id === messageId);
+    if (message) {
+      setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1));
+    }
+    console.log('Mensaje eliminado correctamente');
+  } catch (error) {
+    console.error('Error al eliminar el mensaje:', error);
   }
 };
 
@@ -195,8 +217,10 @@ const moveMessage = async (threadIndex) => {
                                   )}
                      
                      <button onClick={() => expandMessage(threadIndex)}>Cerrar mensaje</button>
+                     <button onClick={() => moveMessage(threadIndex, user.email)}>Mover a leídos</button> 
                      <button onClick={() => handleReply(message.sender, getUserNameByEmail(message.sender), message.id)}>Responder</button>
-                     <button onClick={() => moveMessage(threadIndex, user.email)}>Mover a leídos</button>            
+                     <br/> 
+                     <button id='btn-delete-message' onClick={() => deleteMessage(message.id, threadIndex)}>Eliminar mensaje</button>          
 
           </>
         )}
@@ -235,6 +259,9 @@ const moveMessage = async (threadIndex) => {
                 )}
                     <button onClick={() => expandMessage(threadIndex)}>Cerrar mensaje</button>
                     <button onClick={() => handleReply(message.sender, getUserNameByEmail(message.sender), message.id)}>Responder</button>
+                    <br/> 
+                    <button id='btn-delete-message' onClick={() => deleteMessage(message.id, threadIndex)}>Eliminar mensaje</button>          
+
                   </>
                 ) : (
                   <button onClick={() => expandMessage(threadIndex)}>Ver mensaje</button>
