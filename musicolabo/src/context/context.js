@@ -297,7 +297,25 @@ const MusiColaboContextProvider = ({ children }) => {
       unsubscribe(); // Esto se llama cuando el componente se desmonta o cuando los valores de userEmail o loggedIn cambian
     };
   }, [userEmail, loggedIn]);
-    
+
+// Funcion para eliminar mensajes
+  const deleteMessageFromFirestore = async (userEmail, messageId) => {
+    try {
+      const userSnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', userEmail)));
+      if (!userSnapshot.empty) {
+        const userRef = userSnapshot.docs[0].ref;
+        const messageRef = doc(userRef, 'messages', messageId);
+        await deleteDoc(messageRef);
+        console.log('Mensaje eliminado de Firestore:', messageId);
+      } else {
+        console.error('No se encontró ningún usuario con el correo electrónico proporcionado:', userEmail);
+      }
+    } catch (error) {
+      console.error('Error al eliminar el mensaje de Firestore:', error);
+      throw error;
+    }
+  };
+  
     
   // Función para obtener los mensajes del usuario.
   const getMessagesFromFirestore = async (userEmail) => {
@@ -434,6 +452,7 @@ const MusiColaboContextProvider = ({ children }) => {
       uploadVideo,
       createNewDocument,
       deleteUserProfileFromFirestore,
+      deleteMessageFromFirestore,
       handleRegister,
       handleLogin,
       handleLogout, 
