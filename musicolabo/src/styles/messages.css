@@ -95,7 +95,7 @@
     box-shadow: 0 0 7px rgb(212, 167, 108);
     opacity: 0.8;
     border-radius: 3px;
-    margin-right: 3px;
+    margin-right: 5px;
     margin-top: 10px;
 }
 .mensajes-no-leidos button:hover {
@@ -135,11 +135,28 @@
     color: rgb(212, 167, 108);
     border: 1px solid rgb(212, 167, 108);
     box-shadow: 0 0 7px rgb(212, 167, 108);
+    opacity: 0.8;
     border-radius: 3px;
-    margin-right: 3px;
+    margin-right: 5px;
     margin-top: 10px;
 }
 .mensajes-leidos button:hover {
+    background-color: rgb(46, 44, 44);
+    color: rgb(105, 99, 99);
+    border: 1px solid rgb(105, 99, 99);
+    border-radius: 3px;
+}
+
+#btn-delete-message {
+    background-color:rgb(46, 44, 44);
+    color: rgb(241, 100, 100);
+    border: 1px solid rgb(241, 100, 100);
+    box-shadow: 0 0 7px rgb(241, 100, 100);
+    opacity: 0.8;
+    border-radius: 3px;
+    margin-top: 15px;
+}
+#btn-delete-message:hover {
     background-color: rgb(46, 44, 44);
     color: rgb(105, 99, 99);
     border: 1px solid rgb(105, 99, 99);
