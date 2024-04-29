@@ -16,6 +16,7 @@ const EditProfile = () => {
   const [instruments, setInstruments] = useState([]);
   const [purpose, setPurpose] = useState('');
   const [isEditMode, setIsEditMode] = useState(false);
+  const [saveChangesMessage, setSaveChangesMessage] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,6 +42,7 @@ const EditProfile = () => {
 
     fetchUserProfile();
   }, [getProfilesFromFirestore, userEmail]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,8 +72,15 @@ const EditProfile = () => {
         purpose
       };
       await updateProfileInFirestore(userEmail, updatedProfile);
-      navigate('/edit-profile'); // Redirecciona al perfil del usuario después de actualizar
-      setIsEditMode(false);
+      setSaveChangesMessage(true);
+
+
+      setTimeout(() => {
+        setSaveChangesMessage(false);
+        setIsEditMode(false);
+        navigate('/edit-profile'); // Redirecciona al perfil del usuario después de actualizar
+      }, 1500);
+
     } catch (error) {
       console.error('Error al actualizar el perfil del usuario:', error);
     }
@@ -304,8 +313,15 @@ const EditProfile = () => {
           <button type="submit" className="btn btn-secondary" id='btn-save'>Guardar cambios</button>
           <button className="btn btn-danger" onClick={handleDeleteProfile} id='btn-delete'>Eliminar Cuenta</button>
         </div>
-        
+        {saveChangesMessage && (
+        <div className="save-success-message">
+          Cambios guardados con éxito!
+        </div>
+      )}
+
       </form>
+
+      
        {/* Mostrar la información del perfil */}
       <div style={{ display: isEditMode ? 'none' : 'block' }}>
         {pictureUrl && (
@@ -327,7 +343,7 @@ const EditProfile = () => {
            {videos.map((video, index) => (
           <div key={index}>
             <video controls>
-              <source src={video}  type="video/mp4" />
+            <source src={typeof video === 'string' ? video : URL.createObjectURL(video)} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
