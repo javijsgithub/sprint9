@@ -202,7 +202,7 @@ const MusiColaboContextProvider = ({ children }) => {
   };
 
 
-  // Funcion para ver los perfiles de usuarios en el listado.
+  // Funcion para obtener los perfiles de usuarios en el listado.
   const getProfilesFromFirestore = async () => {
     try {
       const profilesSnapshot = await getDocs(collection(db, 'userData'));

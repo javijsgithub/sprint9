@@ -98,10 +98,12 @@ const EditProfile = () => {
     const updatedVideos = [...videos];
     updatedVideos.splice(index, 1);
     setVideos(updatedVideos);
+    console.log("Video eliminado correctamente")
   };
 
   const handleRemovePicture = () => {
     setPictureUrl('/images/profile_image.jpg'); // Ruta relativa a la carpeta imagen de la carpeta public
+    console.log("Imagen eliminada correctamente")
   };
 
   const handleDeleteProfile = async () => {
@@ -182,8 +184,8 @@ const EditProfile = () => {
         {videos.map((video, index) => (
           <div key={index} className="video-item">
            <video controls>
-            <source src={video} type="video/mp4" />
-             Tu navegador no admite la etiqueta de video.
+           <source src={typeof video === 'string' ? video : URL.createObjectURL(video)} type="video/mp4" />
+          Tu navegador no admite la etiqueta de video.
            </video>
            <button
              type="button"
@@ -193,9 +195,11 @@ const EditProfile = () => {
             >
             Eliminar
            </button>
+          
           </div>
         ))}
       </div>
+    
     <hr></hr>
       <h6>Nombre:</h6>
       <label>
