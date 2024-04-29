@@ -55,7 +55,7 @@ const MyNavbar = () => {
             id='input-instrument-navbar'
             type="search"
             autocomplete="off"
-            placeholder="Filtrar por instrumento"
+            placeholder="Instrumento"
             className="me-2"
             aria-label="Search"
             value={instrumentFilter}
@@ -64,7 +64,7 @@ const MyNavbar = () => {
           <FormControl
             id='input-city-navbar'
             type="search"
-            placeholder="Filtrar por ciudad"
+            placeholder="Ciudad"
             autocomplete="off"
             className="me-2"
             aria-label="Search"
