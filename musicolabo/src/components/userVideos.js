@@ -67,7 +67,7 @@ const UserVideos = () => {
            {videos.map((video, index) => (
             <div key={index}>
               <video controls>
-                <source src={video} type="video/mp4" />
+              <source src={typeof video === 'string' ? video : URL.createObjectURL(video)} type="video/mp4" />
                 Tu navegador no admite la etiqueta de video.
               </video>
             </div>
