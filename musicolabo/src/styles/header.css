@@ -116,7 +116,7 @@
     box-shadow: 0 0 7px rgb(212, 167, 108);
     border-radius: 3px;
     margin-left: 7px;
-    width: max-content;
+    width: 97px;
     height: max-content;
 }
 #btn-header-register:hover {
