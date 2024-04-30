@@ -143,7 +143,7 @@ const EditProfile = () => {
           </div>
           <div className='col col-button-edit-profile'>
            <div className='container-user-logged-edit-profile'>
-           <Link to="/" onClick={handleLogout} className="btn btn-secondary btn-sm" id='btn-edit-profile-logout'>Salir</Link>
+           <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-edit-profile-logout'>Salir</Link>
            <div className='userlogged'>
               <img src={picture} className='picture-header-edit-profile' alt="Imagen de perfil" />
             </div>

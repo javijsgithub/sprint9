@@ -54,7 +54,7 @@ const UserProfile = () => {
           </div>
           <div className='col col-button-profile'>
            <div className='container-user-logged-profile'>
-             <Link to="/" onClick={handleLogout} className="btn btn-secondary btn-sm" id='btn-profile-logout'>Salir</Link>
+             <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-profile-logout'>Salir</Link>
              <div className='userlogged'>
               <img src={picture} className='picture-header-profile' alt="Imagen de perfil" />
              </div>
