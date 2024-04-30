@@ -133,7 +133,7 @@ const EditProfile = () => {
       <div className='container-header-edit-profile'>
         <div className='row-header-edit-profile'>
           <div className='col col-btn-home-edit-profile'>
-           <Link to="/list" className="btn btn-secondary" id='btn-home-edit-profile'>Volver</Link>
+           <Link to="/list" className="btn btn-secondary btn-sm" id='btn-home-edit-profile'>Volver</Link>
           </div>
           <div className=' col col-logo-edit-profile'>
             <div className='musicolabo-logo-edit-profile'> 
@@ -143,7 +143,7 @@ const EditProfile = () => {
           </div>
           <div className='col col-button-edit-profile'>
            <div className='container-user-logged-edit-profile'>
-           <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-edit-profile-logout'>Cerrar sesión</Link>
+           <Link to="/" onClick={handleLogout} className="btn btn-secondary btn-sm" id='btn-edit-profile-logout'>Cerrar sesión</Link>
            <div className='userlogged'>
               <img src={picture} className='picture-header-edit-profile' alt="Imagen de perfil" />
             </div>

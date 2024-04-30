@@ -44,7 +44,7 @@ const UserProfile = () => {
       <div className='container-header-profile'>
         <div className='row-header-profile'>
           <div className='col col-btn-home-profile'>
-          <Link to="/messages" className='btn btn-secondary' type="button" id='btn-volver-profile'>Volver</Link>
+          <Link to="/messages" className='btn btn-secondary btn-sm' type="button" id='btn-volver-profile'>Volver</Link>
           </div>
           <div className='col col-logo-profile'>
             <div className='musicolabo-logo-profile'> 
@@ -54,7 +54,7 @@ const UserProfile = () => {
           </div>
           <div className='col col-button-profile'>
            <div className='container-user-logged-profile'>
-             <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-profile-logout'>Cerrar sesión</Link>
+             <Link to="/" onClick={handleLogout} className="btn btn-secondary btn-sm" id='btn-profile-logout'>Cerrar sesión</Link>
              <div className='userlogged'>
               <img src={picture} className='picture-header-profile' alt="Imagen de perfil" />
              </div>

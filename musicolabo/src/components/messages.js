@@ -177,7 +177,7 @@ const deleteMessage = async (messageId, threadIndex) => {
       <div className='container-header-messages'>
         <div className='row-header-messages'>
           <div className='col col-btn-home-messages'>
-            <Link to="/list" className='btn btn-secondary' type="button" id='btn-volver-messages'>Volver</Link>
+            <Link to="/list" className='btn btn-secondary btn-sm' type="button" id='btn-volver-messages'>Volver</Link>
           </div>
           <div className='col col-logo-messages'>
             <div className='musicolabo-logo-messages'>
@@ -187,7 +187,7 @@ const deleteMessage = async (messageId, threadIndex) => {
           </div>
           <div className='col col-button-messages'>
            <div className='container-user-logged-messages'>
-             <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-messages-logout'>Cerrar sesión</Link>
+             <Link to="/" onClick={handleLogout} className="btn btn-secondary btn-sm" id='btn-messages-logout'>Cerrar sesión</Link>
              <div className='userlogged'>
               <img src={picture} className='picture-header-messages' alt="Imagen de perfil" />
              </div>

@@ -25,7 +25,7 @@ const Header = () => {
         <div className=' col col-buttons-header'>
           {loggedIn ? (
             <div className='container-user-logged-header'>
-            <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-header-logout'>Cerrar sesión</Link>
+            <Link to="/" onClick={handleLogout} className="btn btn-secondary btn-sm" id='btn-header-logout'>Cerrar sesión</Link>
             <div className='userlogged'>
               <img src={picture} className='picture-header' alt="Imagen de perfil" />
             </div>
@@ -38,8 +38,8 @@ const Header = () => {
           </div>
           ) : (
           <>
-              <Link to="/login" type="submit" className="btn btn-secondary" id='btn-header-login'>Iniciar sesión</Link>
-              <Link to="/register" type="submit" className="btn btn-secondary" id='btn-header-register'>Registrarse</Link>
+              <Link to="/login" type="submit" className="btn btn-secondary btn-sm" id='btn-header-login'>Iniciar sesión</Link>
+              <Link to="/register" type="submit" className="btn btn-secondary btn-sm" id='btn-header-register'>Registrarse</Link>
           </>
           )}
         </div>

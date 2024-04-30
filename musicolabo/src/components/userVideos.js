@@ -48,7 +48,7 @@ const UserVideos = () => {
       <div className='container-header-videos'>
         <div className='row-header-videos'>
           <div className='col col-btn-home-videos'>
-           <Link to="/list" className="btn btn-secondary" id='btn-home-videos'>Volver</Link>
+           <Link to="/list" className="btn btn-secondary btn-sm" id='btn-home-videos'>Volver</Link>
           </div>
           <div className='col col-logo-videos'>
             <div className='musicolabo-logo-videos'> 
@@ -58,7 +58,7 @@ const UserVideos = () => {
           </div>
           <div className='col col-button-videos'>
            <div className='container-user-logged-videos'>
-             <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-videos-logout'>Cerrar sesión</Link>
+             <Link to="/" onClick={handleLogout} className="btn btn-secondary btn-sm" id='btn-videos-logout'>Cerrar sesión</Link>
              <div className='userlogged'>
               <img src={picture} className='picture-header-videos' alt="Imagen de perfil" />
              </div>
