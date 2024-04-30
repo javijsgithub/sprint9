@@ -186,6 +186,17 @@
 
     .unread-text {
         font-size: smaller;
+        
+    }
+
+    .container-user-logged-header {
+        display: block;
+        text-align: center;
+        margin-left: 10px;
+    }
+
+    .col-logo {
+        margin-right: 10px;
     }
     
 }

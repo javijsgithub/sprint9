@@ -290,6 +290,10 @@ video {
     .unread-text {
         font-size: smaller;
     }
+
+    .col-logo-edit-profile {
+        margin-right: 10px;
+    }
     
 }
 

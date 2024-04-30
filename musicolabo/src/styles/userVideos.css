@@ -186,5 +186,9 @@ video {
     .unread-text {
         font-size: smaller;
     }
+
+    .col-logo-videos {
+        margin-right: 10px;
+    }
     
 }
