@@ -141,7 +141,7 @@
     /*justify-content: space-between;*/
 }
 
-video {
+.video {
     width: 250px;
     height: 255px;
     margin-right: 5px;
@@ -164,7 +164,7 @@ video {
         margin: auto;
     }
 
-    video {
+    .video {
         width: 285px;
         height: 325px;
         margin-bottom: 25px;
