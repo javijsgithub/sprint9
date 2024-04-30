@@ -47,8 +47,9 @@
 
 .container-form-create-profile {
     border: 1px solid rgb(63, 125, 128);
+    box-shadow: 0 0 7px rgb(63, 125, 128);
     border-radius: 8px;
-    width: 50%;
+    width: 100%;
     padding: 15px;
     display: flex;
     flex-direction: column;
@@ -72,74 +73,93 @@
     margin-bottom: 0px;
 }
 
-.container-form-create-profile input {
+/*.container-form-create-profile input {
     margin-top: 0px;
     margin-bottom: 15px;
-}
+}*/
 
 .input-picture-form-create-profile {
     background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
+    opacity: 0.7;
     border-radius: 3px;
     margin-bottom: 5px;
-    width: 100%;
+    width: 70%;
 }
 
 .input-video-form-create-profile {
     background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
+    opacity: 0.7;
     border-radius: 3px;
     margin-bottom: 5px;
-    width: 100%;
+    width: 70%;
 }
 
 .input-name-form-create-profile {
     background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
+    opacity: 0.7;
     border-radius: 3px;
     margin-bottom: 5px;
+    padding-left: 8px;
 }
 
 .input-username-form-create-profile {
     background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
+    opacity: 0.7;
     border-radius: 3px;
     margin-bottom: 5px;
+    padding-left: 8px;
 }
 
 .input-email-form-create-profile {
     background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
+    opacity: 0.7;
     border-radius: 3px;
     margin-bottom: 5px;
+    padding-left: 8px;
 }
 
 .input-ubication-form-create-profile {
     background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
+    opacity: 0.7;
     border-radius: 3px;
     margin-bottom: 5px;
+    padding-left: 8px;
 }
 
-.checks-instruments-form-create-profile {
+#checks-instruments-form-create-profile {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     padding-left: 5px;
     padding-right: 5px;
     background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
+    opacity: 0.7;
     border-radius: 3px;
     margin-bottom: 5px;
 }
 
-.checks-instruments-form-create-profile label {
+#checks-instruments-form-create-profile label {
     margin-right: 15px;
     color: rgb(63, 125, 128);
 }
@@ -148,13 +168,17 @@
     background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
+    opacity: 0.7;
     border-radius: 3px;
+    padding-left: 8px;
 }
 
 #btn-form-create-profile {
     background-color:rgb(212, 167, 108);
     color: rgb(46, 44, 44);
-    border: 1px solid rgb(212, 167, 108);;
+    border: 1px solid rgb(212, 167, 108);
+    opacity: 0.7;
     border-radius: 3px;
     margin-top: 0px;
 }
@@ -184,6 +208,7 @@ fieldset {
     width: 100%;
     padding-left: 5px;
   }
+
   .container-form-create-profile span {
     color: rgb(16, 202, 16);
     margin-top: 10px;
@@ -191,10 +216,6 @@ fieldset {
 
 
   @media (max-width: 767.98px) {
-
-    .checks-instruments-form-create-profile {
-        display: block;
-    }
 
     .logo-ini-text {
         font-family: "Monoton";
