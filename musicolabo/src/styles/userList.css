@@ -63,7 +63,7 @@ img {
 .container-link {
     display: flex;
     justify-content: space-between;
-    padding: 5px 5px 8px 10px;
+    padding: 5px 0px 8px 10px;
 }
 
 #link-videos {
