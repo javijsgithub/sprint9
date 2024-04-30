@@ -97,7 +97,7 @@
     border: 1px solid rgb(63, 125, 128);
     box-shadow: 0 0 7px rgb(63, 125, 128);
     border-radius: 3px;
-    width: 102px;
+    width: 105px;
     height: max-content;
 }
 #btn-header-login:hover {
