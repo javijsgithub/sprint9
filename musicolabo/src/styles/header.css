@@ -168,6 +168,10 @@
         color: inherit; /* Esto mantiene el color predeterminado del texto */
     }
 
+    #btn-header-register {
+        width: 117px;
+    }
+
     .logo-ini-text {
         font-family: "Monoton";
         margin-top: 33px;
