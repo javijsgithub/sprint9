@@ -150,7 +150,7 @@ const CreateProfile = () => {
               
                 <h6>Instrumentos:</h6> 
                 <label>
-                 <div className='checks-instruments-form-create-profile'>
+                 <div id='checks-instruments-form-create-profile'>
                   <label>
                     <input
                       type="checkbox"
