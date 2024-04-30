@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import '../styles/userProfile.css';
 
 const UserProfile = () => {
-  const { getProfilesFromFirestore } = useContext(MusiColaboContext);
+  const { getProfilesFromFirestore, handleLogout, picture, unreadMessages } = useContext(MusiColaboContext);
   const { userEmail } = useParams();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -52,8 +52,20 @@ const UserProfile = () => {
             </div>
               <h1>MusiColabo</h1>
           </div>
-          <div className='col col-vacia'></div>
-        </div>
+          <div className='col col-button-profile'>
+           <div className='container-user-logged-profile'>
+             <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-profile-logout'>Cerrar sesión</Link>
+             <div className='userlogged'>
+              <img src={picture} className='picture-header-profile' alt="Imagen de perfil" />
+             </div>
+             <div className='container--mensajes-no-leidos'> 
+              {unreadMessages > 0 && 
+                <Link to="/messages" className="unread-messages-header-profile">
+                  <h6>{unreadMessages} mensaje(s) nuevo(s).</h6>
+                </Link>}              
+            </div>
+           </div>
+          </div>        </div>
       </div>
       
       {email && (

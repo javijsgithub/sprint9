@@ -220,6 +220,7 @@ const CreateProfile = () => {
               id='btn-form-create-profile'>
               Crear perfil
             </button>
+            <br/>
             {profileSent && <span>Perfil creado con Exito!</span>}
          </form>
       </div>

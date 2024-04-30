@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import '../styles/userVideos.css';
 
 const UserVideos = () => {
-  const { getVideosByUserEmail, getProfilesFromFirestore } = useContext(MusiColaboContext);
+  const { getVideosByUserEmail, picture, handleLogout, unreadMessages, getProfilesFromFirestore } = useContext(MusiColaboContext);
   const { userEmail } = useParams();
   const [videos, setVideos] = useState([]);
   const [userProfiles, setUserProfiles] = useState([]);
@@ -56,8 +56,20 @@ const UserVideos = () => {
             </div>
               <h1>MusiColabo</h1>
           </div>
-          <div className='col col-vacia'></div>
-        </div>
+          <div className='col col-button-videos'>
+           <div className='container-user-logged-videos'>
+             <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-videos-logout'>Cerrar sesión</Link>
+             <div className='userlogged'>
+              <img src={picture} className='picture-header-videos' alt="Imagen de perfil" />
+             </div>
+             <div className='container--mensajes-no-leidos'> 
+              {unreadMessages > 0 && 
+                <Link to="/messages" className="unread-messages-header-videos">
+                  <h6>{unreadMessages} mensaje(s) nuevo(s).</h6>
+                </Link>}              
+            </div>
+           </div>
+          </div>        </div>
       </div>
       {videos.length > 0 ? (
         <div className="container-videos">

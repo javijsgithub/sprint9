@@ -5,8 +5,8 @@ import { MusiColaboContext } from '../context/context';
 import '../styles/editProfile.css';
 
 const EditProfile = () => {
-  const { userEmail, getProfilesFromFirestore, updateProfileInFirestore, deleteUserProfileFromFirestore, handleLogout, uploadImage, uploadVideo } = useContext(MusiColaboContext);
-  const [picture, setPicture] = useState(null);
+  const { userEmail, getProfilesFromFirestore, picture, unreadMessages, updateProfileInFirestore, deleteUserProfileFromFirestore, handleLogout, uploadImage, uploadVideo } = useContext(MusiColaboContext);
+  const [picture1, setPicture1] = useState(null);
   const [pictureUrl, setPictureUrl] = useState('');
   const [videos, setVideos] = useState([]);
   const [name, setName] = useState('');
@@ -51,8 +51,8 @@ const EditProfile = () => {
         let newPictureUrl = pictureUrl;
         let newVideoUrls = [];
 
-        if (picture) {
-          newPictureUrl = await uploadImage(picture);
+        if (picture1) {
+          newPictureUrl = await uploadImage(picture1);
           setPictureUrl(newPictureUrl)
         }
 
@@ -141,7 +141,20 @@ const EditProfile = () => {
             </div>
               <h1>MusiColabo</h1>
           </div>
-          <div className='col col-vacia2'></div>
+          <div className='col col-button-edit-profile'>
+           <div className='container-user-logged-edit-profile'>
+           <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-edit-profile-logout'>Cerrar sesión</Link>
+           <div className='userlogged'>
+              <img src={picture} className='picture-header-edit-profile' alt="Imagen de perfil" />
+            </div>
+            <div className='container--mensajes-no-leidos'> 
+              {unreadMessages > 0 && 
+                <Link to="/messages" className="unread-messages-header-edit-profile">
+                  <h6>{unreadMessages} mensaje(s) nuevo(s).</h6>
+                </Link>}              
+            </div>
+           </div>
+          </div>        
         </div>
       </div>
       <div className='container-edit'>
@@ -160,7 +173,7 @@ const EditProfile = () => {
           <input
             className='input-edit-profile'
             type="file"
-            onChange={(e) => setPicture(e.target.files[0])}
+            onChange={(e) => setPicture1(e.target.files[0])}
           />
         </label>
             <img src={pictureUrl} className='picture-edit-profile2' alt="Imagen de perfil" />

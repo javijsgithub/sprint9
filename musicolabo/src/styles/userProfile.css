@@ -11,14 +11,30 @@
 .container-header-profile {
     padding: 5px;
     margin-bottom: 20px;
-    box-shadow: 0 0 7px rgb(212, 167, 108);
-    border-radius: 5px;
+   
 }
 
 .row-header-profile {
+    background-color:rgb(46, 44, 44);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
+    border-radius: 5px;
     display: flex;
     width: 100%;
     padding: 15px;
+}
+
+#btn-volver-profile {
+    background-color:rgb(46, 44, 44);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(63, 125, 128);
+    box-shadow: 0 0 7px rgb(63, 125, 128);
+    border-radius: 3px;
+}
+#btn-volver-profile:hover {
+    background-color: rgb(46, 44, 44);
+    color: rgb(105, 99, 99);
+    border: 1px solid rgb(105, 99, 99);
+    border-radius: 3px;
 }
 
 .col-logo-profile {
@@ -44,24 +60,65 @@
 
 .musicolabo-logo-profile h1 {
     font-family: "Monoton";
-    margin-top: 25px;
+    margin-top: 27px;
     color: rgb(63, 125, 128);
 }
 
-#btn-volver-profile {
-    background-color:rgb(46, 44, 44);
+.container-user-logged-profile {
+    display: block;
+    text-align: center;
+}
+
+.userlogged {
+    margin-top: 3px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.col-button-profile {
+    margin-top: 5px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#btn-profile-logout {
+    background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
+    opacity: 0.7;
     border: 1px solid rgb(63, 125, 128);
     box-shadow: 0 0 7px rgb(63, 125, 128);
     border-radius: 3px;
+    height: max-content;
+    margin-bottom: 10px;
 }
-#btn-volver-profile:hover {
+#btn-profile-logout:hover {
     background-color: rgb(46, 44, 44);
     color: rgb(105, 99, 99);
+    opacity: 1;
     border: 1px solid rgb(105, 99, 99);
     border-radius: 3px;
 }
 
+.picture-header-profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+}
+
+.container--mensajes-no-leidos {
+    margin-top: 10px;
+}
+
+.unread-messages-header-profile {
+    color: rgb(63, 125, 128);
+    text-decoration: none;
+    opacity: 0.7;
+}
+.unread-messages-header-profile:hover {
+    background-color: rgb(46, 44, 44);
+    color: rgb(105, 99, 99);
+}
 
 .profile {
     color: rgb(63, 125, 128);
@@ -76,4 +133,16 @@
 
 .picture-profile {
     margin-bottom: 10px;
+}
+
+
+
+@media (max-width: 767.98px) { 
+
+    .musicolabo-logo-profile h1 {
+        font-family: "Monoton";
+        margin-top: 33px;
+        color: rgb(63, 125, 128);
+    }
+
 }

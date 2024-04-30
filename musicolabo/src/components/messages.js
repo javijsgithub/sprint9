@@ -4,7 +4,7 @@ import { MusiColaboContext } from '../context/context';
 import '../styles/messages.css';
 
 const Messages = () => {
-  const { user, getMessagesFromFirestore, deleteMessageFromFirestore, unreadMessages, sendMessage, updateMessageReadStatus, setUnreadMessages, getProfilesFromFirestore  } = useContext(MusiColaboContext);
+  const { user, getMessagesFromFirestore, handleLogout, deleteMessageFromFirestore, picture, unreadMessages, sendMessage, updateMessageReadStatus, setUnreadMessages, getProfilesFromFirestore  } = useContext(MusiColaboContext);
   const [messages, setMessages] = useState([]);
   const [newUnreadList, setNewUnreadList] = useState([]);
   const [newReadList, setNewReadList] = useState([]);
@@ -185,12 +185,24 @@ const deleteMessage = async (messageId, threadIndex) => {
             </div>
             <h1>MusiColabo</h1>
           </div>
-          <div className='col col-vacia'></div>
+          <div className='col col-button-messages'>
+           <div className='container-user-logged-messages'>
+             <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-messages-logout'>Cerrar sesión</Link>
+             <div className='userlogged'>
+              <img src={picture} className='picture-header-messages' alt="Imagen de perfil" />
+             </div>
+             <div className='container--mensajes-no-leidos'> 
+              {unreadMessages > 0 && 
+                <Link to="/messages" className="unread-messages-header-messages">
+                  <h6>{unreadMessages} mensaje(s) nuevo(s).</h6>
+                </Link>}              
+            </div>
+           </div>
+          </div>
         </div>
       </div>
       <div className='container-recibidos'>
       <h2>Mensajes recibidos:</h2>
-      {unreadMessages > 0 && <h6 className='aviso'>Tienes {unreadMessages} mensaje/s no leídos.</h6>}
       <hr/>
       <h3>No leídos:</h3>
       <ul className='mensajes-no-leidos'>
@@ -280,6 +292,7 @@ const deleteMessage = async (messageId, threadIndex) => {
             <form onSubmit={handleSubmit}>
               <textarea value={replyMessage} onChange={(e) => setReplyMessage(e.target.value)} />
               <button id='btn-reply-message-popup-submit' type='submit'>Enviar</button>
+              <br/>
               {messageSent && <span>Mensaje enviado!</span>} 
             </form>
           </div>

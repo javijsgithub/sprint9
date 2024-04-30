@@ -41,7 +41,7 @@
 
 .musicolabo-logo-create-profile h1 {
     font-family: "Monoton";
-    margin-top: 25px;
+    margin-top: 27px;
     color: rgb(63, 125, 128);
 }
 
@@ -186,7 +186,7 @@ fieldset {
   }
   .container-form-create-profile span {
     color: rgb(16, 202, 16);
-    margin-left: 10px;
+    margin-top: 10px;
   }
 
 
@@ -197,7 +197,15 @@ fieldset {
 
     }
 
+    .musicolabo-logo-create-profile h1 {
+        font-family: "Monoton";
+        margin-top: 33px;
+        color: rgb(63, 125, 128);
+
    }
+
+   
+}
 
 
 
