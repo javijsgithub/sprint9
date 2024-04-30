@@ -27,6 +27,7 @@
     background-color:rgb(46, 44, 44);
     color: rgb(63, 125, 128);
     border: 1px solid rgb(63, 125, 128);
+    opacity: 0.7;
     box-shadow: 0 0 7px rgb(63, 125, 128);
     border-radius: 3px;
 }
@@ -78,6 +79,7 @@
 
 .col-button-messages {
     margin-top: 5px;
+    margin-right: 10px;
     display: flex;
     justify-content: flex-end;
 }
@@ -111,7 +113,7 @@
 }
 
 .unread-messages-header-messages {
-    color: rgb(63, 125, 128);
+    color: rgb(212, 167, 108);
     text-decoration: none;
     opacity: 0.7;
 }

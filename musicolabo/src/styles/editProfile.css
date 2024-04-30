@@ -76,6 +76,7 @@
 
 .col-button-edit-profile {
     margin-top: 5px;
+    margin-right: 10px;
     display: flex;
     justify-content: flex-end;
 }
