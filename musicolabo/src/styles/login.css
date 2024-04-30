@@ -9,34 +9,6 @@
 
 .container-header-login {
     padding: 5px;
-    
-}
-
-.col-logo-login {
-    text-align: center;
-}
-
-.col-logo-login h1 {
-    font-family: "Monoton";
-    color: rgb(63, 125, 128);
-}
-
-.musicolabo-logo-login {
-    margin: auto;
-    border-radius: 50px;
-    width: 100px;
-    height: 100px;
-    border: 1px solid rgb(63, 125, 128);
-    box-shadow: 0 0 9px rgb(63, 125, 128);
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-}
-
-.musicolabo-logo-login h1 {
-    font-family: "Monoton";
-    margin-top: 27px;
-    color: rgb(63, 125, 128);
 }
 
 .row-header-login {
@@ -63,6 +35,32 @@
     border-radius: 3px;
 }
 
+.col-logo-login {
+    text-align: center;
+}
+
+.musicolabo-logo-login {
+    margin: auto;
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgb(63, 125, 128);
+    box-shadow: 0 0 9px rgb(63, 125, 128);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-ini-text {
+    font-family: "Monoton";
+    margin-top: 27px;
+    color: rgb(63, 125, 128);
+}
+
+.logo-text {
+    font-family: "Monoton";
+    color: rgb(63, 125, 128);
+}
 
 .container-form-login {
     border: 1px solid rgb(63, 125, 128);
@@ -150,9 +148,16 @@
 
 @media (max-width: 768.98px) {
 
-    .musicolabo-logo-login h1 {
+    .logo-ini-text {
         font-family: "Monoton";
         margin-top: 33px;
+        color: rgb(63, 125, 128);
+    }
+
+    .logo-text {
+        font-size: 22px;
+        margin-top: 5px;
+        font-family: "Monoton";
         color: rgb(63, 125, 128);
     }
 

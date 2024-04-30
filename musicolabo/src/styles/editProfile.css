@@ -39,11 +39,6 @@
     text-align: center;
 }
 
-.col-logo-edit-profile h1 {
-    font-family: "Monoton";
-    color: rgb(63, 125, 128);
-}
-
 .musicolabo-logo-edit-profile {
     margin: auto;
     border-radius: 50px;
@@ -56,9 +51,14 @@
     justify-content: center;
 }
 
-.musicolabo-logo-edit-profile h1 {
+.logo-ini-text {
     font-family: "Monoton";
     margin-top: 27px;
+    color: rgb(63, 125, 128);
+}
+
+.logo-text {
+    font-family: "Monoton";
     color: rgb(63, 125, 128);
 }
 
@@ -274,11 +274,18 @@ video {
 @media (max-width: 767.98px) { 
 
 
-    .musicolabo-logo-edit-profile h1 {
-     font-family: "Monoton";
-     margin-top: 33px;
-     color: rgb(63, 125, 128);
-    }   
+    .logo-ini-text {
+        font-family: "Monoton";
+        margin-top: 33px;
+        color: rgb(63, 125, 128);
+    }
+
+    .logo-text {
+        font-size: 22px;
+        margin-top: 5px;
+        font-family: "Monoton";
+        color: rgb(63, 125, 128);
+    }
 }
 
 
