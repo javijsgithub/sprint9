@@ -187,7 +187,7 @@ const deleteMessage = async (messageId, threadIndex) => {
           </div>
           <div className='col col-button-messages'>
            <div className='container-user-logged-messages'>
-             <Link to="/" onClick={handleLogout} className="btn btn-secondary btn-sm" id='btn-messages-logout'>Cerrar sesión</Link>
+             <Link to="/" onClick={handleLogout} className="btn btn-secondary btn-sm" id='btn-messages-logout'>Salir</Link>
              <div className='userlogged'>
               <img src={picture} className='picture-header-messages' alt="Imagen de perfil" />
              </div>

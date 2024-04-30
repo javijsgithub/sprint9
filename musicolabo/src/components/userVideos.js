@@ -58,7 +58,7 @@ const UserVideos = () => {
           </div>
           <div className='col col-button-videos'>
            <div className='container-user-logged-videos'>
-             <Link to="/" onClick={handleLogout} className="btn btn-secondary btn-sm" id='btn-videos-logout'>Cerrar sesión</Link>
+             <Link to="/" onClick={handleLogout} className="btn btn-secondary btn-sm" id='btn-videos-logout'>Salir</Link>
              <div className='userlogged'>
               <img src={picture} className='picture-header-videos' alt="Imagen de perfil" />
              </div>
