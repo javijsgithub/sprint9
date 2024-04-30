@@ -181,9 +181,9 @@ const deleteMessage = async (messageId, threadIndex) => {
           </div>
           <div className='col col-logo-messages'>
             <div className='musicolabo-logo-messages'>
-              <h1>MC</h1>
-            </div>
-            <h1>MusiColabo</h1>
+            <h1 className='logo-ini-text'>MC</h1>
+          </div>
+            <h1 className='logo-text'>MusiColabo</h1>
           </div>
           <div className='col col-button-messages'>
            <div className='container-user-logged-messages'>

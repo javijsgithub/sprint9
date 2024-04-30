@@ -33,9 +33,9 @@ const Register = () => {
           </div>
           <div className=' col col-logo-register'>
             <div className='musicolabo-logo-register'> 
-              <h1>MC</h1>
-            </div>
-              <h1>MusiColabo</h1>
+            <h1 className='logo-ini-text'>MC</h1>
+          </div>
+            <h1 className='logo-text'>MusiColabo</h1>
           </div>
           <div className='col col-vacia'></div>
         </div>

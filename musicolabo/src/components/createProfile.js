@@ -77,9 +77,9 @@ const CreateProfile = () => {
           <div className='col col-vacia1'></div>
           <div className=' col col-logo-create-profile'>
             <div className='musicolabo-logo-create-profile'> 
-              <h1>MC</h1>
-            </div>
-              <h1>MusiColabo</h1>
+            <h1 className='logo-ini-text'>MC</h1>
+          </div>
+            <h1 className='logo-text'>MusiColabo</h1>
           </div>
           <div className='col col-vacia2'></div>
         </div>
