@@ -243,6 +243,7 @@ video {
 .checkboxes {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     padding-left: 5px;
     padding-right: 5px;
     border: 1px solid rgb(212, 167, 108);
