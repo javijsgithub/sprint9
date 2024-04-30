@@ -4,18 +4,17 @@ import { MusiColaboContext } from '../context/context';
 import { FaInstagram } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
-import { FaYoutube } from "react-icons/fa";
 import '../styles/header.css';
 
 const Header = () => {
-  const { handleLogout, loggedIn, username, picture, unreadMessages } = useContext(MusiColaboContext);
+  const { handleLogout, loggedIn, picture, unreadMessages } = useContext(MusiColaboContext);
 
    
   return (
     <div className='container-header'>
       <div className='row-header'>
         <div className='col col-redes'>
-          <FaInstagram /> <FaFacebook /> <FaSquareXTwitter /> <FaYoutube />
+          <FaInstagram /> <FaFacebook /> <FaSquareXTwitter />
         </div>
         <div className=' col col-logo'>
           <div className='musicolabo-logo'> 
@@ -29,7 +28,6 @@ const Header = () => {
             <Link to="/" onClick={handleLogout} className="btn btn-secondary" id='btn-header-logout'>Cerrar sesión</Link>
             <div className='userlogged'>
               <img src={picture} className='picture-header' alt="Imagen de perfil" />
-              <h6 className='username-header'><strong>{username}</strong></h6>
             </div>
             <div className='container--mensajes-no-leidos'> 
               {unreadMessages > 0 && 
