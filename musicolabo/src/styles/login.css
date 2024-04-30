@@ -35,7 +35,7 @@
 
 .musicolabo-logo-login h1 {
     font-family: "Monoton";
-    margin-top: 33px;
+    margin-top: 27px;
     color: rgb(63, 125, 128);
 }
 
@@ -144,4 +144,16 @@
 }
 #link-register:hover {
     color: rgb(105, 99, 99);
+}
+
+
+
+@media (max-width: 768.98px) {
+
+    .musicolabo-logo-login h1 {
+        font-family: "Monoton";
+        margin-top: 33px;
+        color: rgb(63, 125, 128);
+    }
+
 }
