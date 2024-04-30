@@ -171,7 +171,7 @@ const EditProfile = () => {
              <h6>Cambiar imagen de perfil:</h6>
         <label>
           <input
-            className='input-edit-profile'
+            className='input-picture-edit-profile'
             type="file"
             onChange={(e) => setPicture1(e.target.files[0])}
           />
@@ -195,7 +195,7 @@ const EditProfile = () => {
       <h6>Cargar video(s):</h6> 
         <label> 
           <input
-            className='input-edit-profile'
+            className='input-video-edit-profile'
             type="file"
             accept="video/*"
             multiple
