@@ -162,15 +162,15 @@
     }
 
     
-#btn-home-login {
-    background-color: rgb(46, 44, 44);
-    color: rgb(212, 167, 108);
-    opacity: 0.7;
-    border: 1px solid rgb(212, 167, 108);
-    box-shadow: 0 0 7px rgb(212, 167, 108);   
-    border-radius: 3px;
-    margin-left: 0px;
-    margin-top: 20px;
-}
+    #btn-home-login {
+        background-color: rgb(46, 44, 44);
+        color: rgb(212, 167, 108);
+        opacity: 0.7;
+        border: 1px solid rgb(212, 167, 108);
+        box-shadow: 0 0 7px rgb(212, 167, 108);   
+        border-radius: 3px;
+        margin-left: 0px;
+        margin-top: 20px;
+    }
 
 }
