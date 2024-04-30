@@ -11,12 +11,10 @@
 }
 
 .container-welcome {
-    /*border: 2px solid rgb(212, 167, 108);*/
     box-shadow: 0 0 7px rgb(212, 167, 108);
     border-radius: 5px;
     padding: 15px;
     color: rgb(63, 125, 128);
-    /*font-family: Nanum Gothic;*/
 }
 
 .container-welcome h2 {
