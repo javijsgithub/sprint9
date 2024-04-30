@@ -195,5 +195,9 @@ video {
     .col-logo-videos {
         margin-right: 10px;
     }
+
+    .col-button-videos {
+        margin-right: 0px;
+    }
     
 }

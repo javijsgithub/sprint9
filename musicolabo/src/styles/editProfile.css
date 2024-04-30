@@ -303,6 +303,10 @@ video {
     .col-logo-edit-profile {
         margin-right: 10px;
     }
+
+    .col-button-edit-profile {
+        margin-right: 0px;
+    }
     
 }
 

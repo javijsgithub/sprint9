@@ -197,6 +197,10 @@
     .col-logo {
         margin-right: 10px;
     }
+
+    .col-buttons-header {
+        margin-right: 0px;
+    }
     
 }
 

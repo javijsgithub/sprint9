@@ -308,6 +308,10 @@
     .col-logo-messages {
         margin-right: 10px;
     }
+
+    .col-button-messages {
+        margin-right: 0px;
+    }
     
 }
 
