@@ -160,11 +160,7 @@
         gap: 7px;
     }
 
-    #btn-header-register {
-        /*width: 117px;*/
-       /* margin-bottom: 70px;*/
-    }
-
+   
     .container-user-logged-header p {
         margin-bottom: 70px;
         color: rgb(46, 44, 44);
