@@ -95,7 +95,8 @@ const CreateProfile = () => {
                  <input
                  className='input-picture-form-create-profile' 
                  type="file" 
-                 onChange={(e) => setPicture(e.target.files[0])}                />
+                 onChange={(e) => setPicture(e.target.files[0])}             
+                 />
                </label>
                <h6>Cargar video(s):</h6> 
               <label> 
