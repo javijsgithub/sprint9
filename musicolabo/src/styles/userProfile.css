@@ -156,6 +156,10 @@
         font-size: smaller;
     }
 
+    .container-user-logged-profile {
+        margin-left: 40px;
+    }
+
     .col-logo-profile {
         margin-right: 10px;
     }

@@ -299,6 +299,10 @@
         font-size: smaller;
     }
 
+    .container-user-logged-messages {
+        margin-left: 40px;
+    }
+
     .col-logo-messages {
         margin-right: 10px;
     }

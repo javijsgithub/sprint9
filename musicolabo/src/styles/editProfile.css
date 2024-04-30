@@ -287,8 +287,16 @@ video {
         color: rgb(63, 125, 128);
     }
 
+    .container-user-logged-edit-profile {
+        margin-left: 20px;
+    }
+
     .unread-text {
         font-size: smaller;
+    }
+
+    .container-user-logged-videos {
+        margin-left: 40px;
     }
 
     .col-logo-edit-profile {

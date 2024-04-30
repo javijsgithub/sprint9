@@ -187,6 +187,10 @@ video {
         font-size: smaller;
     }
 
+    .container-user-logged-videos {
+        margin-left: 40px;
+    }
+
     .col-logo-videos {
         margin-right: 10px;
     }

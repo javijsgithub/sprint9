@@ -190,9 +190,7 @@
     }
 
     .container-user-logged-header {
-        display: block;
-        text-align: center;
-        margin-left: 20px;
+        margin-left: 40px;
     }
 
     .col-logo {
