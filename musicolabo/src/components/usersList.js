@@ -103,6 +103,7 @@ const UsersList = () => {
           <form onSubmit={handleSubmit}>
             <textarea value={message} onChange={(e) => setMessage(e.target.value)} />
             <button id='btn-message-popup-submit' type="submit">Enviar</button>
+            <br/>
             {messageSent && <span>Mensaje enviado!</span>}
           </form>
         </div>
