@@ -24,11 +24,6 @@
     text-align: center;
 }
 
-.col-logo h1 {
-    font-family: "Monoton";
-    color: rgb(63, 125, 128);
-}
-
 .musicolabo-logo {
     margin: auto;
     border-radius: 50px;
@@ -41,9 +36,14 @@
     justify-content: center;
 }
 
-.musicolabo-logo h1 {
+.logo-ini-text {
     font-family: "Monoton";
     margin-top: 27px;
+    color: rgb(63, 125, 128);
+}
+
+.logo-text {
+    font-family: "Monoton";
     color: rgb(63, 125, 128);
 }
 
@@ -61,10 +61,10 @@
     text-align: center;
 }
 
-.username-header {
+/*.username-header {
     color: rgb(63, 125, 128);
     margin-top: 3px;
-}
+}*/
 
 .picture-header {
     width: 40px;
@@ -161,8 +161,8 @@
     }
 
     #btn-header-register {
-        width: 117px;
-        margin-bottom: 70px;
+        /*width: 117px;*/
+       /* margin-bottom: 70px;*/
     }
 
     .container-user-logged-header p {
@@ -172,9 +172,16 @@
         color: inherit; /* Esto mantiene el color predeterminado del texto */
     }
 
-    .musicolabo-logo h1 {
+    .logo-ini-text {
         font-family: "Monoton";
         margin-top: 33px;
+        color: rgb(63, 125, 128);
+    }
+
+    .logo-text {
+        font-size: 22px;
+        margin-top: 5px;
+        font-family: "Monoton";
         color: rgb(63, 125, 128);
     }
     

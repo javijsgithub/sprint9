@@ -18,9 +18,9 @@ const Header = () => {
         </div>
         <div className=' col col-logo'>
           <div className='musicolabo-logo'> 
-            <h1>MC</h1>
+            <h1 className='logo-ini-text'>MC</h1>
           </div>
-            <h1>MusiColabo</h1>
+            <h1 className='logo-text'>MusiColabo</h1>
         </div>
         <div className=' col col-buttons-header'>
           {loggedIn ? (
