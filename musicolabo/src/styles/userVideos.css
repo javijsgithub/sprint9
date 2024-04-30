@@ -164,11 +164,10 @@ video {
     }
 
     video {
-        width: 375px;
-        height: 355px;
+        width: 300px;
+        height: 325px;
         margin-bottom: 25px;
-        margin: auto;
-       
+       margin: auto;
     }
 
     .logo-ini-text {
