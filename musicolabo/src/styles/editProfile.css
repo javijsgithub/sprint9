@@ -286,6 +286,11 @@ video {
         font-family: "Monoton";
         color: rgb(63, 125, 128);
     }
+
+    .unread-text {
+        font-size: small;
+    }
+    
 }
 
 

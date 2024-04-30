@@ -151,6 +151,7 @@
 @media (max-width: 767.98px) { 
 
     .col-buttons-header {
+        
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -182,6 +183,12 @@
         font-family: "Monoton";
         color: rgb(63, 125, 128);
     }
+
+    .unread-text {
+        font-size: small;
+    }
+
+    
     
     
 }

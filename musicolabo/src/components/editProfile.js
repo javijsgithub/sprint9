@@ -150,7 +150,7 @@ const EditProfile = () => {
             <div className='container--mensajes-no-leidos'> 
               {unreadMessages > 0 && 
                 <Link to="/messages" className="unread-messages-header-edit-profile">
-                  <h6>{unreadMessages} mensaje(s) nuevo(s).</h6>
+                  <h6 className='unread-text'>{unreadMessages} mensaje(s) nuevo(s).</h6>
                 </Link>}              
             </div>
            </div>
