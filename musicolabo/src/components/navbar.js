@@ -35,7 +35,7 @@ const MyNavbar = () => {
 
   return (
     
-    <Navbar className='navbar' collapseOnSelect expand="lg"  variant="dark">
+    <Navbar className='navbar' collapseOnSelect expand="xl"  variant="dark">
         <Link className="navbar-brand" id='navbar-logo' to="/"><h4>MusiColabo</h4></Link>
       <Navbar.Toggle id='toggle' aria-controls="responsive-navbar-nav" className="custom-toggler" />
       <Navbar.Collapse id="responsive-navbar-nav">
