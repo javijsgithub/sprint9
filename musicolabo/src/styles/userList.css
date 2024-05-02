@@ -157,12 +157,12 @@ img {
 
 
 
-@media (max-width: 991.98) {
+@media (max-width: 991.98px) {
 
     .row-list {
         display: block;
         margin: auto;
-    }
+    }    
 
     .card-instruments {
         height: 45px;
@@ -177,8 +177,10 @@ img {
     }
 
     .cards {
+        width: 500px;
         height: 500px;
         margin: auto;
+        margin-left: 225px;
     }
 
     .container-link {
@@ -197,7 +199,6 @@ img {
     }
 
     .card-instruments {
-        height: 45px;
         margin-bottom: 2px;
         height: 25px;
     }
