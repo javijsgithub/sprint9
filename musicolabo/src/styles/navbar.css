@@ -15,7 +15,8 @@
     color: rgb(63, 125, 128);
     font-family: "Monoton";
     font-size: large;
-    margin-left: 15px;
+    margin-left: 20px;
+    margin-right: 50px;
     align-items: center;
     justify-self: center;
     text-decoration: none;
@@ -35,13 +36,15 @@
 }
 
 .navbar-nav {
-    margin-left: 50px;
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
     width: 300px;
     justify-content: space-between;
 }
 
 #navbar-filter {
-    margin-left: 250px;
+    margin-left: 25px;
     margin-right: 15px;
 }
 
@@ -104,6 +107,10 @@
     border: 1px solid rgb(105, 99, 99); /* Color del borde cuando está enfocado */
   }
 
+  .custom-toggler {
+    margin-right: 15px;
+  }
+
 .alert-warning {
     background-color: rgb(63, 125, 128);
     border: 2px solid rgb(63, 125, 128);
@@ -133,9 +140,12 @@
 
     .navbar {
         padding-left: 20px;
-        padding-right: 20px;
+        padding-right: 0px;
         margin-bottom: 20px;
-        
+    }
+
+    .navbar-brand {
+        margin-left: 0px;
     }
 
     .navbar-nav {
