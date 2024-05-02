@@ -157,31 +157,36 @@ img {
 
 
 
-/*@media (max-width: 1024.98) {
+@media (max-width: 991.98) {
 
     .row-list {
+        display: block;
         margin: auto;
-       
-    }
-
-    .cards {
-        margin: auto;
-        height: max-content;
     }
 
     .card-instruments {
-        height: max-content;
+        height: 45px;
+        margin-bottom: 2px;
+        height: 25px;
     }
 
     .container-purpose {
-        height: 350px;
+        height: 90px;
         margin-top: 5px;
         margin-bottom: 2px;
     }
 
+    .cards {
+        height: 500px;
+        margin: auto;
+    }
+
+    .container-link {
+        margin-bottom: 2px;
+    }
     
 
-}*/
+}
 
 
 @media (max-width: 768.98px) {
