@@ -21,7 +21,6 @@
 }
 
 .cards {
-    margin: auto;
     color: rgb(63, 125, 128);
     max-width: 382px;    
     height: 520;
@@ -57,7 +56,7 @@ img {
 }
 
 .container-purpose {
-    height: 90px;
+    height: 125px;
     margin-top: 10px;
     margin-bottom: 40px;
 }
@@ -153,6 +152,33 @@ img {
     color: rgb(16, 202, 16);
     margin-top: 10px;
   }
+
+  
+/*@media (max-width: 991.98px) {
+    
+    .row-list {
+        display: block;
+        margin: auto;
+    }
+
+    .card-instruments {
+        height: max-content;
+    }
+
+    .container-purpose {
+        margin-bottom: 2px;
+    }
+
+    .cards {
+        margin: auto;
+    }
+
+    .container-link {
+        margin-bottom: 2px;
+    }
+
+ }*/
+
   
 
 
@@ -173,8 +199,7 @@ img {
     }
 
     .cards {
-        /*margin: auto;*/
-        margin: 10px auto 0;
+        margin: auto;
     }
 
     .container-link {
