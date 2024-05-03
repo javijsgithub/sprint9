@@ -13,10 +13,8 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /*justify-content: space-between;*/
     padding: 20px;
     border-radius: 5px;
-    /*border: 2px solid rgb(63, 125, 128);*/
     box-shadow: 0 0 7px rgb(63, 125, 128);
 
 }
@@ -171,14 +169,13 @@ img {
     }
 
     .container-purpose {
-        height: 90px;
         margin-top: 5px;
         margin-bottom: 2px;
     }
 
     .cards {
         width: 500px;
-        height: 500px;
+        height: 520px;
         margin: auto;
         margin-left: 225px;
     }
@@ -186,7 +183,6 @@ img {
     .container-link {
         margin-bottom: 2px;
     }
-    
 
 }
 
@@ -204,13 +200,13 @@ img {
     }
 
     .container-purpose {
-        height: 90px;
         margin-top: 5px;
         margin-bottom: 2px;
     }
 
     .cards {
-        height: 500px;
+        max-width: 382px;    
+        height: 520px;
         margin: auto;
     }
 
