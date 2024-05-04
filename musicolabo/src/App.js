@@ -9,6 +9,7 @@ import WelcomeScreen from './components/welcomeScreen.js';
 import CreateProfile from './components/createProfile.js';
 import EditProfile from './components/editProfile.js';
 import UserProfile from './components/userProfile.js';
+import UserProfileList from './components/userProfileList.js';
 import UserVideos from './components/userVideos.js';
 import Messages from './components/messages.js';
 import './App.css';
@@ -28,6 +29,7 @@ function App() {
               <Route path="/list" element={<UsersList/>} />
               <Route path="/messages" element={<Messages />} />
               <Route path="/user-profile/:userEmail" element={<UserProfile />} />
+              <Route path="/user-profile-list/:userEmail" element={<ProtectedRoute><UserProfileList /></ProtectedRoute>} />
               <Route path="/user-videos/:userEmail" element={<ProtectedRoute><UserVideos /></ProtectedRoute>} />
             </Routes>
           </Router>
