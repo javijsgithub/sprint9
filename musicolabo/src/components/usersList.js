@@ -78,7 +78,10 @@ const UsersList = () => {
               <img src={profile.picture} className="card-img-top" alt="Imagen de perfil" />
               <div className="card-body">
                 <div className='card-name-and-city'>
-                  <h3 className="card-user-name">{profile.username}</h3>
+                  <div className='user'> 
+                    <h3 className="card-user-name">{profile.username}</h3>
+                    <Link to={`/user-profile-list/${profile.email}`} className='link-user'>Perfil</Link>
+                  </div>
                   <p className='card-city'>{profile.city}</p>
                   <p className='card-instruments'>{profile.instruments.join(', ')}</p>
                 </div>
