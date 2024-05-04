@@ -15,6 +15,7 @@ const EditProfile = () => {
   const [city, setCity] = useState('');
   const [instruments, setInstruments] = useState([]);
   const [purpose, setPurpose] = useState('');
+  const [description, setDescription] = useState('');
   const [isEditMode, setIsEditMode] = useState(false);
   const [saveChangesMessage, setSaveChangesMessage] = useState(false);
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ const EditProfile = () => {
             setCity(currentUserProfile.city);
             setInstruments(currentUserProfile.instruments);
             setPurpose(currentUserProfile.purpose);
+            setDescription(currentUserProfile.description);
         }
       } catch (error) {
         console.error('Error al obtener el perfil del usuario:', error);
@@ -69,7 +71,8 @@ const EditProfile = () => {
         email,
         city,
         instruments,
-        purpose
+        purpose,
+        description
       };
       await updateProfileInFirestore(userEmail, updatedProfile);
       setSaveChangesMessage(true);
@@ -313,13 +316,26 @@ const EditProfile = () => {
             </label>
           </div>
         </label>
+        <h6>Propósito:</h6>
+        <label>
+          <textarea
+            className='area1-edit-profile'
+            value={purpose}
+            onChange={(e) => setPurpose(e.target.value)}
+            style={{ overflowWrap: 'break-word', wordWrap: 'break-word', overflow: 'hidden' }}
+            maxLength={200}
+            placeholder='(max 200 caract.)'
+          >
+          </textarea>
+        </label>
         <h6>Descripción:</h6>
         <label>
           <textarea
-            className='area-edit-profile'
-            value={purpose}
-            onChange={(e) => setPurpose(e.target.value)}
-          ></textarea>
+            className='area2-edit-profile'
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          >
+          </textarea>
         </label>
         <hr></hr>
         <div className='container-btns-save-delete'>
@@ -348,7 +364,8 @@ const EditProfile = () => {
        <div className='em'><h5>Email: </h5><p> {email}</p></div>
        <div className='ub'><h5>Ubicación: </h5><p> {city}</p></div>
        <div className='inst'><h5>Instrumentos: </h5><p>{instruments.join(', ')}</p></div>
-       <div className='desc'><h5>Descripción: </h5><p>{purpose}</p></div>
+       <div className='pro'><h5>Propósito: </h5><p>{purpose}</p></div>
+       <div className='desc'><h5>Descripción: </h5><p>{description}</p></div>
        <hr></hr>
        <h3>Videos:</h3> 
        {videos.length > 0 && (

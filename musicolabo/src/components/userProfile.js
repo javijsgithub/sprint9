@@ -12,6 +12,7 @@ const UserProfile = () => {
   const [city, setCity] = useState('');
   const [instruments, setInstruments] = useState([]);
   const [purpose, setPurpose] = useState('');
+  const [description, setDescription] = useState('');
   const [pictureUrl, setPictureUrl] = useState('');
   const [videoUrls, setVideoUrls] = useState([]);
 
@@ -27,6 +28,7 @@ const UserProfile = () => {
           setCity(userProfile.city);
           setInstruments(userProfile.instruments);
           setPurpose(userProfile.purpose);
+          setDescription(userProfile.description);
           setPictureUrl(userProfile.picture);  
           setVideoUrls(userProfile.videos || []);  
         }
@@ -76,7 +78,8 @@ const UserProfile = () => {
           <div className='nom-us'><h5>Nombre de usuario: </h5><p> {username}</p></div>
           <div className='ub'><h5>Ubicación: </h5><p> {city}</p></div>
           <div className='inst'><h5>Instrumentos: </h5><p>{instruments.join(', ')}</p></div>
-          <div className='desc'><h5>Descripción: </h5><p>{purpose}</p></div>
+          <div className='pro'><h5>Propósito: </h5><p>{purpose}</p></div>
+          <div className='desc'><h5>Descripción: </h5><p>{description}</p></div>
           <hr></hr>
             <div className="video-container">
               <h3>Videos:</h3>

@@ -13,6 +13,7 @@ const CreateProfile = () => {
   const [instruments, setInstruments] = useState([]);
   const [city, setCity] = useState('');
   const [purpose, setPurpose] = useState('');
+  const [description, setDescription] = useState('');
   const navigate = useNavigate();
   const [profileSent, setProfileSent] = useState(false);
 
@@ -54,7 +55,8 @@ const CreateProfile = () => {
         email,
         city,
         instruments,
-        purpose
+        purpose,
+        description
       };
 
       await createNewDocument(userProfile);
@@ -203,12 +205,23 @@ const CreateProfile = () => {
                  </div>
                 </label>
                 <br/>
-              <h6>Descripcion:</h6>
+              <h6>Propósito:</h6>
+                <label>
+                  <textarea
+                    className='input-purpose-form-create-profile'
+                    value={purpose}
+                    onChange={(e) => setPurpose(e.target.value)}
+                    maxLength={200}
+                    placeholder='(max 200 caract.)'
+                  >
+                  </textarea>
+                </label>
+                <h6>Descripcion:</h6>
                 <label>
                   <textarea
                     className='input-description-form-create-profile'
-                    value={purpose}
-                    onChange={(e) => setPurpose(e.target.value)}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                   >
                   </textarea>
                 </label>
