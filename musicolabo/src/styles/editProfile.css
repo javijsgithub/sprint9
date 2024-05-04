@@ -267,6 +267,7 @@ video {
     box-shadow: 0 0 7px rgb(212, 167, 108);   
     opacity: 0.7;
     border-radius: 3px;
+    padding: 3px 8px 3px 8px;
 }
 
 .area2-edit-profile {
@@ -276,6 +277,8 @@ video {
     box-shadow: 0 0 7px rgb(212, 167, 108);   
     opacity: 0.7;
     border-radius: 3px;
+    padding: 3px 8px 3px 8px;
+
 }
 
 .container-btns-save-delete {
