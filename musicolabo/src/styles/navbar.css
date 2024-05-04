@@ -140,10 +140,13 @@
 @media (max-width: 767.98px) {
 
     .navbar {
-        padding-left: 20px;
+        padding-left: 10px;
         padding-right: 0px;
         margin-bottom: 20px;
-        
+    }
+
+    .navbar-brand {
+        margin-left: 0px;
     }
 
     .navbar-nav {
