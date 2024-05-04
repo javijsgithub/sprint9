@@ -323,8 +323,8 @@ const EditProfile = () => {
             value={purpose}
             onChange={(e) => setPurpose(e.target.value)}
             style={{ overflowWrap: 'break-word', wordWrap: 'break-word', overflow: 'hidden' }}
-            maxLength={200}
-            placeholder='(max 200 caract.)'
+            maxLength={175}
+            placeholder='(max 175 caract.)'
           >
           </textarea>
         </label>

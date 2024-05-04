@@ -211,8 +211,8 @@ const CreateProfile = () => {
                     className='input-purpose-form-create-profile'
                     value={purpose}
                     onChange={(e) => setPurpose(e.target.value)}
-                    maxLength={200}
-                    placeholder='(max 200 caract.)'
+                    maxLength={175}
+                    placeholder='(max 175 caract.)'
                   >
                   </textarea>
                 </label>
