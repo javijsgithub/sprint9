@@ -164,6 +164,16 @@
     color: rgb(63, 125, 128);
 }
 
+.input-purpose-form-create-profile {
+    background-color: rgb(46, 44, 44);
+    color: rgb(63, 125, 128);
+    border: 1px solid rgb(212, 167, 108);
+    box-shadow: 0 0 7px rgb(212, 167, 108);
+    opacity: 0.7;
+    border-radius: 3px;
+    padding-left: 8px;
+}
+
 .input-description-form-create-profile {
     background-color: rgb(46, 44, 44);
     color: rgb(63, 125, 128);
