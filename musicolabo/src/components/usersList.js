@@ -80,7 +80,7 @@ const UsersList = () => {
                 <div className='card-name-and-city'>
                   <div className='user'> 
                     <h3 className="card-user-name">{profile.username}</h3>
-                    <Link to={`/user-profile-list/${profile.email}`} className='link-user'>Perfil</Link>
+                    <Link to={`/user-profile-list/${profile.email}`} className='link-user'><strong>Perfil</strong></Link>
                   </div>
                   <p className='card-city'>{profile.city}</p>
                   <p className='card-instruments'>{profile.instruments.join(', ')}</p>

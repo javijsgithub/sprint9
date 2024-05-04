@@ -42,7 +42,7 @@ img {
 .user {
     display: flex;
     justify-content: space-between;
-    padding-right: 15px;
+    padding-right: 5px;
     margin-bottom: 10px;
 }
 
@@ -54,7 +54,7 @@ img {
     text-decoration: none;
     color: rgb(212, 167, 108);
     opacity: 0.7;
-    margin-top: 6px;
+    margin-top: 8px;
 }
 
 /*.card-name {
