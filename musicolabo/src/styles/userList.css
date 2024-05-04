@@ -46,6 +46,10 @@ img {
     margin-bottom: 10px;
 }
 
+.card-user-name {
+    margin-top: 1px;
+}
+
 .link-user {
     text-decoration: none;
     color: rgb(212, 167, 108);
