@@ -73,7 +73,7 @@ const UsersList = () => {
       <MyNavbar />
       <div className="row-list">
         {(filteredProfiles.length > 0 ? filteredProfiles : userProfiles).map(profile => (
-          <div className="col-md-3 mb-4 sm-3 col-cards" key={profile.email}>
+          <div className="col-xxxl-2 col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-cards" key={profile.email}>
             <div className="cards">
               <img src={profile.picture} className="card-img-top" alt="Imagen de perfil" />
               <div className="card-body">
