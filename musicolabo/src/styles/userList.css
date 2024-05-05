@@ -21,10 +21,10 @@
 
 .cards {
     color: rgb(63, 125, 128);
-    max-width: 382px;    
+    max-width: 380px;    
     height: 520;
     border-radius: 5px;
-    margin: 10px 10px 0px 10px;
+    margin: 10px 10px 20px 10px;
     box-shadow: 0 0 7px rgb(63, 125, 128);
 }
 
@@ -56,10 +56,9 @@ img {
     opacity: 0.7;
     margin-top: 8px;
 }
-
-/*.card-name {
-    margin-bottom: 0px;
-}*/
+.link-user:hover {
+    color:rgb(105, 99, 99);
+}
 
 .card-city {
     margin-top: 0px;
@@ -68,6 +67,7 @@ img {
 }
 
 .card-instruments {
+    height: max-content;
     margin-bottom: 2px;
     border-bottom: 1px outset rgb(212, 167, 108);
 }
@@ -76,8 +76,6 @@ img {
     height: 125px;
     margin-top: 10px;
     margin-bottom: 40px;
-    width: 100%;
-    
 }
 
 .container-link {
@@ -172,45 +170,41 @@ img {
     margin-top: 10px;
   }
 
-  
-/*@media (max-width: 991.98px) {
-    
-    .row-list {
-        display: block;
-        margin: auto;
-    }
 
-    .card-instruments {
-        height: max-content;
+  
+@media (max-width: 991.98px) {
+    
+   .row-list {
+    padding-right: 8px;
+   }
+
+    .cards {
+        margin-right: 20px;
+        margin-bottom: 20px;
     }
 
     .container-purpose {
         margin-bottom: 2px;
     }
 
-    .cards {
-        margin: auto;
-    }
+    
 
     .container-link {
         margin-bottom: 2px;
     }
 
- }*/
-
-  
-
-
+ }
+ 
 
 @media (max-width: 767.98px) {
     
     .row-list {
         display: block;
-        margin: auto;
+        padding-right: 20px;
     }
 
-    .card-instruments {
-        height: max-content;
+    .link-user {
+        margin-top: 5px;
     }
 
     .container-purpose {
@@ -218,7 +212,8 @@ img {
     }
 
     .cards {
-        margin: auto;
+       margin: auto;
+       margin-bottom: 30px;
     }
 
     .container-link {
