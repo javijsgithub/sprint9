@@ -8,6 +8,7 @@
     color: rgb(212, 167, 108);
     border-radius: 5px;
     box-shadow: 0 0 7px rgb(212, 167, 108);
+    padding: 10px;
 }
 
 .navbar-brand {
@@ -45,8 +46,8 @@
 
 #navbar-filter {
     margin-top: 10px;
-    margin-left: 25px;
-    margin-right: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #input-instrument-navbar {
@@ -108,9 +109,7 @@
     border: 1px solid rgb(105, 99, 99); /* Color del borde cuando está enfocado */
   }
 
-  .custom-toggler {
-    margin-right: 15px;
-  }
+  
 
 .alert-warning {
     background-color: rgb(63, 125, 128);
@@ -124,6 +123,7 @@
 
 .custom-toggler {
     width: min-content;
+    margin-right: 10px;
     border: 2px solid rgb(63, 125, 128);
     box-shadow: 0 0 7px rgb(63, 125, 128);
     color: transparent;
@@ -137,24 +137,30 @@
 }
 
 
+
+@media (max-width: 991.98px) {
+
+    .navbar-nav {
+        margin-left: 20px;
+    }
+}
+
 @media (max-width: 767.98px) {
 
-    .navbar {
+   /* .navbar {
         padding-left: 10px;
         padding-right: 0px;
         margin-bottom: 20px;
-    }
+    }*/
 
     .navbar-brand {
         margin-left: 0px;
+        margin-right: 0px;
     }
 
     .navbar-nav {
-        display: flex;
-        flex-direction: row;
         margin-left: 0px;
         justify-content: flex-start;
-        padding: 5px;
     }
 
     .nav-link {
@@ -163,6 +169,11 @@
 
     #navbar-filter {
         margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .custom-toggler {
+        margin-right: 0px;
     }
 }
 
