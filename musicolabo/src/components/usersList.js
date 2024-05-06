@@ -102,7 +102,7 @@ const UsersList = () => {
       {showForm && (
         <div className="message-popup">
           <button id="popup-close" onClick={() => setShowForm(false)}>&times;</button>
-          <h2>Enviar mensaje a {recipientName}</h2>
+          <h2>Mensaje para {recipientName}</h2>
           <form onSubmit={handleSubmit}>
             <textarea value={message} onChange={(e) => setMessage(e.target.value)} />
             <button id='btn-message-popup-submit' type="submit">Enviar</button>
