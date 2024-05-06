@@ -147,6 +147,32 @@
 
 }
 
+@media (max-width: 1199.98px) {
+    .col-buttons-header {
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-end;
+        gap: 10px;
+        margin-right: 5px;
+
+    }
+ }
+
+@media (max-width: 991.98px) {
+    .col-buttons-header {
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-end;
+        margin-right: 5px;
+
+    }
+ }
+
+
 
 
 @media (max-width: 767.98px) { 
