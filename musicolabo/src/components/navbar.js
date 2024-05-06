@@ -44,7 +44,7 @@ const MyNavbar = () => {
             <>
             <div className='navbar-nav'>
               <Link className="nav-link" id='nav-link-1' to="/">Home</Link>
-              <Link className="nav-link" id='nav-link-2' to="/edit-profile">Perfil</Link>
+              <Link className="nav-link" id='nav-link-2' to="/edit-profile">Mi perfil</Link>
               <Link className="nav-link" id='nav-link-3' to="/messages">Mensajes</Link>
             </div>
             </>
