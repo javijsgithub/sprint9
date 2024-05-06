@@ -67,7 +67,8 @@ const UserProfileList = () => {
                 </Link>}              
             </div>
            </div>
-          </div>        </div>
+          </div>     
+        </div>
       </div>
       
       {email && (
