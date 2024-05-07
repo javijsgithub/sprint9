@@ -135,6 +135,23 @@
 .picture-profile {
     margin-bottom: 20px;
     max-width: 250px;
+    box-shadow: 0 0 7px rgb(63, 125, 128);
+}
+
+.vid-container {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.vid {
+    width: 250px;
+    height: 255px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 7px rgb(63, 125, 128);
+
 }
 
 
