@@ -312,6 +312,7 @@ video {
 .save-success-message {
     margin-top: 10px;
     color: rgb(16, 202, 16);
+    opacity: 0.7;
 }
 
 #btn-delete {

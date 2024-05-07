@@ -168,6 +168,7 @@
   .message-popup span {
     color: rgb(16, 202, 16);
     margin-top: 10px;
+    opacity: 0.7;
   }
 
 
