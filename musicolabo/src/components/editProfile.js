@@ -18,6 +18,7 @@ const EditProfile = () => {
   const [description, setDescription] = useState('');
   const [isEditMode, setIsEditMode] = useState(false);
   const [saveChangesMessage, setSaveChangesMessage] = useState(false);
+  const [key, setKey] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -137,12 +138,27 @@ const EditProfile = () => {
     };
   }, [videos]);
 
+
   const handleRemoveVideo = (index) => {
-    const updatedVideos = [...videos];
-    updatedVideos.splice(index, 1);
-    setVideos(updatedVideos);
+    console.log('Índice para eliminar:', index); // Muestra el índice del array que se va a eliminar [0, 1, 2] (0 o 1 o 2) dependiendo de la posicion del video que eliminamos
+    console.log('Estado de los videos antes de eliminar:', videos.map(v => v.previewUrl || v)); // Muestra el estado previo a la eliminacion del video
+
+    // Crear una copia del arreglo de videos para manipular
+    let updatedVideos = [...videos];
+
+    // Revocar la URL si es necesaria
+    if (typeof updatedVideos[index] !== 'string') {
+        URL.revokeObjectURL(updatedVideos[index].previewUrl);
+    }
+    updatedVideos.splice(index, 1);  // Eliminar el video en el índice dado
+
+    console.log('Estado de videos después de eliminar:', updatedVideos.map(v => v.previewUrl || v));  //Muestra el estado actual despues de la eliminacion del video
+
+    setVideos(updatedVideos); // Actualizar el estado con el nuevo arreglo de videos
+    setKey(prevKey => prevKey + 1); 
     console.log("Video eliminado correctamente")
   };
+  
 
   const handleRemovePicture = () => {
     setPictureUrl('/images/profile_image.jpg'); // Ruta relativa a la carpeta imagen de la carpeta public
@@ -236,7 +252,7 @@ const EditProfile = () => {
             onChange={handleVideoChange}
           />
         </label>
-      <div className='preview-video'>
+      <div key={key} className='preview-video'>
         {videos.map((video, index) => (
           <div key={index} className="video-item">
            <video controls>
@@ -400,7 +416,7 @@ const EditProfile = () => {
        <hr></hr>
        <h3>Videos:</h3> 
        {videos.length > 0 && (
-         <div className='preview-video'>
+          <div key={key} className='preview-video'>
            {videos.map((video, index) => (
           <div key={index}>
             <video controls>
