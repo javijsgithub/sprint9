@@ -16,9 +16,11 @@ const Messages = () => {
   const [expandedMessageIndexes, setExpandedMessageIndexes] = useState([]);
   const [messageSent, setMessageSent] = useState(false);
   const [originalMessageId, setOriginalMessageId] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchMessages = async () => {
+      setLoading(true);  // Activar el spinner
       try {
         if (user) {
           const threads = await getMessagesFromFirestore(user.email);
@@ -39,6 +41,9 @@ const Messages = () => {
       } catch (error) {
         console.error('Error al obtener mensajes del usuario:', error);
       }
+
+      setLoading(false);  // Desactivar el spinner
+
     };
     fetchMessages();
   }, [getMessagesFromFirestore, user]);
@@ -203,6 +208,7 @@ const deleteMessage = async (messageId, threadIndex) => {
       </div>
       <div className='container-recibidos'>
       <h2>Mensajes recibidos:</h2>
+      {loading && <div className="spinner-messages"></div>}
       <hr/>
       <h3>No leídos:</h3>
       <ul className='mensajes-no-leidos'>

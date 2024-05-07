@@ -16,6 +16,7 @@ const CreateProfile = () => {
   const [description, setDescription] = useState('');
   const navigate = useNavigate();
   const [profileSent, setProfileSent] = useState(false);
+  const [loading, setLoading] = useState(false); 
 
   
 
@@ -34,6 +35,7 @@ const CreateProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);  // Activar el spinner
         
     try {
       let pictureUrl = ''; // Inicializar la URL de la imagen como vacía por defecto
@@ -60,7 +62,8 @@ const CreateProfile = () => {
       };
 
       await createNewDocument(userProfile);
-      setProfileSent(true); // para "Perfil creado con exito!"
+      setLoading(false);  // Desactivar el spinner
+      setProfileSent(true); // muestra "Perfil creado con exito!"
       
       setTimeout(() => {
         setProfileSent(false);
@@ -235,6 +238,7 @@ const CreateProfile = () => {
               Crear perfil
             </button>
             <br/>
+            {loading && <div className="spinner"></div>}
             {profileSent && <span>Perfil creado con Exito!</span>}
          </form>
       </div>

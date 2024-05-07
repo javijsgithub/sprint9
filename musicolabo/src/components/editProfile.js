@@ -19,6 +19,7 @@ const EditProfile = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [saveChangesMessage, setSaveChangesMessage] = useState(false);
   const [key, setKey] = useState(0);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,6 +50,7 @@ const EditProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Activa el spinner
   
     try {
       let newPictureUrl = pictureUrl;
@@ -94,12 +96,19 @@ const EditProfile = () => {
       setVideos(newVideoUrls); 
       setSaveChangesMessage(true);
 
+      // Simula tiempo de espera de la red y procesamiento
+    setTimeout(async () => {
+      await updateProfileInFirestore(userEmail, updatedProfile);
+      setLoading(false); // Desactiva el spinner justo antes de mostrar el mensaje
+      setSaveChangesMessage(true);
+
 
       setTimeout(() => {
         setSaveChangesMessage(false);
         setIsEditMode(false);
         navigate('/edit-profile'); // Redirecciona al perfil del usuario después de actualizar
       }, 1500);
+    }, 1000); 
 
     } catch (error) {
       console.error('Error al actualizar el perfil del usuario:', error);
@@ -389,6 +398,7 @@ const EditProfile = () => {
           <button type="submit" className="btn btn-secondary" id='btn-save'>Guardar cambios</button>
           <button className="btn btn-danger" onClick={handleDeleteProfile} id='btn-delete'>Eliminar Cuenta</button>
         </div>
+        {loading && <div className="spinner"></div>} {/* Spinner aquí */}
         {saveChangesMessage && (
         <div className="save-success-message">
           Cambios guardados con éxito!
