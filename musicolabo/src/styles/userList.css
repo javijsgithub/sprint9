@@ -28,9 +28,9 @@
     box-shadow: 0 0 7px rgb(63, 125, 128);
 }
 
-img {
+.card-img-top {
     max-width: 400px;
-    height: 250px;
+    height: 300px;
     border-bottom: 1px solid rgb(63, 125, 128);
 }
 
