@@ -83,14 +83,17 @@ const UserProfile = () => {
           <hr></hr>
             <div className="video-container">
               <h3>Videos:</h3>
+              <div className='vid-container'>
               {videoUrls.map((videoUrl, index) => (
                 <div key={index}>
-                  <video controls>
+                  <video controls className='vid'>
                     <source src={videoUrl} type="video/mp4" />
                     Tu navegador no admite la etiqueta de video.
                   </video>
                 </div>
               ))}
+              </div>
+              
             </div>
         </div>
       )}
