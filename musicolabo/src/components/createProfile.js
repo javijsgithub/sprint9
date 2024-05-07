@@ -4,9 +4,9 @@ import { MusiColaboContext } from '../context/context';
 import '../styles/createProfile.css';
 
 const CreateProfile = () => {
-  const { userEmail, createNewDocument, uploadImage, uploadVideo } = useContext(MusiColaboContext);
+  const { userEmail, createNewDocument, uploadImage/*, uploadVideo */} = useContext(MusiColaboContext);
   const [picture, setPicture] = useState('');
-  const [videos, setVideos] = useState([]);
+  /*const [videos, setVideos] = useState([]);*/
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState(userEmail); // Email prellenado
@@ -28,10 +28,10 @@ const CreateProfile = () => {
     }
   };
 
-  const handleVideoChange = (e) => {
+  /*const handleVideoChange = (e) => {
     setVideos([...videos, ...e.target.files]);
-  };
-  
+  };*/
+
   const handleSubmit = async (e) => {
     e.preventDefault();
         
@@ -44,12 +44,12 @@ const CreateProfile = () => {
       // Si no se proporcionó una imagen, usar la imagen predeterminada
       pictureUrl = '/images/profile_image.jpg'; // Ruta relativa a la carpeta imagen de la carpeta public
     }
-      const videoUrls = await Promise.all(videos.map(async (video) => {
+      /*const videoUrls = await Promise.all(videos.map(async (video) => {
         return await uploadVideo(video);
-      }));
+      }));*/
       const userProfile = {
         picture: pictureUrl,
-        videos: videoUrls,
+       /* videos: videoUrls,*/
         name,
         username,
         email,
@@ -100,7 +100,7 @@ const CreateProfile = () => {
                  onChange={(e) => setPicture(e.target.files[0])}             
                  />
                </label>
-               <h6>Cargar video(s):</h6> 
+              {/* <h6>Cargar video(s):</h6> 
               <label> 
                 <input
                 className='input-video-form-create-profile' 
@@ -109,7 +109,7 @@ const CreateProfile = () => {
                 multiple
                 onChange={handleVideoChange}
                 />
-            </label>
+            </label>*/} 
                <h6>Nombre:</h6>
                <label>
                  <input
