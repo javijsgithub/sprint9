@@ -48,21 +48,35 @@ const EditProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-        let newPictureUrl = pictureUrl;
-        let newVideoUrls = [];
-
-        if (picture1) {
-          newPictureUrl = await uploadImage(picture1);
-          setPictureUrl(newPictureUrl)
+      let newPictureUrl = pictureUrl;
+      let newVideoUrls = [];
+  
+      // Subir nueva imagen si hay una seleccionada
+      if (picture1) {
+        newPictureUrl = await uploadImage(picture1);
+        setPictureUrl(newPictureUrl);
+      }
+  
+      // Subir videos y crear URLs permanentes
+      newVideoUrls = await Promise.all(videos.map(async (video) => {
+        if (typeof video === 'string') {
+          return video; // Si es una URL permanente, reutilizarla.
+        } else if (video && video.file) {
+          const downloadURL = await uploadVideo(video.file);
+          URL.revokeObjectURL(video.previewUrl); // Revocar la URL temporal
+          return downloadURL;
+        } else {
+          console.error('Video no es un objeto de archivo válido:', video);
+          return null;
         }
-
-        if (videos.length > 0) {
-          newVideoUrls = await Promise.all(videos.map(async (video) => {
-            return await uploadVideo(video);
-          }));
-        }
+      }));
+  
+      // Filtrar URLs nulas si alguna carga falló o había datos no válidos
+      newVideoUrls = newVideoUrls.filter(url => url !== null);
+  
+      // Actualizar el perfil con la nueva información
       const updatedProfile = {
         picture: newPictureUrl || null,
         videos: newVideoUrls || [],
@@ -74,7 +88,9 @@ const EditProfile = () => {
         purpose,
         description
       };
+
       await updateProfileInFirestore(userEmail, updatedProfile);
+      setVideos(newVideoUrls); 
       setSaveChangesMessage(true);
 
 
@@ -103,8 +119,23 @@ const EditProfile = () => {
   };
 
   const handleVideoChange = (e) => {
-    setVideos([...videos, ...e.target.files]);
+    const files = Array.from(e.target.files).map(file => ({
+      file: file,
+      previewUrl: URL.createObjectURL(file) // Asigna una URL de vista previa al cargar
+    }));
+    setVideos(prevVideos => [...prevVideos, ...files]);
   };
+
+  useEffect(() => {
+    // Esto asume que `videos` es un array de File objects
+    return () => {
+      videos.forEach(video => {
+        if (typeof video !== 'string') {
+          URL.revokeObjectURL(video.previewUrl);
+        }
+      });
+    };
+  }, [videos]);
 
   const handleRemoveVideo = (index) => {
     const updatedVideos = [...videos];
@@ -209,8 +240,8 @@ const EditProfile = () => {
         {videos.map((video, index) => (
           <div key={index} className="video-item">
            <video controls>
-           <source src={typeof video === 'string' ? video : URL.createObjectURL(video)} type="video/mp4" />
-          Tu navegador no admite la etiqueta de video.
+            <source src={video.previewUrl || video} type="video/mp4" /> 
+            Tu navegador no admite la etiqueta de video.
            </video>
            <button
              type="button"
@@ -373,8 +404,8 @@ const EditProfile = () => {
            {videos.map((video, index) => (
           <div key={index}>
             <video controls>
-            <source src={typeof video === 'string' ? video : URL.createObjectURL(video)} type="video/mp4" />
-              Your browser does not support the video tag.
+             <source src={video.previewUrl || video} type="video/mp4" /> 
+             Your browser does not support the video tag.
             </video>
           </div>
         ))}
