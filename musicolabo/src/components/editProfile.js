@@ -365,8 +365,8 @@ const EditProfile = () => {
             <label>
               <input
                 type="checkbox"
-                value="batería"
-                checked={instruments.includes("batería")}
+                value="bateria"
+                checked={instruments.includes("bateria")}
                 onChange={handleInstrumentChange}
               /> Batería
             </label>
