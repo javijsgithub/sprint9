@@ -45,6 +45,7 @@
 }
 
 #navbar-filter {
+    display: flex;
     margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
@@ -56,7 +57,6 @@
     border: 1px solid rgb(212, 167, 108);
     box-shadow: 0 0 7px rgb(212, 167, 108);
     opacity: 0.7;
-
 }
 #input-instrument-navbar::placeholder {
     color: rgb(212, 167, 108);
@@ -75,7 +75,6 @@
     border: 1px solid rgb(212, 167, 108);
     box-shadow: 0 0 7px rgb(212, 167, 108);
     opacity: 0.7;
-
 }
 #input-city-navbar::placeholder {
     color: rgb(212, 167, 108);
@@ -87,9 +86,6 @@
     color: rgb(63, 125, 128) !important; /* Color de texto cuando está enfocado */
     border: 2px solid rgb(212, 167, 108) !important; /* Color y anchura del borde cuando está enfocado */
   }
-
-
-
 
 #btn-filter {
     color: rgb(63, 125, 128);
@@ -108,8 +104,6 @@
     color: rgb(105, 99, 99); /* Color de texto cuando está enfocado */
     border: 1px solid rgb(105, 99, 99); /* Color del borde cuando está enfocado */
   }
-
-  
 
 .alert-warning {
     background-color: rgb(63, 125, 128);
@@ -147,13 +141,7 @@
 }
 
 @media (max-width: 767.98px) {
-
-   /* .navbar {
-        padding-left: 10px;
-        padding-right: 0px;
-        margin-bottom: 20px;
-    }*/
-
+   
     .navbar-brand {
         margin-left: 0px;
         margin-right: 0px;
@@ -180,6 +168,24 @@
     .alert-warning {
         margin-left: 0px;
     }
+}
+
+@media (max-width: 352.98px) {
+
+    #navbar-filter {
+        display: block;
+    }
+
+    #input-instrument-navbar {
+        width: 150px;
+        margin-bottom: 10px;
+    }
+
+    #input-city-navbar {
+        width: 150px;
+        margin-bottom: 10px;
+    }
+    
 }
 
 

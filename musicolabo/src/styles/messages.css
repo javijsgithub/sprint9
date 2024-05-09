@@ -336,4 +336,54 @@
 }
 
 
+@media (max-width: 375.98px) {
+
+    .container-user-logged-messages {
+        margin-left: 0px;
+        padding: 0px;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .col-logo-messages {
+        text-align: center;
+        margin-right: 0px;
+        width: max-content;
+    }
+
+    .row-header-messages {
+        padding-left: 5px;
+    }
+    
+}
+
+
+@media (max-width: 339.98px) {
+
+    #btn-volver-messages {
+       margin-bottom: 20px;
+    }
+
+    .col-logo-messages {
+        text-align: center;
+        margin: auto;
+    }
+
+    .container-user-logged-messages {
+        margin: auto;
+    }
+
+    .col-button-messages {
+        text-align: center;
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    .row-header-messages {
+        display: block;
+        text-align: center;
+        margin: auto;
+    }
+    
+}
 

@@ -229,4 +229,44 @@
     }
     
 }
+@media (max-width: 339.98px) {
+
+    #btn-home-header {
+       margin-bottom: 20px;
+    }
+
+    .col-redes {
+        margin-bottom: 20px;
+    }
+
+    .col-logo-header {
+        text-align: center;
+        margin: auto;
+    }
+
+    .container-user-logged-header {
+        margin: auto;
+    }
+
+    .col-buttons-header {
+        text-align: center;
+        margin: auto;
+        margin-top: 20px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .col-button-header {
+        text-align: center;
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    .row-header {
+        display: block;
+        text-align: center;
+        margin: auto;
+    }
+    
+}
 

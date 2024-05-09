@@ -388,6 +388,56 @@ video {
     
 }
 
+@media (max-width: 375.98px) {
+
+    .container-user-logged-edit-profile {
+        margin-left: 0px;
+        padding: 0px;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .col-logo-edit-profile {
+        text-align: center;
+        margin-right: 0px;
+        width: max-content;
+    }
+
+    .row-header-edit-profile {
+        padding-left: 5px;
+    }
+    
+}
+
+
+@media (max-width: 339.98px) {
+
+    #btn-home-edit-profile {
+       margin-bottom: 20px;
+    }
+
+    .col-logo-edit-profile {
+        text-align: center;
+        margin: auto;
+    }
+
+    .container-user-logged-edit-profile {
+        margin: auto;
+    }
+
+    .col-button-edit-profile {
+        text-align: center;
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    .row-header-edit-profile {
+        display: block;
+        text-align: center;
+        margin: auto;
+    }
+    
+}
 
 
 
