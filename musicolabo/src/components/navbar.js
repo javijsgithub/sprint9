@@ -50,7 +50,7 @@ const MyNavbar = () => {
             </>
           )}
         </Nav>
-        <Form className="d-flex" id='navbar-filter'>
+        <Form id='navbar-filter'>
           <FormControl
             id='input-instrument-navbar'
             type="search"
