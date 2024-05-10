@@ -151,7 +151,6 @@
     margin-right: 5px;
     margin-bottom: 10px;
     box-shadow: 0 0 7px rgb(63, 125, 128);
-
 }
 
 
@@ -186,6 +185,15 @@
     .col-button-profile {
         margin-right: 0px;
     }
+
+    .vid-container {
+        gap: 0px;
+    }
+
+    .vid {
+        margin-bottom: 15px;
+    }
+    
 
 }
 
