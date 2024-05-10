@@ -78,7 +78,7 @@ const UserVideos = () => {
            <div className='container-vid'>
            {videos.map((video, index) => (
             <div key={index}>
-              <video controls className='video'>
+              <video controls preload="metadata" className='video'>
               <source src={video.previewUrl || video} type="video/mp4" /> 
                 Tu navegador no admite la etiqueta de video.
               </video>
