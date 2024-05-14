@@ -16,6 +16,7 @@ const UsersList = () => {
   const [message, setMessage] = useState('');
   const [messageSent, setMessageSent] = useState(false);
   const navigate = useNavigate(); // Usar el hook useNavigate para la redirección a login si no estas logeado y quieres enviar un mensaje a un usuario
+  const [loading, setLoading] = useState(false);
 
 
 
@@ -36,9 +37,11 @@ const UsersList = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);  // Activar el spinner
     try {
       await sendMessage(recipientEmail, recipientName, message);
       setMessage('');
+      setLoading(false); // Desactiva el spinner justo antes de mostrar el mensaje "mensaje enviado!"
       setMessageSent(true); // para "mensaje enviado!"
       
        //Temporizador para restablecer messageSent después de 2 segundos
@@ -107,6 +110,7 @@ const UsersList = () => {
             <textarea value={message} onChange={(e) => setMessage(e.target.value)} />
             <button id='btn-message-popup-submit' type="submit">Enviar</button>
             <br/>
+            {loading && <div className="spinner-send-messages"></div>}
             {messageSent && <span>Mensaje enviado!</span>}
           </form>
         </div>
