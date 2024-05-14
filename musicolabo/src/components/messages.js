@@ -140,11 +140,13 @@ const deleteMessage = async (messageId, threadIndex) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);  // Activar el spinner
     try {
       console.log('Original Message ID:', originalMessageId);
       await sendMessage(recipientEmail, recipientName, replyMessage, originalMessageId);
       setReplyMessage('');
       setOriginalMessageId(null);
+      setLoading(false); // Desactiva el spinner justo antes de mostrar el mensaje "mensaje enviado!"
       setMessageSent(true); // para "mensaje enviado!"
 
       //Temporizador para restablecer messageSent después de 1,5 segundos
@@ -299,6 +301,7 @@ const deleteMessage = async (messageId, threadIndex) => {
               <textarea value={replyMessage} onChange={(e) => setReplyMessage(e.target.value)} />
               <button id='btn-reply-message-popup-submit' type='submit'>Enviar</button>
               <br/>
+              {loading && <div className="spinner-send-reply-messages"></div>}
               {messageSent && <span>Mensaje enviado!</span>} 
             </form>
           </div>
