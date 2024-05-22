@@ -27,11 +27,9 @@
     margin-top: 20px;
 }
 #btn-home-register:hover {
-    background-color: rgb(46, 44, 44);
     color: rgb(105, 99, 99);
     opacity: 1;
     border: 1px solid rgb(105, 99, 99);
-    border-radius: 3px;
 }
 
 .col-logo-register {
@@ -116,11 +114,9 @@
     margin-top: 14px;
 }
 #btn-form-register:hover {
-    background-color: rgb(46, 44, 44);
     color: rgb(105, 99, 99);
     opacity: 1;
     border: 1px solid rgb(105, 99, 99);
-    border-radius: 3px;
 }
 
 .error-message-email-register {
