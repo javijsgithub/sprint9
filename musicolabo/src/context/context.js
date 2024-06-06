@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import { auth, db, storage } from '../firebase';
 import { addDoc, collection, getDocs, getDoc, doc, updateDoc, deleteDoc, query, where, orderBy, setDoc, onSnapshot } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, deleteUser, onAuthStateChanged } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, deleteUser, onAuthStateChanged, sendPasswordResetEmail as sendPasswordResetEmailFirebase } from "firebase/auth";
 export const MusiColaboContext = createContext();
 
 const MusiColaboContextProvider = ({ children }) => {
@@ -97,6 +97,16 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   };
 
+  //  Funcion para recuperar la contraseña.
+  const sendPasswordResetEmail = async (email) => {
+    try {
+      await sendPasswordResetEmailFirebase(auth, email);
+      console.log('Correo de recuperación enviado');
+    } catch (error) {
+      console.error('Error al enviar el correo de recuperación:', error);
+      throw error;
+    }
+  };
 
   // Función para crear un nuevo documento de perfil de usuario en Firestore.
   const createNewDocument = async (userProfile) => {
@@ -462,7 +472,8 @@ const MusiColaboContextProvider = ({ children }) => {
       updateMessageReadStatus,
       setUnreadMessages,
       setFilteredProfiles,
-      getVideosByUserEmail
+      getVideosByUserEmail,
+      sendPasswordResetEmail
       }}>
       {children}
     </MusiColaboContext.Provider>
