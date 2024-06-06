@@ -12,6 +12,7 @@ import UserProfile from './components/userProfile.js';
 import UserProfileList from './components/userProfileList.js';
 import UserVideos from './components/userVideos.js';
 import Messages from './components/messages.js';
+import RecoverPassword from './components/recoverPassword.js';
 import './App.css';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
               <Route path="/header" element={<Header />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/recover-password" element={<RecoverPassword />} />
               <Route path="/create-profile" element={<CreateProfile />} />
               <Route path="/edit-profile" element={<EditProfile />} />
               <Route path="/list" element={<UsersList/>} />
