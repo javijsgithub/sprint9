@@ -7,14 +7,18 @@ const RecoverPassword = () => {
   const { sendPasswordResetEmail } = useContext(MusiColaboContext);
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessage('');
+    setError('');
     try {
       await sendPasswordResetEmail(email);
-      setMessage('Correo de recuperación enviado. Revisa tu bandeja de entrada.');
+      setMessage('Correo de recuperación enviado con exito!. Revisa tu bandeja de entrada.');
     } catch (error) {
-      setMessage('Error al enviar el correo de recuperación. Asegúrate de que el correo es correcto.');
+      setError('Error al enviar el correo de recuperación. Asegúrate de que el correo es correcto.');
       console.error('Error al enviar el correo de recuperación:', error);
     }
   };
@@ -54,6 +58,7 @@ const RecoverPassword = () => {
           </button>
         </form>
         {message && <p className="message">{message}</p>}
+        {error && <p className="error-message-email-recover-password">{error}</p>} 
       </div>
     </div>
   );
