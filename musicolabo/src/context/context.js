@@ -97,9 +97,19 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   };
 
+
   //  Funcion para recuperar la contraseña.
   const sendPasswordResetEmail = async (email) => {
     try {
+      // Verificar si el correo electrónico existe en Firestore
+      const userQuery = query(collection(db, 'userData'), where('email', '==', email));
+      const querySnapshot = await getDocs(userQuery);
+  
+      if (querySnapshot.empty) {
+        throw new Error('No se encontró ninguna cuenta con este correo electrónico.');
+      }
+  
+      // Si el correo existe, enviar el correo de recuperación de contraseña
       await sendPasswordResetEmailFirebase(auth, email);
       console.log('Correo de recuperación enviado');
     } catch (error) {
@@ -107,6 +117,7 @@ const MusiColaboContextProvider = ({ children }) => {
       throw error;
     }
   };
+  
 
   // Función para crear un nuevo documento de perfil de usuario en Firestore.
   const createNewDocument = async (userProfile) => {
