@@ -62,6 +62,9 @@ const Login = () => {
 
           {error && <p className="error-message-email-login">{error}</p>} 
 
+          <div className='container-link-recover-password'>
+             <p>¿Olvidaste tu contraseña? <Link to="/recover-password" type="submit" id='link-recover-password'>Recuperar contraseña</Link></p>
+          </div>
           <button 
             onSubmit={handleLogin} 
             type="submit" 
