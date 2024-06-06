@@ -104,6 +104,20 @@
     opacity: 0.5;
 }
 
+.container-link-recover-password {
+    color: rgb(63, 125, 128);
+    margin-top: 8px;
+}
+
+#link-recover-password {
+    text-decoration: none;
+    color: rgb(212, 167, 108);
+    opacity: 0.7;
+}
+#link-recover-password:hover {
+    color: rgb(105, 99, 99);
+}
+
 #btn-form-login {
     background-color: rgb(46, 44, 44);
     color: rgb(212, 167, 108);
@@ -111,7 +125,7 @@
     border: 1px solid rgb(212, 167, 108);
     box-shadow: 0 0 7px rgb(212, 167, 108);   
     border-radius: 3px;
-    margin-top: 14px;
+    margin-top: 3px;
 }
 #btn-form-login:hover {
     color: rgb(105, 99, 99);
