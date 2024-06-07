@@ -156,6 +156,7 @@
     height: 100px;
     margin-bottom: 15px;
     box-shadow: 0 0 7px rgb(63, 125, 128);
+    border-radius: 5px;
 }
 
 #btn-delete-picture {
@@ -198,6 +199,7 @@ video {
     margin-right: 10px;
     margin-bottom: 10px;
     box-shadow: 0 0 7px rgb(63, 125, 128);
+    border-radius: 5px;
 }
 
 #btn-delete-video {
@@ -211,6 +213,7 @@ video {
     width: 250px;
     height: 250px;
     margin-bottom: 15px;
+    border-radius: 5px;
 }
 
 .input-edit-profile {
