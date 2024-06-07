@@ -100,16 +100,23 @@ const deleteMessage = async (messageId, threadIndex) => {
     await deleteMessageFromFirestore(user.email, messageId);
 
     // Una vez eliminado el mensaje de Firestore, actualizamos el estado localmente para reflejar el cambio
-    const updatedMessages = [...messages];
-    updatedMessages[threadIndex].unread = updatedMessages[threadIndex].unread.filter(msg => msg.id !== messageId);
-    updatedMessages[threadIndex].read = updatedMessages[threadIndex].read.filter(msg => msg.id !== messageId);
-    setMessages(updatedMessages);
+    setMessages(prevMessages => {
+      const updatedMessages = [...prevMessages];
+      updatedMessages[threadIndex].unread = updatedMessages[threadIndex].unread.filter(msg => msg.id !== messageId);
+      updatedMessages[threadIndex].read = updatedMessages[threadIndex].read.filter(msg => msg.id !== messageId);
+      return updatedMessages;
+    });
+    // Actualizar el contaddor de aviso de mensajes no leidos
+    setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1));
+
+    // Asegurarse de que el índice del hilo no se quede en la lista de expandidos
+    setExpandedMessageIndexes(prevIndexes => prevIndexes.filter(id => id !== messageId));
 
     // Actualizar el contador de mensajes no leídos si es necesario
-    const message = messages[threadIndex].unread.find(msg => msg.id === messageId);
-    if (message) {
-      setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1));
-    }
+   // const message = messages[threadIndex].unread.find(msg => msg.id === messageId);
+    //if (message) {
+     // setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1));
+    //}
     console.log('Mensaje eliminado correctamente');
   } catch (error) {
     console.error('Error al eliminar el mensaje:', error);
@@ -118,14 +125,13 @@ const deleteMessage = async (messageId, threadIndex) => {
 
 
   
-  const expandMessage = (threadIndex) => {
-    // Expandir o contraer el hilo según su estado actual
-    setExpandedMessageIndexes(prevIndexes =>
-      prevIndexes.includes(threadIndex) ?
-      prevIndexes.filter(index => index !== threadIndex) :
-      [...prevIndexes, threadIndex]
-    );
-  };
+const expandMessage = (messageId) => {
+  setExpandedMessageIndexes(prevIndexes =>
+    prevIndexes.includes(messageId) ?
+    prevIndexes.filter(index => index !== messageId) :
+    [...prevIndexes, messageId]
+  );
+};
   
   
   const handleReply = (recipientEmail, recipientName, originalMessageId) => {
@@ -221,7 +227,7 @@ const deleteMessage = async (messageId, threadIndex) => {
                 <strong>De:</strong> {getUserNameByEmail(message.sender)}, <Link to={`/user-profile/${message.sender}`} className='link-messages'>Ver perfil</Link><br />
                 <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
                 <br/>
-                 {expandedMessageIndexes.includes(threadIndex) && ( // Solo expande el mensaje si el índice del hilo está en expandedMessageIndexes
+                {expandedMessageIndexes.includes(message.id) && ( // Solo expande el mensaje si el índice del hilo está en expandedMessageIndexes
           <>
                 <strong>Mensaje:</strong> {message.message}<br />
 
@@ -236,7 +242,7 @@ const deleteMessage = async (messageId, threadIndex) => {
                   </div>
                                   )}
                      
-                     <button onClick={() => expandMessage(threadIndex)}>Cerrar mensaje</button>
+                     <button onClick={() => expandMessage(message.id)}>Cerrar mensaje</button>
                      <button onClick={() => moveMessage(threadIndex, user.email)}>Mover a leídos</button> 
                      <button onClick={() => handleReply(message.sender, getUserNameByEmail(message.sender), message.id)}>Responder</button>
                      <br/> 
@@ -244,9 +250,9 @@ const deleteMessage = async (messageId, threadIndex) => {
 
           </>
         )}
-        {!expandedMessageIndexes.includes(threadIndex) && ( // Renderiza el botón "Ver mensaje" solo si el índice del hilo NO está expandido
-          <button onClick={() => expandMessage(threadIndex)}>Ver mensaje</button>
-        )}
+         {!expandedMessageIndexes.includes(message.id) && (
+           <button onClick={() => expandMessage(message.id)}>Ver mensaje</button>
+         )}
         <hr></hr>
       </li>
     ))}
