@@ -38,6 +38,9 @@ const EditProfile = () => {
             setInstruments(currentUserProfile.instruments);
             setPurpose(currentUserProfile.purpose);
             setDescription(currentUserProfile.description);
+        } else { //cuando el usuario elimina su cuenta y se intenta volver a cargar su perfil, evitar que se mantenga la pagina de editar el perfil sin usuario logeado, hacer logout y redirigir a la pagina de login.
+          handleLogout();
+          navigate('/login');
         }
       } catch (error) {
         console.error('Error al obtener el perfil del usuario:', error);
@@ -45,7 +48,7 @@ const EditProfile = () => {
     };
 
     fetchUserProfile();
-  }, [getProfilesFromFirestore, userEmail]);
+  }, [getProfilesFromFirestore, userEmail, handleLogout, navigate]);
 
 
   const handleSubmit = async (e) => {
@@ -179,7 +182,7 @@ const EditProfile = () => {
       try {
         await deleteUserProfileFromFirestore(userEmail);
         handleLogout(); // Hacer logout si la eliminación fue exitosa
-        navigate('/login'); // Redirigir al usuario a la pagina de login
+       //navigate('/login'); // Redirigir al usuario a la pagina de login
       } catch (error) {
         alert("Ocurrió un error al eliminar el perfil: " + error.message);
       }
