@@ -30,8 +30,8 @@ function App() {
               <Route path="/edit-profile" element={<EditProfile />} />
               <Route path="/list" element={<UsersList/>} />
               <Route path="/messages" element={<Messages />} />
-              <Route path="/user-profile/:userEmail" element={<UserProfile />} />
-              <Route path="/user-profile-list/:userEmail" element={<ProtectedRoute><UserProfileList /></ProtectedRoute>} />
+              <Route path="/user-profile/:username" element={<UserProfile />} />
+              <Route path="/user-profile-list/:username" element={<ProtectedRoute><UserProfileList /></ProtectedRoute>} />
               <Route path="/user-videos/:userEmail" element={<ProtectedRoute><UserVideos /></ProtectedRoute>} />
             </Routes>
           </Router>
