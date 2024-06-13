@@ -224,7 +224,7 @@ const expandMessage = (messageId) => {
           <React.Fragment key={threadIndex}>
             {thread.unread.map((message, index) => (
               <li key={`${threadIndex}-${index}`} className={message.replyTo ? "reply-message" : "original-message"}>
-                <strong>De:</strong> {getUserNameByEmail(message.sender)}, <Link to={`/user-profile/${message.sender}`} className='link-messages'>Ver perfil</Link><br />
+                <strong>De:</strong> {getUserNameByEmail(message.sender)}, <Link to={`/user-profile/${getUserNameByEmail(message.sender)}`} className='link-messages'>Ver perfil</Link><br />
                 <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
                 <br/>
                 {expandedMessageIndexes.includes(message.id) && ( // Solo expande el mensaje si el índice del hilo está en expandedMessageIndexes
@@ -266,7 +266,7 @@ const expandMessage = (messageId) => {
           <React.Fragment key={threadIndex}>
             {thread.read.map((message, index) => (
               <li key={`${threadIndex}-${index}`} className={message.replyTo ? "reply-message" : "original-message"}>
-                <strong>De:</strong> {getUserNameByEmail(message.sender)}, <Link to={`/user-profile/${message.sender}`} className='link-messages'>Ver perfil</Link><br />
+                <strong>De:</strong> {getUserNameByEmail(message.sender)}, <Link to={`/user-profile/${getUserNameByEmail(message.sender)}`} className='link-messages'>Ver perfil</Link><br />
                 <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
                 <br/>
 
