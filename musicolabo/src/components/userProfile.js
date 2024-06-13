@@ -6,8 +6,7 @@ import '../styles/userProfile.css';
 
 const UserProfile = () => {
   const { getProfilesFromFirestore, handleLogout, picture, unreadMessages } = useContext(MusiColaboContext);
-  const { userEmail } = useParams();
-  const [username, setUsername] = useState('');
+  const { username } = useParams();
   const [email, setEmail] = useState('');
   const [city, setCity] = useState('');
   const [instruments, setInstruments] = useState([]);
@@ -21,9 +20,8 @@ const UserProfile = () => {
     const fetchUserProfile = async () => {
       try {
         const profiles = await getProfilesFromFirestore();
-        const userProfile = profiles.find(profile => profile.email === userEmail);
+        const userProfile = profiles.find(profile => profile.username === username);
         if (userProfile) {
-          setUsername(userProfile.username);
           setEmail(userProfile.email);
           setCity(userProfile.city);
           setInstruments(userProfile.instruments);
@@ -38,7 +36,7 @@ const UserProfile = () => {
     };
 
     fetchUserProfile();
-  }, [getProfilesFromFirestore, userEmail]);
+  }, [getProfilesFromFirestore, username]);
 
 
   return (
