@@ -18,9 +18,7 @@ const UsersList = () => {
   const navigate = useNavigate(); // Usar el hook useNavigate para la redirección a login si no estas logeado y quieres enviar un mensaje a un usuario
   const [loading, setLoading] = useState(false);
 
-
-
-
+  
   const handleSendMessage = (recipientEmail, recipientName) => {
     if (!loggedIn) {
       // Redirigir al usuario a la página de inicio de sesión si no está logeado
@@ -83,7 +81,7 @@ const UsersList = () => {
                 <div className='card-name-and-city'>
                   <div className='user'> 
                     <h3 className="card-user-name">{profile.username}</h3>
-                    <Link to={`/user-profile-list/${profile.email}`} className='link-user'><strong>Perfil</strong></Link>
+                    <Link to={`/user-profile-list/${profile.username}`} className='link-user'><strong>Perfil</strong></Link>
                   </div>
                   <p className='card-city'>{profile.city}</p>
                   <p className='card-instruments'>{profile.instruments.join(', ')}</p>
