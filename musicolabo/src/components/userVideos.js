@@ -5,8 +5,8 @@ import { useParams } from 'react-router-dom';
 import '../styles/userVideos.css';
 
 const UserVideos = () => {
-  const { getVideosByUserEmail, picture, handleLogout, unreadMessages, getProfilesFromFirestore } = useContext(MusiColaboContext);
-  const { userEmail } = useParams();
+  const { getVideosByUsername, picture, handleLogout, unreadMessages, getProfilesFromFirestore } = useContext(MusiColaboContext);
+  const { username } = useParams();
   const [videos, setVideos] = useState([]);
   const [userProfiles, setUserProfiles] = useState([]);
 
@@ -14,17 +14,17 @@ const UserVideos = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const userVideos = await getVideosByUserEmail(userEmail);
+        const userVideos = await getVideosByUsername(username);
         setVideos(userVideos);
       } catch (error) {
         console.error('Error al obtener los videos del usuario:', error);
       }
     };
 
-    if (userEmail) {
+    if (username) {
       fetchVideos();
     }
-  }, [userEmail, getVideosByUserEmail]);
+  }, [username, getVideosByUsername]);
 
   useEffect(() => {
     const fetchUserProfiles = async () => {
@@ -38,11 +38,9 @@ const UserVideos = () => {
     fetchUserProfiles();
   }, [getProfilesFromFirestore]);
 
-  const getUserNameByEmail = (email) => {
-    const userProfile = userProfiles.find(profile => profile.email === email);
-    return userProfile ? userProfile.username : email; // Si se encuentra el perfil, devolver el nombre de usuario, de lo contrario, devolver el correo electrónico
-  };
+  console.log(`Number of user profiles fetched: ${userProfiles.length}`);
 
+ 
   return (
     <div className='container-fluid' id='container-user-videos'>
       <div className='container-header-videos'>
@@ -73,7 +71,7 @@ const UserVideos = () => {
       </div>
       {videos.length > 0 ? (
         <div className="container-videos">
-           <h2 className='videos-de'>Videos de {getUserNameByEmail(userEmail)}:</h2>
+           <h2 className='videos-de'>Videos de {username}:</h2>
            <hr></hr>
            <div className='container-vid'>
            {videos.map((video, index) => (
