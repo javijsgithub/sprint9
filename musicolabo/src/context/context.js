@@ -201,7 +201,7 @@ const MusiColaboContextProvider = ({ children }) => {
     }
   };
 
-  //  Funcion para obtener los videos del usuario. 
+  //  Funcion para obtener los videos del usuario por el email. 
   const getVideosByUserEmail = async (email) => {
     try {
       const querySnapshot = await getDocs(query(collection(db, 'userData'), where('email', '==', email)));
@@ -221,6 +221,27 @@ const MusiColaboContextProvider = ({ children }) => {
       throw error;
     }
   };
+
+  // Función para obtener los videos del usuario por el nombre de usuario
+  const getVideosByUsername = async (username) => {
+    try {
+      const querySnapshot = await getDocs(query(collection(db, 'userData'), where('username', '==', username)));
+      if (!querySnapshot.empty) {
+        const userData = querySnapshot.docs[0].data();
+        if (userData.videos) {
+          return userData.videos;
+        } else {
+          return [];
+        }
+      } else {
+        console.error('No se encontró ningún usuario con el nombre de usuario proporcionado:', username);
+        return [];
+      }
+    } catch (error) {
+      console.error('Error al obtener los videos del usuario:', error);
+      throw error;
+    }
+  };  
 
 
   // Funcion para obtener los perfiles de usuarios en el listado.
@@ -484,6 +505,7 @@ const MusiColaboContextProvider = ({ children }) => {
       setUnreadMessages,
       setFilteredProfiles,
       getVideosByUserEmail,
+      getVideosByUsername,
       sendPasswordResetEmail
       }}>
       {children}
