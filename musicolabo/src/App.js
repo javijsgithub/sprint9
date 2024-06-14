@@ -32,7 +32,7 @@ function App() {
               <Route path="/messages" element={<Messages />} />
               <Route path="/user-profile/:username" element={<UserProfile />} />
               <Route path="/user-profile-list/:username" element={<ProtectedRoute><UserProfileList /></ProtectedRoute>} />
-              <Route path="/user-videos/:userEmail" element={<ProtectedRoute><UserVideos /></ProtectedRoute>} />
+              <Route path="/user-videos/:username" element={<ProtectedRoute><UserVideos /></ProtectedRoute>} />
             </Routes>
           </Router>
          </MusiColaboContextProvider>
