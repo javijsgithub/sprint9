@@ -91,7 +91,7 @@ const UsersList = () => {
                     <p className='card-purpose'>{profile.purpose}</p>
                   </div>
                   <div className='container-link'>
-                    <Link to={`/user-videos/${profile.email}`} className='link-card' id='link-videos'>Ver videos</Link>
+                    <Link to={`/user-videos/${profile.username}`} className='link-card' id='link-videos'>Ver videos</Link>
                     <button className='link-card2' id='button-message' onClick={() => handleSendMessage(profile.email, profile.username)}>Enviar mensaje</button>
                   </div>
                 </div>
