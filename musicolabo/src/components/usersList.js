@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { MusiColaboContext } from '../context/context';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -15,9 +15,48 @@ const UsersList = () => {
   const [recipientName, setRecipientName] = useState('');
   const [message, setMessage] = useState('');
   const [messageSent, setMessageSent] = useState(false);
-  const navigate = useNavigate(); // Usar el hook useNavigate para la redirección a login si no estas logeado y quieres enviar un mensaje a un usuario
+  const navigate = useNavigate(); // Usar el hook useNavigate para la redirección a login si no estas logeado y quieres enviar un mensaje a un usuario o ver sus videos y perfil
   const [loading, setLoading] = useState(false);
+  //const [scrollPosition, setScrollPosition] = useState(0);
 
+  // Función para guardar la posición del scroll al navegar a User-videos y user-profile-link
+  const handleLinkClick = () => {
+    const currentPosition = window.scrollY;
+    console.log('Posición del scroll al salir:', currentPosition);
+    localStorage.setItem('scrollPosition', currentPosition.toString());
+  };
+
+  // Restaurar la posición del scroll cuando se regrese
+  useLayoutEffect(() => {
+    const storedPosition = localStorage.getItem('scrollPosition');
+    if (storedPosition) {
+      const parsedPosition = parseInt(storedPosition, 10);
+      if (!isNaN(parsedPosition) && parsedPosition !== 0) {
+        console.log('Posición del scroll al volver:', parsedPosition);
+        window.scrollTo(0, parsedPosition);
+        localStorage.removeItem('scrollPosition'); // Limpiar después de restaurar
+      }
+    }
+  }, []);
+ 
+  // Restaurar la posición del scroll cuando se regrese
+ /* useLayoutEffect(() => {
+    console.log('Posición del scroll al regresar:', scrollPosition);
+    window.scrollTo(0, scrollPosition);
+  }, [scrollPosition]);*/
+
+ // Guardar la posición del scroll justo antes de salir de la página
+/*  useEffect(() => {
+    const storedPosition = localStorage.getItem('scrollPosition');
+    if (storedPosition) {
+      const parsedPosition = parseInt(storedPosition, 10);
+      if (!isNaN(parsedPosition) && parsedPosition !== 0) {
+        window.scrollTo(0, parsedPosition);
+        setScrollPosition(parsedPosition); // Actualizar el estado si es necesario
+        localStorage.removeItem('scrollPosition'); // Limpiar después de restaurar
+      }
+    }
+  }, [scrollPosition]);*/
   
   const handleSendMessage = (recipientEmail, recipientName) => {
     if (!loggedIn) {
@@ -81,7 +120,7 @@ const UsersList = () => {
                 <div className='card-name-and-city'>
                   <div className='user'> 
                     <h3 className="card-user-name">{profile.username}</h3>
-                    <Link to={`/user-profile-list/${profile.username}`} className='link-user'><strong>Perfil</strong></Link>
+                    <Link to={`/user-profile-list/${profile.username}`} className='link-user' onClick={handleLinkClick}><strong>Perfil</strong></Link>
                   </div>
                   <p className='card-city'>{profile.city}</p>
                   <p className='card-instruments'>{profile.instruments.join(', ')}</p>
@@ -91,7 +130,7 @@ const UsersList = () => {
                     <p className='card-purpose'>{profile.purpose}</p>
                   </div>
                   <div className='container-link'>
-                    <Link to={`/user-videos/${profile.username}`} className='link-card' id='link-videos'>Ver videos</Link>
+                    <Link to={`/user-videos/${profile.username}`} className='link-card' id='link-videos' onClick={handleLinkClick}>Ver videos</Link>
                     <button className='link-card2' id='button-message' onClick={() => handleSendMessage(profile.email, profile.username)}>Enviar mensaje</button>
                   </div>
                 </div>
