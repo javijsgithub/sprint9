@@ -24,7 +24,7 @@ const UsersList = () => {
     const currentPosition = window.scrollY;
     console.log('Posición del scroll al salir:', currentPosition);
     localStorage.setItem('scrollPosition', currentPosition.toString());
-  };
+};
 
   // Restaurar la posición del scroll cuando se regrese
   useLayoutEffect(() => {
@@ -40,7 +40,7 @@ const UsersList = () => {
   }, []);
  
   // Restaurar la posición del scroll cuando se regrese
- /* useLayoutEffect(() => {
+  /*useLayoutEffect(() => {
     console.log('Posición del scroll al regresar:', scrollPosition);
     window.scrollTo(0, scrollPosition);
   }, [scrollPosition]);*/
@@ -60,7 +60,7 @@ const UsersList = () => {
   
   const handleSendMessage = (recipientEmail, recipientName) => {
     if (!loggedIn) {
-      // Redirigir al usuario a la página de inicio de sesión si no está logeado
+      // Redirigir al usuario a la página de inicio de sesión si al querer enviar un mensaje no está logeado
       navigate('/login');
 
       } else {
