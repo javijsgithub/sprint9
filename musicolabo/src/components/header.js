@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { MusiColaboContext } from '../context/context';
 import { FaInstagram } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
 import '../styles/header.css';
 
 const Header = () => {
@@ -13,7 +12,7 @@ const Header = () => {
     <div className='container-header'>
       <div className='row-header'>
         <div className='col col-redes'>
-          <FaInstagram /> <FaFacebook />
+          <FaInstagram size={25}/>
         </div>
         <div className=' col col-logo'>
           <div className='musicolabo-logo'> 
