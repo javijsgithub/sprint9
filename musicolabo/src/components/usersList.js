@@ -28,18 +28,16 @@ const UsersList = () => {
  
  // Restaurar la posición del scroll a donde estaba antes de salir del listado y aplicarla al regresar
  useEffect(() => {
-    const storedPosition = localStorage.getItem('scrollPosition');
-    if (storedPosition) {
-      const parsedPosition = parseInt(storedPosition, 10);
-      if (!isNaN(parsedPosition) && parsedPosition !== 0) {
-        //console.log('Posición del scroll al volver:', parsedPosition);
-        setTimeout(() => {
-          window.scrollTo(0, parsedPosition);
-          localStorage.removeItem('scrollPosition');
-        }, 100)// Retraso de 100 ms para permitir la carga del contenido
-      }
+  const storedPosition = localStorage.getItem('scrollPosition');
+  if (storedPosition && userProfiles.length > 0) {
+    const parsedPosition = parseInt(storedPosition, 10);
+    if (!isNaN(parsedPosition) && parsedPosition !== 0) {
+      console.log('Posición del scroll al volver:', parsedPosition);
+      window.scrollTo(0, parsedPosition);
+      localStorage.removeItem('scrollPosition');
     }
-  }, []);
+  }
+}, [userProfiles]);  //  Se restaurará la posicion del scroll despues de que se carguen los perfiles de usuario
 
   
   const handleSendMessage = (recipientEmail, recipientName) => {
