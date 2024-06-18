@@ -18,6 +18,27 @@ const Messages = () => {
   const [originalMessageId, setOriginalMessageId] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // Función para guardar la posición del scroll al navegar a user-profile
+  const handleLinkClick = () => {
+    const currentPosition = window.scrollY;
+    console.log('Posición del scroll al salir:', currentPosition);
+    localStorage.setItem('scrollPosition', currentPosition.toString());
+};
+ 
+ // Restaurar la posición del scroll a donde estaba antes de salir del listado de mensajes y aplicarla al regresar
+ useEffect(() => {
+  const storedPosition = localStorage.getItem('scrollPosition');
+  if (storedPosition && messages.length > 0) {
+    const parsedPosition = parseInt(storedPosition, 10);
+    if (!isNaN(parsedPosition) && parsedPosition !== 0) {
+      console.log('Posición del scroll al volver:', parsedPosition);
+      window.scrollTo(0, parsedPosition);
+      localStorage.removeItem('scrollPosition');
+    }
+  }
+}, [messages]);  //  Se restaurará la posicion del scroll despues de que se carguen los mensajes
+
+
   useEffect(() => {
     const fetchMessages = async () => {
       setLoading(true);  // Activar el spinner
@@ -224,7 +245,7 @@ const expandMessage = (messageId) => {
           <React.Fragment key={threadIndex}>
             {thread.unread.map((message, index) => (
               <li key={`${threadIndex}-${index}`} className={message.replyTo ? "reply-message" : "original-message"}>
-                <strong>De:</strong> {getUserNameByEmail(message.sender)}, <Link to={`/user-profile/${getUserNameByEmail(message.sender)}`} className='link-messages'>Ver perfil</Link><br />
+                <strong>De:</strong> {getUserNameByEmail(message.sender)}, <Link to={`/user-profile/${getUserNameByEmail(message.sender)}`} className='link-messages' onClick={handleLinkClick}>Ver perfil</Link><br />
                 <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
                 <br/>
                 {expandedMessageIndexes.includes(message.id) && ( // Solo expande el mensaje si el índice del hilo está en expandedMessageIndexes
@@ -266,7 +287,7 @@ const expandMessage = (messageId) => {
           <React.Fragment key={threadIndex}>
             {thread.read.map((message, index) => (
               <li key={`${threadIndex}-${index}`} className={message.replyTo ? "reply-message" : "original-message"}>
-                <strong>De:</strong> {getUserNameByEmail(message.sender)}, <Link to={`/user-profile/${getUserNameByEmail(message.sender)}`} className='link-messages'>Ver perfil</Link><br />
+                <strong>De:</strong> {getUserNameByEmail(message.sender)}, <Link to={`/user-profile/${getUserNameByEmail(message.sender)}`} className='link-messages' onClick={handleLinkClick}>Ver perfil</Link><br />
                 <strong>Fecha y hora:</strong> {new Date(message.timestamp.toDate()).toLocaleString()}<br />
                 <br/>
 
