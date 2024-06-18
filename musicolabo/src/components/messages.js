@@ -21,7 +21,7 @@ const Messages = () => {
   // Función para guardar la posición del scroll al navegar a user-profile
   const handleLinkClick = () => {
     const currentPosition = window.scrollY;
-    console.log('Posición del scroll al salir:', currentPosition);
+   //console.log('Posición del scroll al salir:', currentPosition);
     localStorage.setItem('scrollPosition', currentPosition.toString());
 };
  
@@ -31,7 +31,7 @@ const Messages = () => {
   if (storedPosition && messages.length > 0) {
     const parsedPosition = parseInt(storedPosition, 10);
     if (!isNaN(parsedPosition) && parsedPosition !== 0) {
-      console.log('Posición del scroll al volver:', parsedPosition);
+      //console.log('Posición del scroll al volver:', parsedPosition);
       window.scrollTo(0, parsedPosition);
       localStorage.removeItem('scrollPosition');
     }
@@ -45,7 +45,7 @@ const Messages = () => {
       try {
         if (user) {
           const threads = await getMessagesFromFirestore(user.email);
-          console.log('Hilos de mensajes obtenidos:', threads);
+          //console.log('Hilos de mensajes obtenidos:', threads);
   
           // Aquí adaptamos la estructura a las listas existentes de leídos y no leídos.
           const newUnreadList = [];
@@ -133,12 +133,8 @@ const deleteMessage = async (messageId, threadIndex) => {
     // Asegurarse de que el índice del hilo no se quede en la lista de expandidos
     setExpandedMessageIndexes(prevIndexes => prevIndexes.filter(id => id !== messageId));
 
-    // Actualizar el contador de mensajes no leídos si es necesario
-   // const message = messages[threadIndex].unread.find(msg => msg.id === messageId);
-    //if (message) {
-     // setUnreadMessages(prevUnreadMessages => Math.max(0, prevUnreadMessages - 1));
-    //}
-    console.log('Mensaje eliminado correctamente');
+   
+    //console.log('Mensaje eliminado correctamente');
   } catch (error) {
     console.error('Error al eliminar el mensaje:', error);
   }
@@ -156,7 +152,7 @@ const expandMessage = (messageId) => {
   
   
   const handleReply = (recipientEmail, recipientName, originalMessageId) => {
-    console.log('Message ID received:', originalMessageId);
+    //console.log('Message ID received:', originalMessageId);
     setRecipientEmail(recipientEmail);
     setRecipientName(recipientName);
     setOriginalMessageId(originalMessageId);
@@ -169,7 +165,7 @@ const expandMessage = (messageId) => {
     e.preventDefault();
     setLoading(true);  // Activar el spinner
     try {
-      console.log('Original Message ID:', originalMessageId);
+      //console.log('Original Message ID:', originalMessageId);
       await sendMessage(recipientEmail, recipientName, replyMessage, originalMessageId);
       setReplyMessage('');
       setOriginalMessageId(null);
