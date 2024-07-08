@@ -2,7 +2,6 @@ import React from 'react';
 import Header from './header';
 import { Link } from 'react-router-dom';
 import '../styles/welcomeScreen.css';
-import Iubenda from './iubenda';
 
 
 function WelcomeScreen() {
@@ -20,7 +19,6 @@ function WelcomeScreen() {
           </p>
           <Link to="/list" className="btn btn-secondary" id='btn-welcome-screen-go-to-user-list'>Ir al listado de artistas</Link>
         </div>
-        <Iubenda/>
        </div>
     );
   }
