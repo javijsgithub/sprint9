@@ -13,6 +13,7 @@ import UserProfileList from './components/userProfileList.js';
 import UserVideos from './components/userVideos.js';
 import Messages from './components/messages.js';
 import RecoverPassword from './components/recoverPassword.js';
+import Iubenda from './components/iubenda.js';
 import './App.css';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
               <Route path="/user-profile/:username" element={<UserProfile />} />
               <Route path="/user-profile-list/:username" element={<ProtectedRoute><UserProfileList /></ProtectedRoute>} />
               <Route path="/user-videos/:username" element={<ProtectedRoute><UserVideos /></ProtectedRoute>} />
+              <Route path="/iubenda" element={< Iubenda/>} />
             </Routes>
           </Router>
          </MusiColaboContextProvider>
