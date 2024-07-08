@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext, useState/*, useEffect */} from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { MusiColaboContext } from '../context/context';
@@ -8,6 +8,25 @@ const MyNavbar = () => {
 
   const { getProfilesFromFirestore, setFilteredProfiles, loggedIn, instrumentFilter, setInstrumentFilter, cityFilter, setCityFilter } = useContext(MusiColaboContext);
   const [noProfilesFound, setNoProfilesFound] = useState(false);
+
+ /* const handleScroll = useCallback(() => {
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+      if (window.scrollY > navbar.offsetTop) {
+        navbar.classList.add('fixed-top');
+      } else {
+        navbar.classList.remove('fixed-top');
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [handleScroll]);*/
+
 
   const filterProfiles = useCallback(async () => {
     try {
@@ -35,7 +54,7 @@ const MyNavbar = () => {
 
   return (
     
-    <Navbar className='navbar' collapseOnSelect expand="xl"  variant="dark">
+      <Navbar className='navbar' collapseOnSelect expand="xl"  variant="dark">
         <Link className="navbar-brand" id='navbar-logo' to="/"><h4>MusiColabo</h4></Link>
       <Navbar.Toggle id='toggle' aria-controls="responsive-navbar-nav" className="custom-toggler" />
       <Navbar.Collapse id="responsive-navbar-nav">

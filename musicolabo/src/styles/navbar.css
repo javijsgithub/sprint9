@@ -9,7 +9,15 @@
     border-radius: 5px;
     box-shadow: 0 0 7px rgb(212, 167, 108);
     padding: 10px;
+   /* position: relative; /* Posición inicial */
 }
+
+/*.navbar.fixed-top {
+    margin: auto;
+    margin-top: 0.4px;
+    width: 97.3%;
+    position: fixed;
+}*/
 
 .navbar-brand {
     color: rgb(63, 125, 128);
@@ -138,6 +146,11 @@
     .navbar-nav {
         margin-left: 20px;
     }
+
+   /* .navbar.fixed-top {
+        margin-top: 0.4px;
+        width: 95.5%;
+    }*/
 }
 
 @media (max-width: 767.98px) {
@@ -146,6 +159,10 @@
         margin-left: 0px;
         margin-right: 0px;
     }
+
+    /*.navbar.fixed-top {
+        width: 94.5%;
+    }*/
 
     .navbar-nav {
         margin-left: 0px;
@@ -175,6 +192,10 @@
     #navbar-filter {
         display: block;
     }
+
+    /*.navbar.fixed-top {
+        width: 94.5%;
+    }*/
 
     #input-instrument-navbar {
         width: 150px;
