@@ -5,13 +5,10 @@
 }
 
 
-  /* Ejemplo de cambio de color de fondo del banner */
-  .iubenda-cs-banner {
-    background-color: red; /* Cambiar color de fondo a blanco */
-  }
+  
 
 
-.custom-privacy-link {
+/*.custom-privacy-link {
     box-shadow: 0 0 7px gray;
     opacity: 0.7;
     color: gray;
@@ -33,5 +30,5 @@
     margin-top: 25px;
     padding: 5px;
     text-decoration: none;
-}
+}*/
 
