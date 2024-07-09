@@ -33,6 +33,11 @@
     <title>Musicolabo</title>
 
     <style>
+
+      .container-privacy-cookies {
+          margin-top: 15px;
+      }
+
       .custom-link {
           color: rgb(212, 167, 108);
           text-decoration: none;
@@ -41,11 +46,28 @@
           background-color: rgb(54, 105, 108);
           padding: 5px;
           border-radius: 5px;
+          opacity: 0.8;
+      }
+      .custom-link:hover {
+          background-color: rgb(42, 81, 83);
+      }
+    
+
+      @media (max-width: 767.98px) {
+
+        .container-privacy-cookies {
+          margin-top: 5px;
+          display: flex;
+          flex-direction: column;
+          width: max-content;
       }
 
-      .container-privacy-cookies {
-        margin-top: 15px;
+      .custom-link {
+        margin-top: 5px;
       }
+
+      }
+      
       </style>
       
   </head>
