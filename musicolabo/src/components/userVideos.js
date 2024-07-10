@@ -86,7 +86,12 @@ const UserVideos = () => {
           
         </div>
       ) : (
-        <p>No hay videos disponibles.</p>
+        <div className="container-videos">
+           <h2 className='videos-de'>Videos de {username}:</h2>
+           <hr></hr>
+          <p className='p'>No hay videos disponibles.</p>
+        </div>
+
       )}
     </div>
   );

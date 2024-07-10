@@ -19,6 +19,9 @@
     color: rgb(212, 167, 108);
     opacity: 0.7;
 }
+.col-redes a:hover {
+    color: rgb(105, 99, 99);
+}
 
 .col-logo {
     text-align: center;
