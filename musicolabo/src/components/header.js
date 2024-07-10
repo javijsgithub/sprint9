@@ -12,9 +12,10 @@ const Header = () => {
     <div className='container-header'>
       <div className='row-header'>
         <div className='col col-redes'>
-        <a href="https://www.instagram.com/musicolabo.app?igsh=c3B0b3Rhd2R0bGcw&utm_source=qr" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.instagram.com/musicolabo.app?igsh=c3B0b3Rhd2R0bGcw&utm_source=qr" target="_blank" rel="noopener noreferrer">
             <FaInstagram size={25} />
-          </a>        </div>
+          </a>        
+        </div>
         <div className=' col col-logo'>
           <div className='musicolabo-logo'> 
             <h1 className='logo-ini-text'>MC</h1>
