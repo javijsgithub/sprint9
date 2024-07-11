@@ -325,54 +325,230 @@ const EditProfile = () => {
         <h6>Instrumentos:</h6>
         <label>
           <div className="checkboxes">
-            <label>
-              <input
-                type="checkbox"
-                value="guitarra"
-                checked={instruments.includes("guitarra")}
-                onChange={handleInstrumentChange}
-              /> Guitarra
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="bajo"
-                checked={instruments.includes("bajo")}
-                onChange={handleInstrumentChange}
-              /> Bajo
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="piano"
-                checked={instruments.includes("piano")}
-                onChange={handleInstrumentChange}
-              /> Piano
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="violin"
-                checked={instruments.includes("violin")}
-                onChange={handleInstrumentChange}
-              /> Violín
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="cello"
-                checked={instruments.includes("cello")}
-                onChange={handleInstrumentChange}
-              /> Cello
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value="bateria"
-                checked={instruments.includes("bateria")}
-                onChange={handleInstrumentChange}
-              /> Batería
-            </label>
+          <label>
+                    <input
+                      type="checkbox"
+                      value="voz"
+                      checked={instruments.includes("voz")}
+                      onChange={handleInstrumentChange}
+                    /> Voz 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="guitarra"
+                      checked={instruments.includes("guitarra")}
+                      onChange={handleInstrumentChange}
+                    /> Guitarra 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="bajo"
+                      checked={instruments.includes("bajo")}
+                      onChange={handleInstrumentChange}
+                    /> Bajo
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="ukelele"
+                      checked={instruments.includes("ukelele")}
+                      onChange={handleInstrumentChange}
+                    /> Ukelele 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="piano"
+                      checked={instruments.includes("piano")}
+                      onChange={handleInstrumentChange}
+                    /> Piano
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="organo"
+                      checked={instruments.includes("organo")}
+                      onChange={handleInstrumentChange}
+                    /> Órgano 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="violin"
+                      checked={instruments.includes("violin")}
+                      onChange={handleInstrumentChange}
+                    /> Violin
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="cello"
+                      checked={instruments.includes("cello")}
+                      onChange={handleInstrumentChange}
+                    /> Cello
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="bateria"
+                      checked={instruments.includes("bateria")}
+                      onChange={handleInstrumentChange}
+                    /> Bateria
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="trompeta"
+                      checked={instruments.includes("trompeta")}
+                      onChange={handleInstrumentChange}
+                    /> Trompeta 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="saxofon"
+                      checked={instruments.includes("saxofon")}
+                      onChange={handleInstrumentChange}
+                    /> Saxofón 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="trombon"
+                      checked={instruments.includes("trombon")}
+                      onChange={handleInstrumentChange}
+                    /> Trombón 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="trompa"
+                      checked={instruments.includes("trompa")}
+                      onChange={handleInstrumentChange}
+                    /> Trompa 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="tuba"
+                      checked={instruments.includes("tuba")}
+                      onChange={handleInstrumentChange}
+                    /> Tuba 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="flauta"
+                      checked={instruments.includes("flauta")}
+                      onChange={handleInstrumentChange}
+                    /> Flauta 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="clarinete"
+                      checked={instruments.includes("clarinete")}
+                      onChange={handleInstrumentChange}
+                    /> Clarinete 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="armonica"
+                      checked={instruments.includes("armonica")}
+                      onChange={handleInstrumentChange}
+                    /> Armónica 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="arpa"
+                      checked={instruments.includes("arpa")}
+                      onChange={handleInstrumentChange}
+                    /> Arpa 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="acordeon"
+                      checked={instruments.includes("acordeon")}
+                      onChange={handleInstrumentChange}
+                    /> Acordeón 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="gaita"
+                      checked={instruments.includes("gaita")}
+                      onChange={handleInstrumentChange}
+                    /> Gaita 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="balalaika"
+                      checked={instruments.includes("balalaika")}
+                      onChange={handleInstrumentChange}
+                    /> Balalaika 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="banjo"
+                      checked={instruments.includes("banjo")}
+                      onChange={handleInstrumentChange}
+                    /> Banjo 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="dejembe"
+                      checked={instruments.includes("dejembe")}
+                      onChange={handleInstrumentChange}
+                    /> Dejembe 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="bongos"
+                      checked={instruments.includes("bongos")}
+                      onChange={handleInstrumentChange}
+                    /> Bongos 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="pandereta"
+                      checked={instruments.includes("pandereta")}
+                      onChange={handleInstrumentChange}
+                    /> Pandereta 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="maracas"
+                      checked={instruments.includes("maracas")}
+                      onChange={handleInstrumentChange}
+                    /> Maracas 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="triangulo"
+                      checked={instruments.includes("triangulo")}
+                      onChange={handleInstrumentChange}
+                    /> Triángulo 
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value="xilofono"
+                      checked={instruments.includes("xilofono")}
+                      onChange={handleInstrumentChange}
+                    /> Xilófono 
+                  </label>
           </div>
         </label>
         <h6>Propósito:</h6>
