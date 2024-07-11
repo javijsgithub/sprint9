@@ -27,9 +27,9 @@
     margin-top: 20px;
 }
 #btn-home-register:hover {
-    color: rgb(105, 99, 99);
+    color: rgb(139, 110, 73);
     opacity: 1;
-    border: 1px solid rgb(105, 99, 99);
+    border: 1px solid rgb(139, 110, 73);
 }
 
 .col-logo-register {
@@ -68,7 +68,8 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-top: 50px;
+    margin-top: 60px;
+    margin-bottom: 115px;
     font-family: "Anta"; /* de google fonts*/
 }
 
@@ -114,9 +115,9 @@
     margin-top: 14px;
 }
 #btn-form-register:hover {
-    color: rgb(105, 99, 99);
+    color: rgb(139, 110, 73);
     opacity: 1;
-    border: 1px solid rgb(105, 99, 99);
+    border: 1px solid rgb(139, 110, 73);
 }
 
 .error-message-email-register {

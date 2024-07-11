@@ -16,7 +16,6 @@
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 7px rgb(63, 125, 128);
-
 }
 
 .cards {
@@ -37,7 +36,6 @@
 
 .card-body {
     padding: 3px 7px 3px 7px ;
-   
 }
 
 .user {
@@ -58,7 +56,7 @@
     margin-top: 8px;
 }
 .link-user:hover {
-    color:rgb(105, 99, 99);
+    color:rgb(139, 110, 73);
 }
 
 .card-city {
@@ -91,7 +89,7 @@
     opacity: 0.7;
 }
 #link-videos:hover {
-    color:rgb(105, 99, 99);
+    color:rgb(139, 110, 73);
 }
 
 #button-message {
@@ -101,7 +99,7 @@
     opacity: 0.7;
 }
 #button-message:hover {
-    color:rgb(105, 99, 99);
+    color:rgb(139, 110, 73);
 
 }
 
@@ -133,7 +131,6 @@
     
   }
   .message-popup #popup-close:hover {
-    color: rgb(46, 44, 44);
     border: 1px solid rgb(46, 44, 44);
     border-radius: 5px;
   }
@@ -160,10 +157,8 @@
     color:  rgb(46, 44, 44);
   }
   .message-popup #btn-message-popup-submit:hover {
-    background-color: rgb(212, 167, 108);
     border: 1px solid rgb(46, 44, 44);
-    border-radius: 3px;
-    color:  rgb(46, 44, 44);
+    border-radius: 5px;
   }
 
   .spinner-send-messages {

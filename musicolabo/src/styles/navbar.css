@@ -31,7 +31,7 @@
     text-decoration: none;
 }
 .navbar-brand:hover {
-    color: rgb(105, 99, 99);
+    color: rgb(39, 77, 79);
 }
 
 .nav-link {
@@ -40,7 +40,7 @@
     opacity: 0.7;
 }
 .nav-link:hover {
-    color: rgb(105, 99, 99);
+    color: rgb(139, 110, 73);
     opacity: 1;
 }
 
@@ -99,18 +99,16 @@
     color: rgb(63, 125, 128);
     border: 1px solid rgb(63, 125, 128);
     box-shadow: 0 0 7px rgb(63, 125, 128);
-
 }
-
 #btn-filter:hover {
     background-color: rgb(46, 44, 44);
-    color: rgb(105, 99, 99);
-    border: 1px solid rgb(105, 99, 99);
+    color: rgb(39, 77, 79);
+    border: 1px solid rgb(39, 77, 79);
 }
 #btn-filter:focus {
     background-color:rgb(46, 44, 44); /* Color de fondo cuando está enfocado */
-    color: rgb(105, 99, 99); /* Color de texto cuando está enfocado */
-    border: 1px solid rgb(105, 99, 99); /* Color del borde cuando está enfocado */
+    color: rgb(39, 77, 79); /* Color de texto cuando está enfocado */
+    border: 1px solid rgb(39, 77, 79); /* Color del borde cuando está enfocado */
   }
 
 .alert-warning {
@@ -130,7 +128,6 @@
     border: 2px solid rgb(63, 125, 128);
     box-shadow: 0 0 7px rgb(63, 125, 128);
     color: transparent;
-    
 }
 .custom-toggler:hover {
     border: 3px solid rgb(63, 125, 128);

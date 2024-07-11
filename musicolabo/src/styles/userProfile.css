@@ -11,7 +11,6 @@
 .container-header-profile {
     padding: 5px;
     margin-bottom: 20px;
-   
 }
 
 .row-header-profile {
@@ -31,10 +30,8 @@
     border-radius: 3px;
 }
 #btn-volver-profile:hover {
-    background-color: rgb(46, 44, 44);
-    color: rgb(105, 99, 99);
-    border: 1px solid rgb(105, 99, 99);
-    border-radius: 3px;
+    color: rgb(39, 77, 79);
+    border: 1px solid rgb(39, 77, 79);
 }
 
 .col-logo-profile {
@@ -94,11 +91,9 @@
     margin-bottom: 10px;
 }
 #btn-profile-logout:hover {
-    background-color: rgb(46, 44, 44);
-    color: rgb(105, 99, 99);
+    color: rgb(39, 77, 79);
     opacity: 1;
-    border: 1px solid rgb(105, 99, 99);
-    border-radius: 3px;
+    border: 1px solid rgb(39, 77, 79);
 }
 
 .picture-header-profile {
@@ -117,8 +112,7 @@
     opacity: 0.7;
 }
 .unread-messages-header-profile:hover {
-    background-color: rgb(46, 44, 44);
-    color: rgb(105, 99, 99);
+    color: rgb(139, 110, 73);
 }
 
 .profile {

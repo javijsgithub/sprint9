@@ -29,10 +29,8 @@
     border-radius: 3px;
 }
 #btn-home-edit-profile:hover {
-    background-color: rgb(46, 44, 44);
-    color: rgb(105, 99, 99);
-    border: 1px solid rgb(105, 99, 99);
-    border-radius: 3px;
+    color: rgb(39, 77, 79);
+    border: 1px solid rgb(39, 77, 79);
 }
 
 .col-logo-edit-profile {
@@ -92,11 +90,9 @@
     margin-bottom: 10px;
 }
 #btn-edit-profile-logout:hover {
-    background-color: rgb(46, 44, 44);
-    color: rgb(105, 99, 99);
+    color: rgb(39, 77, 79);
     opacity: 1;
-    border: 1px solid rgb(105, 99, 99);
-    border-radius: 3px;
+    border: 1px solid rgb(39, 77, 79);
 }
 
 .picture-header-edit-profile {
@@ -114,9 +110,8 @@
     text-decoration: none;
     opacity: 0.7;
 }
-.unread-messages-edit-profile:hover {
-    background-color: rgb(46, 44, 44);
-    color: rgb(105, 99, 99);
+.unread-messages-header-edit-profile:hover {
+    color: rgb(139, 110, 73);
 }
 
 
@@ -144,11 +139,9 @@
     border-radius: 3px;
 }
 #btn-edit:hover {
-    background-color: rgb(46, 44, 44);
-    color: rgb(105, 99, 99);
+    color: rgb(139, 110, 73);
     opacity: 1;
-    border: 1px solid rgb(105, 99, 99);
-    border-radius: 3px;
+    border: 1px solid rgb(139, 110, 73);
 }
 
 .picture-edit-profile1 {
@@ -302,13 +295,10 @@ video {
     opacity: 0.8;
     border: 1px solid rgb(212, 167, 108);
     border-radius: 3px;
-    border-radius: 3px;
 }
 #btn-save:hover {
-    background-color: rgb(105, 99, 99);
-    color: rgb(46, 44, 44);
-    border: 1px solid rgb(105, 99, 99);
-    border-radius: 3px;
+    background-color: rgb(139, 110, 73);
+    border: 1px solid rgb(139, 110, 73);
 }
 
 .spinner {
