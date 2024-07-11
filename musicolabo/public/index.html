@@ -33,6 +33,8 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Musicolabo</title>
 
     <style>
@@ -46,7 +48,7 @@
         font-size: small;
         color: rgb(63, 125, 128);
         opacity: 0.8;
-        padding: 5px;
+        padding: 3px;
         margin-left: 5px;
       }
 
@@ -84,11 +86,27 @@
           padding: 5px;
           border-radius: 5px;
           opacity: 0.8;
+          margin-bottom: 10px;
       }
       #preferences-link:hover {
         color: rgb(139, 110, 73);
       }
-      
+
+      .contact {
+        margin-top: -3px;
+      }
+
+      .custom-link-contacto {
+        font-size: larger;
+        color: rgb(63, 125, 128);
+        opacity: 0.7;
+        margin-left: 15px;
+      }
+      .custom-link-contacto:hover {
+        color: rgb(39, 77, 79);
+      }
+
+     
 
       @media (max-width: 767.98px) {
 
@@ -108,6 +126,12 @@
         #preferences-link {
           margin-left: 0px;
         }
+        
+        .custom-link-contacto {
+          margin-left: 0px;
+      }
+
+
       
       }
       
@@ -137,6 +161,9 @@
      <p>
       <a href='#' class='iubenda-cs-preferences-link' id="preferences-link">Tus Opciones de Privacidad</a>
      </p> 
+     <p class="contact">
+      <a href="mailto:info@musicolabo.com" class="custom-link-contacto" title="Contacto"><i class="fas fa-envelope"></i></a>
+    </p>
     </div>
   </body>
 </html>
